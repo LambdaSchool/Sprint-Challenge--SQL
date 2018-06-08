@@ -18,15 +18,18 @@ The chat system has an arbitrary number of:
 * Channels (e.g. `#random`)
 * Users (e.g. `Dave`)
 
-An organization can have many channels.
-A channel can have many users.
+The following relationships exist:
 
-A channel can belong to one organization.
-A user can belong to many channels.
+* An organization can have many channels.
+* A channel can belong to one organization.
+* A channel can have many users subscribed.
+* A user can be subscribed to many channels.
+* Additionally, a user can post messages to a channel. (Note that a user might have
+posted messages to a channel to which they subscribed in the past, but they no
+longer subscribe to now.)
 
-Additionally, a user can post messages to a channel. Note that a user might have
-posted messages to a channel to which they belonged in the past, but they no
-longer belong to now.
+> In the following, there will be more columns that you have to add in
+> many tables, not just the ones listed here.
 
 1. Write `CREATE TABLE` statements for tables `organization`, `channel`, `user`,
    and `message`.
