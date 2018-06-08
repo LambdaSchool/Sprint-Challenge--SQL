@@ -84,3 +84,26 @@ SELECT message.* FROM message, channel
   WHERE message.channel_id = channel.id
   AND channel.name = "#general"
   ORDER BY message.post_time DESC;
+
+-- List all channels to which user Alice belongs
+SELECT channel.* FROM channel, user, user_channel
+  WHERE user_channel.channel_id = channel.id
+  AND user_channel.user_id = user.id
+  AND user.name = "Alice";
+
+-- List all users that belong to channel #general
+SELECT user.* FROM channel, user, user_channel
+  WHERE user_channel.channel_id = channel.id
+  AND user_channel.user_id = user.id
+  AND channel.name = "#general";
+
+-- List all messages in all channels by user Alice
+SELECT message.* FROM message, user
+  WHERE message.user_id = user.id
+  AND user.name = "Alice";
+
+-- List all messages in #random by user Bob.
+SELECT message.* FROM message, user, channel WHERE message.user_id = user.id
+  AND message.channel_id = channel.id
+  AND channel.name = "#random"
+  AND user.name = "Bob";
