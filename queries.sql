@@ -81,23 +81,47 @@ INSERT INTO message (user_id, channel_id, content, post_time)
 INSERT INTO message (user_id, channel_id, content, post_time)
   VALUES (1, 1, "Okay Bob.", DATETIME("now"));
 
-SELECT * FROM organization;
-SELECT * FROM channel;
-SELECT * FROM channel, organization WHERE channel.organization_id = organization.id;
+-- List all organization names.
+SELECT organization.name FROM organization;
+
+-- List all channel names.
+SELECT channel.name FROM channel;
+
+-- List all channels in a specific organization by organization name.
+SELECT channel.name, organization.name FROM channel, organization WHERE channel.organization_id = organization.id;
+
+-- List all messages in a specific channel by channel name #general in order of post_time, descending. (Hint: ORDER BY. Because your INSERTs might have all taken place at the exact same time, this might not return meaningful results. But humor us with the ORDER BY anyway.)
 SELECT * FROM message, channel WHERE message.channel_id = channel.id 
   AND channel.name = "#general" ORDER BY post_time DESC;
+
+-- List all channels to which user Alice belongs.
 SELECT user.name, channel.name FROM user_channel, channel, user WHERE user_channel.user_id = user.id
   AND user_channel.channel_id = channel.id AND user.name = "Alice";
+
+-- List all users that belong to channel #general.
 SELECT user.name, channel.name FROM user_channel, user, channel 
   WHERE user_channel.channel_id = channel.id AND user_channel.user_id = user.id
   AND channel.name = "#general";
+
+-- List all messages in all channels by user Alice.
 SELECT * FROM message, user WHERE message.user_id = user.id AND user.name = "Alice";
+
+-- List all messages in #random by user Bob.
 SELECT * FROM user_channel, channel, message, user 
   WHERE user_channel.user_id = user.id AND user_channel.channel_id = channel.id
   AND message.user_id = user.id AND message.channel_id = channel.id
   AND channel.name = "#random" AND user.name = "Bob"; -- This should return nothing because Bob isn't in #random, and could likely be shortened up quite a bit.
+
+-- List the count of messages across all channels per user.
 SELECT user.name AS "User Name", COUNT(message.id) AS "Message Count" FROM user, message
   WHERE message.user_id = user.id GROUP BY user.name ORDER BY user.name DESC;
+
+-- [Stretch!] List the count of messages per user per channel.
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(message.id) AS "Message Count"
+  FROM user, channel, message, user_channel
+  WHERE user_channel.user_id = user.id AND user_channel.channel_id = channel.id
+  AND message.user_id = user.id AND message.channel_id = channel.id
+  GROUP BY channel.name, user.name;
 
   -- ON DELETE CASCADE is in use in the appropriate tables in order to delete all messages by a user
   -- if that user is deleted.
