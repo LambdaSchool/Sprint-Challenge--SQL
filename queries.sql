@@ -83,4 +83,4 @@ SELECT message.* FROM message, user WHERE message.user_id = user.id AND user.nam
 
 SELECT message.* FROM message, user, channel WHERE message.user_id = user.id AND message.channel_id = channel.id AND channel.name = "#random" AND user.name = "Bob";
 
-
+SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count" FROM user, message WHERE message.user_id = user.id GROUP BY user.name ORDER BY user.name DESC;
