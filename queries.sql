@@ -98,3 +98,16 @@ SELECT user.name AS "User Name", COUNT(message.id) AS "Message Count"
     GROUP BY user.id 
     ORDER BY user.id DESC;
 
+SELECT user.name AS User, channel.name AS Channel, COUNT(message.id) AS "Message Count"
+    FROM user, channel, message, channel_user
+    WHERE message.user_id = user.id
+    AND message.channel_id = channel.id
+    AND user.id = channel_user.user_id
+    AND channel.id = channel_user.channel_id
+    GROUP BY channel.name, user.id;
+
+-- you would use the DELETE keyword, but in this order:
+-- you'd first look and see which channels that user was in
+-- then, go delete the messages that user posted in that channel
+-- then delete that user/channel connection
+-- repeat for each channel
