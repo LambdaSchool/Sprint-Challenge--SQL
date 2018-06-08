@@ -109,3 +109,11 @@ SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count"
   WHERE message.user_id = user.id
   GROUP BY user.name
   ORDER BY user.name DESC;
+
+-- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table by id? 
+-- DELETE FROM message WHERE message.user_id = 1;
+
+-- OR by subquery:
+-- DELETE FROM message 
+  -- WHERE EXISTS (SELECT user.id FROM user WHERE message.user_id = user.id AND user.name = "Alice");
+
