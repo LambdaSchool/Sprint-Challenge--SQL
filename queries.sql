@@ -1,10 +1,5 @@
 PRAGMA foreign_keys = ON;
 
-DROP TABLE IF EXISTS organization;
-DROP TABLE IF EXISTS channel;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS message;
-
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL
@@ -64,6 +59,42 @@ INSERT INTO message (content, user_id, channel_id)
     VALUES ("Going to go take a nap!", 2, 1);
 
 INSERT INTO channel_user (channel_id, user_id) VALUES (1, 1);
-INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2);
 INSERT INTO channel_user (channel_id, user_id) VALUES (2, 1);
-INSERT INTO channel_user (channel_id, user_id) VALUES (3, 2);
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2);
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 3);
+
+
+SELECT name FROM organization;
+SELECT name FROM channel;
+SELECT name AS Lambda_School_Channels FROM channel WHERE org_id = 1;
+SELECT post_time, user.name, content FROM message, user
+    WHERE channel_id = 1
+    AND message.user_id = user.id
+    ORDER BY post_time;
+SELECT channel.name AS channels_Alice_is_in 
+    FROM channel LEFT JOIN channel_user
+    WHERE channel.id = channel_user.channel_id
+    AND channel_user.user_id = 1;
+SELECT user.name AS users_in_general 
+    FROM user LEFT JOIN channel_user
+    WHERE user.id = channel_user.user_id
+    AND channel_user.channel_id = 1;
+SELECT user.name, post_time, content, channel.name
+    FROM user, message, channel
+    WHERE message.user_id = 1
+    AND message.channel_id = channel.id
+    AND user.name = "Alice"
+    ORDER BY post_time;
+
+-- Bob is not in random, so does not show
+SELECT post_time, content
+    FROM message
+    WHERE message.user_id = 2
+    AND message.channel_id = 2;
+
+SELECT user.name AS "User Name", COUNT(message.id) AS "Message Count"
+    FROM user, message
+    WHERE message.user_id = user.id
+    GROUP BY user.id 
+    ORDER BY user.id DESC;
+

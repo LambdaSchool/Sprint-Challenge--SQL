@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS channel_user;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS channel;
+DROP TABLE IF EXISTS organization;
+DROP TABLE IF EXISTS message;
