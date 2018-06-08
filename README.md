@@ -16,7 +16,7 @@ The chat system has an arbitrary number of:
 
 * Organizations (e.g. `Lambda School`)
 * Channels (e.g. `#random`)
-* Users (e.g. `BeejJorgensen`)
+* Users (e.g. `Dave`)
 
 An organization can have many channels.
 A channel can have many users.
