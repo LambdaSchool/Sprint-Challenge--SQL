@@ -14,7 +14,7 @@ CREATE TABLE channel (
 );
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
   org_id INTEGER,
   FOREIGN KEY(org_id) REFERENCES organization(id)
 );
@@ -32,6 +32,12 @@ CREATE TABLE message (
 PRAGMA foreign_keys = ON;
 
 INSERT INTO organization (name) VALUES ("Lambda School");
-INSERT INTO user (name) VALUES ("Alice"), ("Bob"), ("Chris");
-INSERT INTO channel (name) VALUES ("#random"), ("#general");
+INSERT INTO user (name) VALUES ("Alice");
+INSERT INTO user (name) VALUES ("Bob");
+INSERT INTO user (name) VALUES ("Chris");
+-- INSERT INTO channel (name) VALUES ("#random");
 
+INSERT INTO user (org_id)
+   SELECT id
+   FROM organization
+   WHERE organization.name = "Lambda School";
