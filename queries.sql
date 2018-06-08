@@ -73,8 +73,7 @@ SELECT channel.name AS "Channel Name", organization.name AS "Organization Name"
   WHERE channel.organization_id = organization.id
   AND organization.name = "Lambda School";
 
--- List all messages in a specific channel by channel name #general
--- in order of post_time, descending
+-- List all messages in a specific channel by channel name #general in order of post_time, descending
 SELECT message.* FROM message, channel
   WHERE message.channel_id = channel.id
   AND channel.name = "#general"
@@ -112,16 +111,15 @@ SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count"
 
 -- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table by id? 
 -- DELETE FROM message WHERE message.user_id = 1;
-
--- OR by subquery:
+-- OR
 -- DELETE FROM message 
   -- WHERE EXISTS (SELECT user.id FROM user WHERE message.user_id = user.id AND user.name = "Alice");
-  --OR
+--OR
 --DELETE FROM message
   --WHERE NOT EXISTS(SELECT NULL FROM user WHERE message.user_id = user.id);
 
 
-  -- STRETCH GOAL:
+-- STRETCH GOAL:
 -- List the count of messages per user per channel
 SELECT user.name AS "User Name",
   channel.name AS "Channel Name",
