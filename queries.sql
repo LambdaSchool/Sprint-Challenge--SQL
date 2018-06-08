@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS organization;
+DROP TABLE IF EXISTS channel;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS channel_user;
+
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL
@@ -36,6 +42,13 @@ INSERT INTO user (name) VALUES ('Chris');
 INSERT INTO channel (name, organization_id) VALUES ('#general', 1);
 INSERT INTO channel (name, organization_id) VALUES ('#random', 1);
 
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 1)
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 1)
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2)
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 2)
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 3)
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 3)
+
 INSERT INTO message (content, user_id, channel_id) VALUES ('Hi', 1, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Sup', 1, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Ohai', 1, 2);
@@ -47,5 +60,19 @@ INSERT INTO message (content, user_id, channel_id) VALUES ('See ya', 3, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Salutations', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Ciao', 3, 2);
 
+SELECT name FROM organization;
+SELECT name FROM channel;
 
+SELECT channel.name, organization.name FROM channel, organization
+    WHERE organization_id = organization.id
+    AND organization.name IS "Lambda School";
 
+SELECT message.content, message.post_time, channel.name FROM message, channel
+    WHERE channel_id = channel.id
+    AND channel.name IS "#general"
+    ORDER BY post_time DESC;
+
+SELECT channel.name FROM user, channel, channel_user
+    WHERE channel_user.user_id = user.id
+    AND channel_user.channel_id = channel.id
+    AND user.name IS "Alice";
