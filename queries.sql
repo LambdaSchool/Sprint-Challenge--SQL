@@ -72,37 +72,37 @@ SELECT channel.name FROM channel, organization
   AND organization.name IS "Lambda School";
 
 -- List all messages in a specific channel by channel name #general in order of post_time, descending.
-SELECT * FROM message, channel 
+SELECT message.content FROM message, channel 
   WHERE message.channel_id = channel.id
   AND channel.name IS "#general" 
-  ORDER BY message.post_time DESC
+  ORDER BY message.post_time DESC;
 
 -- List all channels to which user Alice belongs
 SELECT channel.name FROM channel, user, user_channel
   WHERE user_channel.channel_id = channel.id
   AND user_channel.user_id = user.id
-  And user.name is "Alice"
+  AND user.name is "Alice";
 
 -- List all users that belong to channel #general
 SELECT user.name FROM user, channel, user_channel
   WHERE user_channel.channel_id = channel.id
   AND user_channel.user_id = user.id
-  AND channel.name IS "#general"
+  AND channel.name IS "#general";
 
 -- List all messages in all channels by user Alice
-SELECT * FROM message, user 
+SELECT message.content FROM message, user 
   WHERE message.user_id = user.id 
-  AND user.name IS "Alice"
+  AND user.name IS "Alice";
 
 -- List all messages in #random by user Bob
-SELECT * FROM message, user, channel 
+SELECT message.content FROM message, user, channel 
   WHERE message.user_id = user.id 
   AND channel.name = "#random" 
   AND user.name IS "Bob";
-  
+
 -- List the count of messages across all channels per user
 SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count"
   FROM user, message
   WHERE message.user_id = user.id
-  ORDER BY user.name DESC
-  GROUP BY user.name;
+  GROUP BY user.name
+  ORDER BY user.name DESC;
