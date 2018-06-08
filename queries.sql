@@ -116,4 +116,18 @@ SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count"
 -- OR by subquery:
 -- DELETE FROM message 
   -- WHERE EXISTS (SELECT user.id FROM user WHERE message.user_id = user.id AND user.name = "Alice");
+  --OR
+--DELETE FROM message
+  --WHERE NOT EXISTS(SELECT NULL FROM user WHERE message.user_id = user.id);
+
+
+  -- STRETCH GOAL:
+-- List the count of messages per user per channel
+SELECT user.name AS "User Name",
+  channel.name AS "Channel Name",
+  COUNT(*) AS "Message Count"
+  FROM user, message, channel
+  WHERE message.user_id = user.id
+  AND message.channel_id = channel.id
+  GROUP BY channel.name, user.name;
 
