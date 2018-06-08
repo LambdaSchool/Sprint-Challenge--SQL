@@ -6,16 +6,21 @@ DROP TABLE [IF EXISTS]
 user;
 DROP TABLE [IF EXISTS]
 message;
+
 CREATE TABLE organization (
   org_id int PRIMARY KEY AUTO_INCREMENT,
-  
+  name VARCHAR(255) NOT NULL
 );
 CREATE TABLE channel (
-
+  channel_id int PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL
 );
 CREATE TABLE user (
-
+  user_id int PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL
 );
 CREATE TABLE message (
-
+  message_id int PRIMARY KEY AUTO_INCREMENT,
+  content VARCHAR(255) NOT NULL,
+  post_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
