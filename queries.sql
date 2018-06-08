@@ -10,6 +10,7 @@ CREATE TABLE organization (
 
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,  
+    organization_id INTEGER REFERENCES organization(id),
     name VARCHAR(128) NOT NULL
 );
 
@@ -20,6 +21,8 @@ CREATE TABLE user (
 
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    channel_id INTEGER REFERENCES channel(id),
+    user_id INTEGER REFERENCES user(id),
     post_time DATETIME NOT NULL,
     content TEXT NOT NULL
 );
