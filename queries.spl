@@ -1,0 +1,88 @@
+CREATE TABLE organization (
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   name TEXT NOT NULL
+);
+
+
+CREATE TABLE channel (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(128),
+    organization_id INTEGER REFERENCES organizaiton(id)
+);
+
+CREATE TABLE user (
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   name TEXT NOT NULL
+);
+
+CREATE TABLE message (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    content TEXT,
+    channel_id INTEGER REFERENCES channel(id),
+    user_id INTEGER REFERENCES user(id)
+);
+
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "Hi folks welcome to general", 1, 1);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "Hi Alice, I'm Bob.", 1, 2);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "Hi, Bob.", 1, 1);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "I thought I'd also put in a random channel too", 2, 1);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "Thanks Alice", 2, 3);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "You're welcome, Chris", 2, 1);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "I'm looking forward to many chats", 1, 1);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "Do you have anything random to say, Chris?", 2, 1);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "naw", 2, 3);
+INSERT INTO message (post_time, content, channel_id, user_id)
+    VALUES (datetime(), "Well, I think those are all the channels that I will add today", 1, 1);
+
+
+SELECT name FROM organizaiton;
+SELECT name FROM channel;
+
+
+SELECT channel.name, organization.name FROM channel, organization
+    WHERE organization_id = organization.id
+    AND organization.name IS "Lambda School";
+
+SELECT content, name FROM message, channel
+    WHERE name = "#general" AND channel_id = channel.id
+    ORDER BY post_time DESC;
+
+
+SELECT user.name AS "User Name", COUNT(*) AS "Message Count"
+    FROM user, message
+    WHERE message.user_id = user.id
+    GROUP BY user.id 
+    ORDER BY user.id DESC;
+
+SELECT message.content, message.post_time, channel.name FROM message, channel
+    WHERE channel_id = channel.id
+    AND channel.name IS "#general"
+    ORDER BY post_time DESC;
+
+SELECT user.name FROM user, channel, user_channel
+    WHERE user.id = user_id
+    AND channel.id = channel_id
+    AND channel.name = "#general";
+
+SELECT content FROM message, user
+    WHERE user_id = user.id
+    AND user.name = "Alice";
+
+
+SELECT user.name AS User, channel.name AS Channel, COUNT(*) AS "Message Count"
+    FROM user, channel, message, channel_user
+    WHERE message.user_id = user.id
+    AND message.channel_id = channel.id
+    AND user.id = channel_user.user_id
+    AND channel.id = channel_user.channel_id
+    GROUP BY channel.name, user.id;
