@@ -47,8 +47,6 @@ INSERT INTO channel (name, organization_id) VALUES ('#random', 1);
 INSERT INTO channel_user (channel_id, user_id) VALUES (1, 1);
 INSERT INTO channel_user (channel_id, user_id) VALUES (2, 1);
 INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2);
-INSERT INTO channel_user (channel_id, user_id) VALUES (2, 2);
-INSERT INTO channel_user (channel_id, user_id) VALUES (1, 3);
 INSERT INTO channel_user (channel_id, user_id) VALUES (2, 3);
 
 INSERT INTO message (content, user_id, channel_id) VALUES ('Hi', 1, 1);
@@ -58,7 +56,7 @@ INSERT INTO message (content, user_id, channel_id) VALUES ('Yahello', 2, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Howdy do?', 2, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Heyo', 2, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Greetings', 3, 1);
-INSERT INTO message (content, user_id, channel_id) VALUES ('See ya', 3, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ('See ya', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Salutations', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Ciao', 3, 2);
 
@@ -78,3 +76,35 @@ SELECT channel.name FROM user, channel, channel_user
     WHERE channel_user.user_id = user.id
     AND channel_user.channel_id = channel.id
     AND user.name IS "Alice";
+
+SELECT user.name FROM user, channel, channel_user
+    WHERE user.id = user_id
+    AND channel.id = channel_id
+    AND channel.name = "#general";
+
+-- Solution code
+
+SELECT content FROM message, user
+    WHERE user_id = user.id
+    AND user.name = "Alice";
+
+SELECT content from message, channel, user
+    WHERE user_id = user.id
+    AND channel_id = channel.id
+    AND channel.name = "#randon"
+    AND user.name = "Bob";
+
+SELECT user.name AS "User Name", COUNT(*) AS "Message Count" FROM user, message
+    WHERE user_id = user.id
+    GROUP BY user.name 
+    ORDER BY user.name DESC;
+
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(*) AS "Message Count"
+    FROM user, channel, message, channel_user
+    WHERE message.user_id = user.id
+    AND message.channel_id = channel.id
+    AND user.id = channel_user.user_id
+    AND channel.id = channel_user.channel_id
+    GROUP BY channel.name, user.id;
+
+-- CASCADE
