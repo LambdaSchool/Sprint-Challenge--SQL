@@ -54,7 +54,7 @@ INSERT INTO message (content, channel_id, user_id) VALUES ("That's so crazy, rig
 INSERT INTO message (content, channel_id, user_id) VALUES ("No, it's not crazy at all", 2, 3);
 INSERT INTO message (content, channel_id, user_id) VALUES ("Time never stops.", 2, 3);
 INSERT INTO message (content, channel_id, user_id) VALUES ("k", 2, 1);
-INSERT INTO message (content, channel_id, user_id) VALUES ("Chris is weird.", 1, 1);
+-- INSERT INTO message (content, channel_id, user_id) VALUES ("Chris is weird.", 1, 1);
 
 -- Alice should be in #general and #random.
 INSERT INTO user_channel (user_id, channel_id) VALUES (1, 1);
@@ -107,3 +107,10 @@ SELECT message.* FROM message, user, channel WHERE message.user_id = user.id
   AND message.channel_id = channel.id
   AND channel.name = "#random"
   AND user.name = "Bob";
+
+-- List the count of messages across all channels per user
+SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count"
+  FROM user, message
+  WHERE message.user_id = user.id
+  GROUP BY user.name
+  ORDER BY user.name DESC;
