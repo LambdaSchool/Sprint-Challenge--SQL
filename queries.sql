@@ -133,8 +133,8 @@ DELETE FROM message
 -- List the count of messages per user per channel
 SELECT user.name AS "User Name",
   channel.name AS "Channel Name",
-  COUNT(message.content) AS "Message Count"
+  COUNT(*) AS "Message Count"
   FROM user, message, channel
   WHERE message.user_id = user.id
   AND message.channel_id = channel.id
-  GROUP BY user.name
+  GROUP BY channel.name, user.name;
