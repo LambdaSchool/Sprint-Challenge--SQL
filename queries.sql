@@ -77,3 +77,10 @@ SELECT message.* FROM message, channel WHERE message.channel_id = channel.id AND
 
 SELECT channel.* FROM channel, user, channel_user WHERE user_channel.channel_id = channel.id AND user_channel.user_id = user.id AND user.name = "Alice";
 
+SELECT user.* FROM channel, user, user_channel WHERE user_channel.channel_id = channel.id AND user_channel.user_id = user.id AND channel.name = "#general";
+
+SELECT message.* FROM message, user WHERE message.user_id = user.id AND user.name = "Alice";
+
+SELECT message.* FROM message, user, channel WHERE message.user_id = user.id AND message.channel_id = channel.id AND channel.name = "#random" AND user.name = "Bob";
+
+
