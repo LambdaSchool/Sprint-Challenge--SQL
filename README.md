@@ -1,8 +1,4 @@
-# Sprint-Challenge-Solution--SQL
-
-## GraphQL
-
-## SQL
+# Sprint Challenge: SQL
 
 Design a database for an online chat system.
 
