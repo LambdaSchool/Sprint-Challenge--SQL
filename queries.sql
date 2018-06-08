@@ -130,8 +130,14 @@ ORDER BY user.name DESC;
 SELECT " ";
 
 SELECT "[Stretch!] List the count of messages per user per channel.";
-
+SELECT channel.name, user.name, COUNT(*)
+FROM user, message, channel
+WHERE message.user_id = user.id
+AND message.channel_id = channel.id
+GROUP BY channel.name, user.name;
 SELECT " "
+
+
 -- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
 
 -- DELETE FROM message WHERE message.user_id = "user id";
