@@ -2,6 +2,16 @@
 
 Design a database for an online chat system.
 
+## Deliverables
+
+Add a file called `queries.sql` that runs all of the `CREATE TABLE`,
+`INSERT`, and `SELECT` queries, below.
+
+The last question is a fill-in-the-blank. You can add that as a SQL
+comment to the end of `queries.sql`.
+
+## Details
+
 The chat system has an arbitrary number of:
 
 * Organizations (e.g. `Lambda School`)
