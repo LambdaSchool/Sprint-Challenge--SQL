@@ -26,3 +26,8 @@ CREATE TABLE message (
     post_time DATETIME NOT NULL,
     content TEXT NOT NULL
 );
+
+CREATE TABLE user_channel (
+    channel_id INTEGER REFERENCES channel(id),
+    user_id INTEGER REFERENCES user(id)
+)
