@@ -55,10 +55,28 @@ INSERT INTO message(content, user_id, channel_id, post_time) VALUES ("Sure Alice
 
 -- 1. List all organization `name`s.--
 SELECT name FROM organization;
---   2. List all channel `name`s.--
+-- 2. List all channel `name`s.--
 SELECT name from channel;
 -- 3. List all channels in a specific organization by organization `name` --
 SELECT channel.name AS "Channel Name", organization.name as "Organization Name" FROM channel JOIN organization;
 
 -- 4. List all messages in a specific channel by channel `name` `#general` in order of `post_time`, descending. --
+
+-- 5. List all channels to which user `Alice` belongs.-
+
+
+-- 6. List all users that belong to channel `#general`.--
+
+-- 7. List all messages in all channels by user `Alice`--
+
+-- 8. List all messages in `#random` by user `Bob`. --
+
+-- 9. List the count of messages across all channels per user. --
+
+
+
+6. What SQL keywords or concept would you use if you wanted to automatically
+   delete all messages by a user if that user were deleted from the `user`
+   table?
+'ON DELETE CASCADE'.
 
