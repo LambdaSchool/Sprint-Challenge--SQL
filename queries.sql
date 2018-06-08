@@ -17,7 +17,6 @@ CREATE TABLE channels (
 CREATE TABLE users (
      id INTEGER PRIMARY KEY AUTOINCREMENT,
      users_name VARCHAR(128) NOT NULL,
- 
 );
 
 CREATE TABLE messages (
