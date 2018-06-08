@@ -28,8 +28,8 @@ The following relationships exist:
 posted messages to a channel to which they subscribed in the past, but they no
 longer subscribe to now.)
 
-> In the following, there will be more columns that you have to add in
-> many tables, not just the ones listed here.
+In the following, there will be more columns that you have to add in
+various tables, not just the columns listed here.
 
 1. Write `CREATE TABLE` statements for tables `organization`, `channel`, `user`,
    and `message`.
@@ -56,7 +56,7 @@ longer subscribe to now.)
 
 3. Add additional join tables needed, if any.
 
-4. Write `INSERT` queries to add:
+4. Write `INSERT` queries to add information to the database.
 
    For these `INSERT`s, it is OK to refer to users, channels, and organization
    by their `id`s. No need to do a subselect unless you want to.
@@ -64,7 +64,7 @@ longer subscribe to now.)
    1. One organization, `Lambda School`
    2. Three users, `Alice`, `Bob`, and `Chris`
    3. Two channels, `#general` and `#random`
-   4. 10 messages (at least one per user, and some in both channels).
+   4. 10 messages (at least one per user, and at least one per channel).
    5. `Alice` should be in `#general` and `#random`.
    6. `Bob` should be in `#general`.
    7. `Chris` should be in `#random`.
@@ -72,7 +72,7 @@ longer subscribe to now.)
 5. Write `SELECT` queries to:
 
    For these `INSERT`s, it is **NOT** OK to refer to users, channels, and
-   organization by their `id`s. You must join.
+   organization by their `id`s. You must join in those cases.
 
    1. List all organization `name`s.
 
@@ -97,7 +97,8 @@ longer subscribe to now.)
       `COUNT`, `GROUP BY`.)
       
       The title of the user's name column should be `User Name` and the title of
-      the count column should be `Message Count`.
+      the count column should be `Message Count`. (The SQLite commands
+	  `.mode column` and `.header on` might be useful here.)
 
       The user names should be listed in reverse alphabetical order.
       
