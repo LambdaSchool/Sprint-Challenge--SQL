@@ -97,6 +97,7 @@ SELECT message.content FROM message, user
 -- List all messages in #random by user Bob
 SELECT message.content FROM message, user, channel 
   WHERE message.user_id = user.id 
+  AND channel_id = channel.id
   AND channel.name = "#random" 
   AND user.name IS "Bob";
 
