@@ -25,7 +25,7 @@ CREATE TABLE user (
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     post_time DATETIME default current_time,
-    content VARCHAR(1024),
+    content TEXT,
     user_id INTEGER REFERENCES user(id),
     channel_id INTEGER REFERENCES channel(id)
 );
@@ -44,12 +44,12 @@ INSERT INTO user (name) VALUES ('Chris');
 INSERT INTO channel (name, organization_id) VALUES ('#general', 1);
 INSERT INTO channel (name, organization_id) VALUES ('#random', 1);
 
-INSERT INTO channel_user (channel_id, user_id) VALUES (1, 1)
-INSERT INTO channel_user (channel_id, user_id) VALUES (2, 1)
-INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2)
-INSERT INTO channel_user (channel_id, user_id) VALUES (2, 2)
-INSERT INTO channel_user (channel_id, user_id) VALUES (1, 3)
-INSERT INTO channel_user (channel_id, user_id) VALUES (2, 3)
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 1);
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 1);
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2);
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 2);
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 3);
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 3);
 
 INSERT INTO message (content, user_id, channel_id) VALUES ('Hi', 1, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Sup', 1, 1);
