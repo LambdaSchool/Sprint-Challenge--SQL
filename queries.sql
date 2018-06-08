@@ -24,7 +24,6 @@ CREATE TABLE message (
   channel_id INTEGER REFERENCES channel(id)
 );
 
-
 -- A channel can have many users subscribed.
 -- A user can be subscribed to many channels.
 CREATE TABLE user_channel (
@@ -66,3 +65,22 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
 
 -- Chris should be in #random.
 INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
+
+-- List all organization names.
+SELECT name FROM organization;
+
+-- List all channel names.
+SELECT name FROM channel;
+
+-- List all channels in a specific organization by organization name.
+SELECT channel.name AS "Channel Name", organization.name AS "Organization Name"
+  FROM channel, organization
+  WHERE channel.organization_id = organization.id
+  AND organization.name = "Lambda School";
+
+-- List all messages in a specific channel by channel name #general
+-- in order of post_time, descending
+SELECT message.* FROM message, channel
+  WHERE message.channel_id = channel.id
+  AND channel.name = "#general"
+  ORDER BY message.post_time DESC;
