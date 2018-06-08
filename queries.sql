@@ -16,7 +16,7 @@ CREATE TABLE user (
 
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    post_time DATETIME default (datetime(current_time),
+    post_time DATETIME default current_time,
     content VARCHAR(1024),
     user_id INTEGER REFERENCES user(id),
     channel_id INTEGER REFERENCES channel(id)
@@ -46,4 +46,6 @@ INSERT INTO message (content, user_id, channel_id) VALUES ('Greetings', 3, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('See ya', 3, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Salutations', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Ciao', 3, 2);
+
+
 
