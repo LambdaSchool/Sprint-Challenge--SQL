@@ -72,7 +72,12 @@ INSERT INTO message (post_time, content, channel_id, user_id)
 SELECT name FROM organizaiton;
 SELECT name FROM channel;
 
-SELECT channel.name, organization.name FROM channel, organization WHERE organization.name = "Lambda School";
+SELECT channel.name, organization.name FROM channel, organization 
+	WHERE organization.name = "Lambda School";
 
+SELECT content, name FROM message, channel 
+	WHERE name = "#general" AND channel_id = channel.id 
+	ORDER BY post_time DESC;
+	
 
 
