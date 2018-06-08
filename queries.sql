@@ -1,5 +1,11 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS channel_user;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS channel;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS organization;
+
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL
