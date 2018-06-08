@@ -5,53 +5,49 @@ DROP TABLE IF EXISTS message
 
 CREATE TABLE organization(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL
+    name VARCHAR(32) NOT NULL
 )
 CREATE TABLE channel(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL
+    name VARCHAR(64) NOT NULL,
+    organization_id INTEGER,
+    FOREIGN KEY(organization_id) REFERENCES organization(id)
 )
 CREATE TABLE user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL
+    name VARCHAR(16) NOT NULL
 )
 CREATE TABLE message(
-    post_time time(7) NOT NULL
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL
+    user_id INTEGER,
+    channel_id INTEGER,
+    content TEXT,
+    post_time DATETIME NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES user(id)
+    FOREIGN KEY(channel_id) REFERENCES channel(id)
 )
 
+INSERT INTO organization (name) VALUES ("Lambda School");
+
+INSERT INTO user (name) VALUES ("Alice");
+INSERT INTO user (name) VALUES ("Bob");
+INSERT INTO user (name) VALUES ("Chris");
+
+INSERT INTO channel (name) VALUES ("#general");
+INSERT INTO channel (name) VALUES ("#random");
+
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
+INSERT INTO message (user_id, content) VALUES (1, "text");
 
 
--- Write CREATE TABLE statements for tables organization, channel, user, and message.
-
--- organization. This table should at least have column(s):
-
--- name
--- channel. This table should at least have column(s):
-
--- name
--- user. This table should at least have column(s):
-
--- name
--- message. This table should have at least columns(s):
-
--- post_time--the timestamp of when the message was posted
-
--- See Date types in SQLite. Also see the SQLite function datetime().
--- content--the message content itself
-
--- Add additional foreign keys needed to the above tables, if any.
-
--- Add additional join tables needed, if any.
-
--- Write INSERT queries to add information to the database.
-
--- For these INSERTs, it is OK to refer to users, channels, and organization by their ids. No need to do a subselect unless you want to.
-
--- One organization, Lambda School
--- Three users, Alice, Bob, and Chris
--- Two channels, #general and #random
 -- 10 messages (at least one per user, and at least one per channel).
 -- Alice should be in #general and #random.
 -- Bob should be in #general.
