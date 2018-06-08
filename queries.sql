@@ -31,9 +31,11 @@ create table user_channel (
 
 insert into organization (name) values ("Lambda School");
 
+insert into user (name) values ("Alice");
+insert into user (name) values ("Bob");
+insert into user (name) values ("Chris");
 insert into user (name) values ("Dave");
 insert into user (name) values ("Albert");
-insert into user (name) values ("Chris");
 
 insert into channel (name, organization_id) values ("#general", 1);
 insert into channel (name, organization_id) values ("#random", 1);
@@ -74,7 +76,7 @@ select message.* from message, channel
 select channel.* from channel, user, user_channel
   where user_channel.channel_id = channel.id
   and user_channel.user_id = user.id
-  and user.name = "Dave";
+  and user.name = "Alice";
 
 select user.* from channel, user, user_channel
   where user_channel.channel_id = channel.id
@@ -83,9 +85,9 @@ select user.* from channel, user, user_channel
 
 select message.* from message, user
   where message.user_id = user.id
-  and user.name = "Dave";
+  and user.name = "Bob";
 
 select message.* from message, user, channel where message.user_id = user.id
   and message.channel_id = channel.id
   and channel.name = "#random"
-  and user.name = "Albert";
+  and user.name = "Chris";
