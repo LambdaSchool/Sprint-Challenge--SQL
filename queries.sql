@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS organization;
 DROP TABLE IF EXISTS channel;
+DROP TABLE IF EXISTS user_channel;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS message;
 
@@ -30,14 +31,25 @@ CREATE TABLE message(
     FOREIGN KEY(channel_id) REFERENCES channel(id)
 );
 
+CREATE TABLE user_channel (
+    user_id REFERENCES user(id),
+    channel_id REFERENCES channel(id)
+);
+
 INSERT INTO organization (name) VALUES ("Lambda School");
 
 INSERT INTO channel (name, organization_id) VALUES ("#general", 1);
 INSERT INTO channel (name, organization_id) VALUES ("#random", 1);
 
 INSERT INTO user (name) VALUES ("Alice");
+INSERT INTO user_channel (user_id, channel_id) VALUES (1, 1);
+INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
+
 INSERT INTO user (name) VALUES ("Bob");
+INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
+
 INSERT INTO user (name) VALUES ("Chris");
+INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
 
 INSERT INTO message (user_id, channel_id, post_time, content) VALUES (1, 1, CURRENT_TIMESTAMP, "Hello!");
 INSERT INTO message (user_id, channel_id, post_time, content) VALUES (2, 1, CURRENT_TIMESTAMP, "Hey, good morning");
@@ -78,19 +90,48 @@ ORDER BY message.post_time DESC;
 SELECT " ";
 
 SELECT "List all channels to which user Alice belongs.";
-
+SELECT channel.name
+FROM channel, user, user_channel 
+WHERE user_channel.user_id = user.id 
+AND user_channel.channel_id = channel.id 
+AND user.name = 'Alice';
 SELECT " ";
 
 SELECT "List all users that belong to channel #general.";
-
+SELECT user.name
+FROM channel, user, user_channel
+WHERE user_channel.user_id = user.id 
+AND user_channel.channel_id = channel.id 
+AND channel.name = '#general';
 SELECT " ";
 
-SELECT " List all messages in all channels by user Alice.";
-
+SELECT "List all messages in all channels by user Alice.";
+SELECT user.name, channel.name, message.content
+FROM message, user, channel
+WHERE message.user_id = user.id
+AND message.channel_id = channel.id
+AND user.name = "Alice";
 SELECT " ";
 
-SELECT " List all messages in #random by user Bob.";
-
+SELECT "List all messages in #random by user Bob.";
+SELECT user.name, channel.name, message.content
+FROM message, user, channel
+WHERE message.user_id = user.id
+AND channel.name = "#random"
+AND user.name = "Bob";
 SELECT " ";
 
-SELECT " List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.)";
+SELECT "List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.)";
+SELECT user.name, COUNT(message.content)
+FROM user, message
+WHERE message.user_id = user.id
+GROUP BY user.name
+ORDER BY user.name DESC;
+SELECT " ";
+
+SELECT "[Stretch!] List the count of messages per user per channel.";
+
+SELECT " "
+-- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
+
+-- DELETE FROM message WHERE message.user_id = "user id";
