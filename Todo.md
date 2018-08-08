@@ -1,16 +1,4 @@
-# Sprint Challenge: SQL
-
-Design a database for an online chat system.
-
-## Deliverables
-
-Add a file called `queries.sql` that runs all of the `CREATE TABLE`,
-`INSERT`, and `SELECT` queries, below. `done`
-
-The last question is a fill-in-the-blank. You can add that as a SQL
-comment to the end of `queries.sql`. 
-
-## Details
+`sqlite3 sprintdb`
 
 The chat system has an arbitrary number of:
 
@@ -20,13 +8,15 @@ The chat system has an arbitrary number of:
 
 The following relationships exist:
 
-* An organization can have many channels.
-* A channel can belong to one organization.
-* A channel can have many users subscribed.
-* A user can be subscribed to many channels.
+* An organization can have many channels. `Org 1 --> Channel 1, Channel 2, Channel 3`
+* A channel can belong to one organization. `channel 1 -> Organization 1`
+* A channel can have many users subscribed. `Channel 1 -> User 1, user 2, user 3`
+* A user can be subscribed to many channels. `user1 -> Cjannel 1, channel 2, channel 3`
 * Additionally, a user can post messages to a channel. (Note that a user might have
 posted messages to a channel to which they subscribed in the past, but they no
-longer subscribe to now.)
+longer subscribe to now.) 
+`User -> channel, subscribed, not subscribed,`
+`user -> post 1, post 2, post 3`
 
 In the following, there will be more columns that you have to add in
 various tables, not just the columns listed here.
@@ -34,23 +24,29 @@ various tables, not just the columns listed here.
 1. Write `CREATE TABLE` statements for tables `organization`, `channel`, `user`,
    and `message`.
 
-   1. `organization`. This table should at least have column(s):
-      * `name`
+   CREATE TABLE organization(
+       id INTEGER AUTOINCREMENT,
+       name VARCHAR(128),
+   );
 
-   2. `channel`. This table should at least have column(s):
-      * `name`
+   CREATE TABLE channel(
+       id INTEGER AUTOINCREMENT,
+       name VARCHAR(128),
+   );
 
-   3. `user`. This table should at least have column(s):
-      * `name`
+   CREATE TABLE user(
+        id INTEGER AUTOINCREMENT,
+        name VARCHAR(128),
+   );
 
-   4. `message`. This table should have at least columns(s):
+   CREATE TABLE message(
+       id INTEGER AUTOINCREMENT,
+       post_time DATE,
+       content VARCHAR(256),
 
-      * `post_time`--the timestamp of when the message was posted
-        * See [Date types in
-          SQLite](https://www.sqlite.org/datatype3.html#date_and_time_datatype).
-          Also see the SQLite function `datetime()`.
-
-      * `content`--the message content itself
+   );
+       
+`https://www.sqlite.org/datatype3.html#date_and_time_datatype)`
 
 2. Add additional foreign keys needed to the above tables, if any.
 
@@ -62,12 +58,25 @@ various tables, not just the columns listed here.
    by their `id`s. No need to do a subselect unless you want to.
 
    1. One organization, `Lambda School`
+        `INSERT INTO organization (name) VALUES ('Lambda School')`
+
    2. Three users, `Alice`, `Bob`, and `Chris`
+        `INSERT INTO users (name) VALUES ('Alice', 'Bob', 'Chris')`
+
    3. Two channels, `#general` and `#random`
+        `INSERT INTO channels (name) VALUES ('#general', '#random')`
+
    4. 10 messages (at least one per user, and at least one per channel).
+        `INSERT INTO messages `
+
    5. `Alice` should be in `#general` and `#random`.
+        Foreign Key Alice -> General & Random
+
    6. `Bob` should be in `#general`.
+        foreign key bob -> General
+
    7. `Chris` should be in `#random`.
+        foreign key bob -> random
 
 5. Write `SELECT` queries to:
 
@@ -130,3 +139,4 @@ various tables, not just the columns listed here.
 6. What SQL keywords or concept would you use if you wanted to automatically
    delete all messages by a user if that user were deleted from the `user`
    table?
+
