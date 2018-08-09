@@ -132,5 +132,12 @@ SELECT user.name
   AND user.id = channel_user.user_id
   AND channel.name = '#general';
 
+----- All messages from Alice -----
+SELECT channel.name, message.content
+  FROM channel, user, message
+  WHERE channel.id = message.channel_id
+  AND user.id = message.user_id
+  AND user.name = 'Alice';
+
 
 
