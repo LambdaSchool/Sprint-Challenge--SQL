@@ -118,5 +118,12 @@ SELECT user.name, message.content, message.post_time
   AND channel.id = message.channel_id
   AND channel.name = '#javascript';
 
+----- All channels with Alice -----
+SELECT channel.name
+  FROM channel, user, channel_user
+  WHERE channel.id = channel_user.channel_id
+  AND user.id = channel_user.user_id
+  AND user.name = 'Alice';
+
 
 
