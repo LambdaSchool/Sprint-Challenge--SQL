@@ -11,5 +11,11 @@ CREATE TABLE channel (
   organization_id INTEGER REFERENCES organization(id)
 );
 
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL
+);
+
 
 
