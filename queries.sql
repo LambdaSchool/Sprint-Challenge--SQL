@@ -4,5 +4,12 @@ CREATE TABLE organization (
   name TEXT NOT NULL
 );
 
+DROP TABLE IF EXISTS channel;
+CREATE TABLE channel (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  organization_id INTEGER REFERENCES organization(id)
+);
+
 
 
