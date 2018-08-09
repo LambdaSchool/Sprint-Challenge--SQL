@@ -139,5 +139,13 @@ SELECT channel.name, message.content
   AND user.id = message.user_id
   AND user.name = 'Alice';
 
+----- All messages in #random from Bob -----
+SELECT message.content
+  FROM message, channel, user
+  WHERE message.channel_id = channel.id
+  AND message.user_id = user.id
+  AND channel.name = '#random'
+  AND user.name = 'Bob';
+
 
 
