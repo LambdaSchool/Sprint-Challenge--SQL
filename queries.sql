@@ -102,5 +102,8 @@ SELECT * FROM channel_user;
 ----- All organization names -----
 SELECT name FROM organization;
 
+----- All channel names -----
+SELECT name FROM channel;
+
 
 
