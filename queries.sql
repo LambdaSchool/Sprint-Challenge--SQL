@@ -105,5 +105,11 @@ SELECT name FROM organization;
 ----- All channel names -----
 SELECT name FROM channel;
 
+----- All channel names that belong to specific organization -----
+SELECT channel.name 
+  FROM organization, channel 
+  WHERE organization.id = channel.organization_id 
+  AND organization.name = 'Lambda School';
+
 
 
