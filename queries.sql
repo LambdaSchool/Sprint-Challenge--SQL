@@ -36,5 +36,17 @@ INSERT INTO organization (name) VALUES ('Lambda School');
 INSERT INTO organization (name) VALUES ('Free Code Camp');
 INSERT INTO organization (name) VALUES ('Edx');
 
+INSERT INTO channel (name, organization_id) VALUES ('#general', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#random', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#computerscience', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#lambdalabs', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#careerdevelopment', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#isa', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#javascript', 2);
+INSERT INTO channel (name, organization_id) VALUES ('#campfires', 2);
+INSERT INTO channel (name, organization_id) VALUES ('#nonprofits', 2);
+INSERT INTO channel (name, organization_id) VALUES ('#cs50', 3);
+INSERT INTO channel (name, organization_id) VALUES ('#puzzleday', 3);
+
 
 
