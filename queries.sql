@@ -26,5 +26,11 @@ CREATE TABLE message (
   channel_id INTEGER REFERENCES channel(id)
 );
 
+DROP TABLE IF EXISTS channel_user;
+CREATE TABLE channel_user (
+  channel_id INTEGER REFERENCES channel(id),
+  user_id INTEGER REFERENCES user(id)
+);
+
 
 
