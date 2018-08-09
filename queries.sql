@@ -99,5 +99,8 @@ SELECT * FROM user;
 SELECT * FROM message;
 SELECT * FROM channel_user;
 
+----- All organization names -----
+SELECT name FROM organization;
+
 
 
