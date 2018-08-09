@@ -147,5 +147,12 @@ SELECT message.content
   AND channel.name = '#random'
   AND user.name = 'Bob';
 
+----- Count messages per user -----
+SELECT user.name AS 'User', COUNT(message.id) AS 'Message Count'
+  FROM message, channel, user
+  WHERE message.channel_id = channel.id
+  AND message.user_id = user.id
+  GROUP BY user.name;
+
 
 
