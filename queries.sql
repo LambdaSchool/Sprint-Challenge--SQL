@@ -125,5 +125,12 @@ SELECT channel.name
   AND user.id = channel_user.user_id
   AND user.name = 'Alice';
 
+----- All users in #general -----
+SELECT user.name
+  FROM user, channel, channel_user
+  WHERE channel.id = channel_user.channel_id
+  AND user.id = channel_user.user_id
+  AND channel.name = '#general';
+
 
 
