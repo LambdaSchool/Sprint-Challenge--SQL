@@ -48,5 +48,15 @@ INSERT INTO channel (name, organization_id) VALUES ('#nonprofits', 2);
 INSERT INTO channel (name, organization_id) VALUES ('#cs50', 3);
 INSERT INTO channel (name, organization_id) VALUES ('#puzzleday', 3);
 
+INSERT INTO user (name) VALUES ('Alice');
+INSERT INTO user (name) VALUES ('Bob');
+INSERT INTO user (name) VALUES ('Chris');
+INSERT INTO user (name) VALUES ('Devon');
+INSERT INTO user (name) VALUES ('Marjoerie');
+INSERT INTO user (name) VALUES ('Moonlight');
+INSERT INTO user (name) VALUES ('Ponzi');
+INSERT INTO user (name) VALUES ('Taylor');
+INSERT INTO user (name) VALUES ('Artemis');
+
 
 
