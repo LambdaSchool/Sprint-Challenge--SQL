@@ -154,5 +154,10 @@ SELECT user.name AS 'User', COUNT(message.id) AS 'Message Count'
   AND message.user_id = user.id
   GROUP BY user.name;
 
-
+----- Count messages per user and per channel -----
+SELECT user.name AS 'User', channel.name AS 'Channel', COUNT(message.id) AS 'Message Count'
+  FROM message, channel, user
+  WHERE message.channel_id = channel.id
+  AND message.user_id = user.id
+  GROUP BY user.name, channel.name;
 
