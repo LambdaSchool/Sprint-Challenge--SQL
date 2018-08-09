@@ -92,5 +92,12 @@ INSERT INTO channel_user (channel_id, user_id) VALUES (9, 5);
 INSERT INTO channel_user (channel_id, user_id) VALUES (10, 4);
 INSERT INTO channel_user (channel_id, user_id) VALUES (11, 6);
 
+----- Base Line of all rows -----
+SELECT * FROM organization;
+SELECT * FROM channel;
+SELECT * FROM user;
+SELECT * FROM message;
+SELECT * FROM channel_user;
+
 
 
