@@ -6,40 +6,40 @@
 -- * Organizations TABLE (e.g. `Lambda School`)
 -- ID, NAME,
 CREATE TABLE organization (
-    id INTEGER PRIMARY_KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- * Channels TABLE (e.g. `#random`)
 -- ID, NAME, ORGANIZATION_ID
 CREATE TABLE channel (
-    id INTEGER PRIMARY_KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE,
-    organization_id INTEGER REFERENCES organization(id),
+    organization_id INTEGER REFERENCES organization(id)
 );
 
 -- * Users TABLE (e.g. `Dave`)
 -- ID, NAME,
 CREATE TABLE user (
-    id INTEGER PRIMARY_KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- * Messge TABLE ()
 -- ID, POST_TIME, CONTENT, AUTHOR, CHANNEL
 CREATE TABLE message (
-    id INTEGER PRIMARY_KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     content LONGTEXT,
     user INTEGER REFERENCES user(id),
-    channel_id INTEGER REFERENCES channel(id),
+    channel_id INTEGER REFERENCES channel(id)
 );
 
 -- * CHANNEL_SUBSCRIPTIONS
 -- CHANNEL_ID, USER_ID
 CREATE TABLE channel_subs (
     channel_id INTEGER REFERENCES channel(id),
-    user_id INTEGER REFERENCES user(id),
+    user_id INTEGER REFERENCES user(id)
 );
 
 -- #### INSERT LAND ######## --
