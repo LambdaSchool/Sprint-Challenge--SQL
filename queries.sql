@@ -58,5 +58,22 @@ INSERT INTO user (name) VALUES ('Ponzi');
 INSERT INTO user (name) VALUES ('Taylor');
 INSERT INTO user (name) VALUES ('Artemis');
 
+INSERT INTO message (content, user_id, channel_id) VALUES ('Goes down the rabbit whole.', 1, 2);
+INSERT INTO message (content, user_id, channel_id) VALUES ('The clock goes "tick tock, tick tock"!', 1, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ('The builder, CAN HE DO IT!?!', 2, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Rock, Brown, Hemsworth?...', 3, 2);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Computer Science at Lambda School is AWESOME!', 4, 3);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Learning Javascrip with Free Code Camp School is SHWEET!', 4, 7);
+INSERT INTO message (content, user_id, channel_id) VALUES ('CS50 was the SHIT!', 4, 10);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Make all the MONEIES!', 5, 5);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Da fuq is a non-profit!?', 5, 9);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Can has puzzle?', 6, 11);
+INSERT INTO message (content, user_id, channel_id) VALUES ('The ideas are flowing.', 7, 4);
+INSERT INTO message (content, user_id, channel_id) VALUES ('FIRE!!!', 7, 8);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Do it for SCIENCE!', 7, 3);
+INSERT INTO message (content, user_id, channel_id) VALUES ('Insane smile assault?', 8, 6);
+INSERT INTO message (content, user_id, channel_id) VALUES ('FIRE!!!', 8, 8);
+INSERT INTO message (content, user_id, channel_id) VALUES ('I can keyboard too.', 9, 7);
+
 
 
