@@ -32,5 +32,9 @@ CREATE TABLE channel_user (
   user_id INTEGER REFERENCES user(id)
 );
 
+INSERT INTO organization (name) VALUES ('Lambda School');
+INSERT INTO organization (name) VALUES ('Free Code Camp');
+INSERT INTO organization (name) VALUES ('Edx');
+
 
 
