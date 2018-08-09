@@ -8,14 +8,14 @@
 -- ID, NAME,
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- * Organizations TABLE (e.g. `Lambda School`)
 -- ID, NAME,
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- * Channels TABLE (e.g. `#random`)
@@ -23,24 +23,24 @@ CREATE TABLE organization (
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE,
-    organization_id INTEGER REFERENCES organization(id),
+    organization_id INTEGER REFERENCES organization(id)
 );
 
--- * Messge TABLE ()
--- ID, POST_TIME, CONTENT, USER, CHANNEL
+-- * Messge TABLE
+-- ID, POST_TIME, CONTENT, USER_ID, CHANNEL_ID
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     content LONGTEXT,
     user_id INTEGER REFERENCES user(id),
-    channel_id INTEGER REFERENCES channel(id),
+    channel_id INTEGER REFERENCES channel(id)
 );
 
--- * CHANNEL_SUBSCRIPTIONS
+-- * CHANNEL_SUBSCRIPTIONS JOIN TABLE
 -- CHANNEL_ID, USER_ID
 CREATE TABLE channel_subs (
     channel_id INTEGER REFERENCES channel(id),
-    user_id INTEGER REFERENCES user(id),
+    user_id INTEGER REFERENCES user(id)
 );
 
 -- #### INSERT LAND ######## --
