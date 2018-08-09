@@ -75,5 +75,22 @@ INSERT INTO message (content, user_id, channel_id) VALUES ('Insane smile assault
 INSERT INTO message (content, user_id, channel_id) VALUES ('FIRE!!!', 8, 8);
 INSERT INTO message (content, user_id, channel_id) VALUES ('I can keyboard too.', 9, 7);
 
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 1);
+INSERT INTO channel_user (channel_id, user_id) VALUES (1, 2);
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 1);
+INSERT INTO channel_user (channel_id, user_id) VALUES (2, 3);
+INSERT INTO channel_user (channel_id, user_id) VALUES (3, 4);
+INSERT INTO channel_user (channel_id, user_id) VALUES (3, 7);
+INSERT INTO channel_user (channel_id, user_id) VALUES (4, 7);
+INSERT INTO channel_user (channel_id, user_id) VALUES (5, 5);
+INSERT INTO channel_user (channel_id, user_id) VALUES (6, 8);
+INSERT INTO channel_user (channel_id, user_id) VALUES (7, 4);
+INSERT INTO channel_user (channel_id, user_id) VALUES (7, 9);
+INSERT INTO channel_user (channel_id, user_id) VALUES (8, 7);
+INSERT INTO channel_user (channel_id, user_id) VALUES (8, 8);
+INSERT INTO channel_user (channel_id, user_id) VALUES (9, 5);
+INSERT INTO channel_user (channel_id, user_id) VALUES (10, 4);
+INSERT INTO channel_user (channel_id, user_id) VALUES (11, 6);
+
 
 
