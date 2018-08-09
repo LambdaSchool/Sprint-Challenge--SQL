@@ -111,5 +111,12 @@ SELECT channel.name
   WHERE organization.id = channel.organization_id 
   AND organization.name = 'Lambda School';
 
+----- All messages in specific channel -----
+SELECT user.name, message.content, message.post_time 
+  FROM user, message, channel 
+  WHERE user.id = message.user_id 
+  AND channel.id = message.channel_id
+  AND channel.name = '#javascript';
+
 
 
