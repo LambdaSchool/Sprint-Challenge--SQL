@@ -161,3 +161,8 @@ SELECT user.name AS 'User', channel.name AS 'Channel', COUNT(message.id) AS 'Mes
   AND message.user_id = user.id
   GROUP BY user.name, channel.name;
 
+
+-- What SQL keywords or concept would you use if you wanted to automatically delete all 
+-- messages by a user if that user were deleted from the user table?
+
+-- REFERENCE and PRIMARY KEYS as done in this file
