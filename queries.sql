@@ -17,5 +17,14 @@ CREATE TABLE user (
   name TEXT NOT NULL
 );
 
+DROP TABLE IF EXISTS message;
+CREATE TABLE message (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  post_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  content TEXT,
+  user_id INTEGER REFERENCES user(id),
+  channel_id INTEGER REFERENCES channel(id)
+);
+
 
 
