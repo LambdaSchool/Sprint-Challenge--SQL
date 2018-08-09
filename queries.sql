@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS organization;
+CREATE TABLE organization (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL
+);
+
+
+
