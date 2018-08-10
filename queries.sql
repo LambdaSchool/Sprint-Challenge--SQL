@@ -81,16 +81,20 @@ SELECT organization.name, channel.name FROM channel, organization
 -- List all messages in a specific channel by channel name #general in order of post_time, descending. 
   -- (Hint: ORDER BY. Because your INSERTs might have all taken place at the exact same time, 
   -- this might not return meaningful results. But humor us with the ORDER BY anyway.)
-SELECT message.post_time, message.posted_by, message.content FROM message, channel
-  WHERE channel.name IS "#general"
-  AND channel.id IS message.channel_id
-  ORDER BY message.post_time ASC;
+SELECT channel.name AS "Channel", message.post_time AS "Post Time", user.name AS "User Name", message.content AS "Message Contnet"
+  FROM message, channel, user
+    WHERE user.id IS message.posted_by
+    AND channel.name IS "#general"
+    AND channel.id IS message.channel_id
+      ORDER BY message.post_time ASC;
 
 -- List all channels to which user Alice belongs.
 SELECT channel.name FROM channel, user, subscription
   WHERE user.name IS "Alice"
   AND user.id IS subscription.user_id
-  AND channel.id IS subscription.channel_id;=
+  AND channel.id IS subscription.channel_id;
+
+-- SELECT channel.name AS "Channel"
 
 -- List all users that belong to channel #general
 SELECT user.name from user, channel, subscription
@@ -119,7 +123,7 @@ SELECT user.name AS "User Name", COUNT() AS "Message Count"
     WHERE user.id IS message.posted_by
     AND channel.id IS message.channel_id
       GROUP BY user.name
-      ORDER BY user.name ASC;
+      ORDER BY user.name DESC;
 
 -- [Stretch!] List the count of messages per user per channel.
 SELECT user.name AS "User", channel.name AS "Channel", Count(*) AS "Message Count"
