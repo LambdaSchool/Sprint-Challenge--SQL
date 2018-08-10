@@ -84,6 +84,13 @@ various tables, not just the columns listed here.
 
    2. List all channel `name`s.
 
+      SELECT name FROM channel;
+
+      name      
+      ----------
+      #general  
+      #random 
+
    3. List all channels in a specific organization by organization `name`.
 
    4. List all messages in a specific channel by channel `name` `#general` in
