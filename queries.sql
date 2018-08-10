@@ -51,3 +51,29 @@ INSERT INTO message (content, user_id, channel_id) VALUES ('Greetings', 3, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ('See ya', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Salutations', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Ciao', 3, 2);
+
+SELECT name FROM organization;
+SELECT name FROM channel;
+
+SELECT content FROM message, user
+    WHERE user_id = user.id
+    AND user.name = "Kenzie";
+
+SELECT content from message, channel, user
+    WHERE user_id = user.id
+    AND channel_id = channel.id
+    AND channel.name = "#lambda"
+    AND user.name = "Kenzie";
+
+SELECT user.name AS "User Name", COUNT(*) AS "Message Count" FROM user, message
+    WHERE user_id = user.id
+    GROUP BY user.name 
+    ORDER BY user.name DESC;
+
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(*) AS "Message Count"
+    FROM user, channel, message, channel_user
+    WHERE message.user_id = user.id
+    AND message.channel_id = channel.id
+    AND user.id = channel_user.user_id
+    AND channel.id = channel_user.channel_id
+    GROUP BY channel.name, user.id;
