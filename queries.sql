@@ -38,3 +38,8 @@ create table user_channel (
   user_fk Integer REFERENCES user(id),
   channel_kf Integer REFERENCES channel(id)
 );
+
+
+-- insert
+insert  into organization (name) values ('Lambda School');
+
