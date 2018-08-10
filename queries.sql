@@ -82,3 +82,9 @@ WHERE message.user_id = user.id AND user.id = 3 and channel.id = 2;
 
 SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count" FROM message, user
 WHERE message.user_id = user.id GROUP BY user.name ORDER BY user.name DESC;
+
+-- The keywords that are important to delete all messages from a deleted user
+-- is to first set up 'PRAGMA foreign_keys = on'. Then when creating
+-- messages and setting up the foreign keys, write ON DELETE CASCADE
+-- this will cause all of the messages to delete when a user is
+-- deleted.
