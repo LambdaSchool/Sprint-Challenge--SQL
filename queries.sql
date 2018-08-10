@@ -8,21 +8,22 @@ CREATE TABLE organization (
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128),
-    org_id INTEGER FOREIGN KEY REFERENCES organization(id)
+    org_id INTEGER REFERENCES organization(id)
 );
 
 -- User
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128),
-    channel_id INTEGER FOREIGN KEY REFERENCES channel(id)
+    channel_id INTEGER REFERENCES channel(id)
 );
 
 -- Message
 CREATE TABLE message (
-    post_time DATETIME,
+    post_time REAL 
+    DEFAULT CURRENT_TIMESTAMP,
     content VARCHAR(128),
-    user_id INTEGER FOREIGN KEY REFERENCES user(id)
+    user_id INTEGER REFERENCES user(id)
 );
 
 -- Join Table For Channel and Users
@@ -42,17 +43,42 @@ INSERT INTO user (name, channel_id) VALUES ("Alice", 2);
 INSERT INTO user (name, channel_id) VALUES ("Bob", 1);
 INSERT INTO user (name, channel_id) VALUES ("Chris", 2);
 
-INSERT INTO channel (name) VALUES ("#general");
-INSERT INTO channel (name) VALUES ("#random");
+INSERT INTO channel (name, org_id) VALUES ("#general", 1);
+INSERT INTO channel (name, org_id) VALUES ("#random", 1);
 
 INSERT INTO message (content, user_id) VALUES ("Potato", 1);
 INSERT INTO message (content, user_id) VALUES ("Yam", 1);
 INSERT INTO message (content, user_id) VALUES ("Crabs", 1);
-INSERT INTO message (content, user_id) VALUES ("Hamburgers", 1);
-INSERT INTO message (content, user_id) VALUES ("Chicken Pot Pie", 1);
+INSERT INTO message (content, user_id) VALUES ("Hamburgers", 4);
+INSERT INTO message (content, user_id) VALUES ("Chicken Pot Pie", 4);
 
 INSERT INTO message (content, user_id) VALUES ("Bananas", 2);
 INSERT INTO message (content, user_id) VALUES ("Bunny", 2);
 INSERT INTO message (content, user_id) VALUES ("Turtle", 2);
 INSERT INTO message (content, user_id) VALUES ("Hamster", 3);
 INSERT INTO message (content, user_id) VALUES ("Dog", 3);
+
+-- SELECT
+
+SELECT organization.name FROM organization;
+
+SELECT channel.name FROM channel;
+
+SELECT channel.name AS "Lambda School Channel(s)" FROM organization, channel WHERE channel.org_id = organization.id AND
+organization.name = "Lambda School";
+
+SELECT message.post_time, message.content AS "#general" FROM channel, user, message
+WHERE message.user_id = user.id AND user.channel_id = 1 AND
+channel.id = 1 ORDER BY message.post_time;
+
+SELECT channel.name AS "Alice's Channels" FROM channel, user
+WHERE user.channel_id = 1 AND user.name = "Alice";
+
+SELECT user.name AS "#general Users" FROM channel, user
+WHERE user.channel_id = 1 AND channel.name = "#general";
+
+SELECT message.content AS "#general - Bob" FROM message, user, channel
+WHERE message.user_id = user.id AND user.id = 3 and channel.id = 2;
+
+SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count" FROM message, user
+WHERE message.user_id = user.id GROUP BY user.name ORDER BY user.name DESC;
