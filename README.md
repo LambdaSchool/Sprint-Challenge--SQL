@@ -135,6 +135,9 @@ various tables, not just the columns listed here.
 
    8. List all messages in `#random` by user `Bob`.
 
+
+      SELECT messages.content, user.name FROM messages, user, channel WHERE channel.name = "#random" AND user.name = "Bob" AND user.id = messages.user;
+
    9. List the count of messages across all channels per user. (Hint:
       `COUNT`, `GROUP BY`.)
       
