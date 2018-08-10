@@ -34,20 +34,23 @@ insert into user_channel(userId,channelId) values(2,1);
 insert into user_channel(userId,channelId) values(3,2);
 
 select * from organization;
+
 select name from channel;
+
 select channel.name,organization.name from channel, organization;
+
 select message.content, channel.name from message,channel where channel.name is '#general';
-select channel.name from channel,user_channel,user where user_channel.userId = user.id and user.name = 'Alice
 
+select channel.name from channel,user_channel,user where user_channel.userId = user.id and user.name = 'Alice'
 
+select user.name from user,user_channel,channel where user.id = user_channel.userId and user_channel.channelId = channel.id and channel.name = '#general';
 
+select message.content from message,user where message.userId = user.id and user.name = 'Alice';
 
+select user.name,message.content,channel.name,channel.id from message,user,channel where message.userId = user.id and user.id = 2 and channel.id = message.channelId and channel.name = '#random';
 
+select user.name,count(message.userId) as 'Message Count' from message
+    left join user on message.userId = user.id
+      group by user.name;
 
-
-
-
-
-
-
-
+6. I would use an SQLite trigger if I wanted to automatically delete all messages by a user if that user were deleted from the user table
