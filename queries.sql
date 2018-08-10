@@ -65,18 +65,26 @@ insert into user_channels (user_id, channel_id) values (2, 1);
 insert into user_channels (user_id, channel_id) values (3, 2);
 
 
+
+-- Not entirely sure how to proceed with joins as most of my queries are with id's and there'd be joins everywhere
 select (name) from organization;
 select (name) from channel;
 select channel.name as "Channel", organization.name as "Organization" from channel join organization;
-select * from message where message.channel_id = 1  order by post_time desc;
+
+
+select message.content from message, channel where channel.name = "#general" order by post_time desc;
 -- Weird behavior, repeats records beyond this point
-select channel.name from channel, user, user_channels where user_channels.channel_id = channel.id and user.name = "Alice";
-select message.content  from message, channel where channel.id = 1 and channel.name = "#general";
+select channel.name from channel inner join user, user_channels where user_channels.channel_id = channel.id and user.name = "Alice";
+select message.content  from message, channel where channel.name = "#general";
 -- Seems to be due to the where and from parameters, have to attempt different queries
-select message.content from message, user where user.id = message.user_id and message.user_id = 1;
-select message.content, message.user_id from message, user, channel where message.user_id = user.id and user.id = 2 and channel.id = message.channel_id and channel.name = "#random";
+select message.content from message inner join user where user.id = message.user_id and user.name = "Alice";
+select message.content, message.user_id from message inner join user, channel where message.user_id = user.id and user.id = 2 and channel.id = message.channel_id and channel.name = "#random";
 -- Above will return empty as ReadMe specified bob should only be in general
-select count(message.content) as "Count", user.name, channel.name as "Channel" from message, user, channel
+select count(message.content) as "Count", user.name, channel.name as "Channel" from message inner join user, channel
 where message.user_id = user.id
 and message.channel_id = channel.id
 group by channel.name, user.name;
+
+
+
+-- LAST QUESTION: ON DELETE CASCADE
