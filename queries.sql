@@ -62,3 +62,26 @@ insert into user_channel(channel_kf, user_fk) values(1,2);
 
 -- Chris in random
 insert into user_channel(channel_kf, user_fk) values (2,3);
+
+-- insert into message
+---- Alice
+--  general
+insert into message(content, user_fk, channel_kf) values ('Alice general message test', 1,1);
+insert into message(content, user_fk, channel_kf) values ('Alice general message test 2', 1,1);
+-- Alice
+-- random
+insert into message(content, user_fk, channel_kf) values ('Alice general message test', 1,2);
+insert into message(content, user_fk, channel_kf) values ('Alice random message test 2', 1,2);
+
+-- Bob
+-- general
+insert into message(content, user_fk, channel_kf) values ('Alice random message test', 2,1);
+insert into message(content, user_fk, channel_kf) values ('Alice random message test 2', 2,1);
+insert into message(content, user_fk, channel_kf) values ('Alice random message test 3', 2,1);
+
+-- Chris
+insert into message(content, user_fk, channel_kf) values ('Alice random message test', 3,2);
+insert into message(content, user_fk, channel_kf) values ('Alice random message test 2', 2,2);
+insert into message(content, user_fk, channel_kf) values ('Alice random message test 3', 2,2);
+
+
