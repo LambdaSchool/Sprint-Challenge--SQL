@@ -1,3 +1,4 @@
+-- CREATE TABLES
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL UNIQUE,
@@ -25,8 +26,41 @@ CREATE TABLE message (
     FOREIGN KEY(channel_id) REFERENCES channel(id),
 )
 
+-- JOIN TABLE
 CREATE TABLE channel_user
     channel_id INTEGER,
     user_id INTEGER,
     FOREIGN KEY(channel_id) REFERENCES channel(id)
     FOREIGN KEY(user_id) REFERENCES user(id)
+
+-- INSERT QUERIES
+INSERT INTO organization(name) VALUES ("Lambda School");
+
+INSERT INTO user(name) VALUES ("Alice");
+INSERT INTO user(name) VALUES ("Bob");
+INSERT INTO user(name) VALUES ("Chris");
+
+INSERT INTO channel(name, organization_id) VALUES ("#general", 1);
+INSERT INTO channel(name, organization_id) VALUES ("#random", 1);
+
+INSERT INTO message(content, user_id, channel_id) VALUES ("AliceMessage1", 1, 1);
+INSERT INTO message(content, user_id, channel_id) VALUES ("AliceMessage2", 1, 1);
+INSERT INTO message(content, user_id, channel_id) VALUES ("AliceMessage3", 1, 2);
+INSERT INTO message(content, user_id, channel_id) VALUES ("AliceMessage4", 1, 2);
+
+INSERT INTO message(content, user_id, channel_id) VALUES ("BobMessage1", 2, 1);
+INSERT INTO message(content, user_id, channel_id) VALUES ("BobMessage2", 2, 2);
+INSERT INTO message(content, user_id, channel_id) VALUES ("BobMessage3", 2, 2);
+
+INSERT INTO message(content, user_id, channel_id) VALUES ("ChrisMessage1", 3, 1);
+INSERT INTO message(content, user_id, channel_id) VALUES ("ChrisMessage2", 3, 1);
+INSERT INTO message(content, user_id, channel_id) VALUES ("ChrisMessage3", 3, 2);
+
+INSERT INTO channel_user(channel_id, user_id) VALUES (1, 1);
+INSERT INTO channel_user(channel_id, user_id) VALUES (2, 1);
+INSERT INTO channel_user(channel_id, user_id) VALUES (1, 2);
+INSERT INTO channel_user(channel_id, user_id) VALUES (2, 3);
+
+
+
+
