@@ -2,7 +2,7 @@
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL UNIQUE,
-)
+);
 
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,7 +14,7 @@ CREATE TABLE channel (
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL UNIQUE,
-)
+);
 
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +24,7 @@ CREATE TABLE message (
     post_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES user(id),
     FOREIGN KEY(channel_id) REFERENCES channel(id),
-)
+);
 
 -- JOIN TABLE
 CREATE TABLE channel_user
@@ -60,6 +60,16 @@ INSERT INTO channel_user(channel_id, user_id) VALUES (1, 1);
 INSERT INTO channel_user(channel_id, user_id) VALUES (2, 1);
 INSERT INTO channel_user(channel_id, user_id) VALUES (1, 2);
 INSERT INTO channel_user(channel_id, user_id) VALUES (2, 3);
+
+-- SELECT QUERIES
+SELECT name FROM organization;
+
+SELECT name FROM channel;
+
+SELECT channel.name FROM channel WHERE organization_id = organization.id;
+
+SELECT message.content FROM message WHERE channel_id = channel.id AND channel.name = '#general' ORDER BY post_time
+
 
 
 
