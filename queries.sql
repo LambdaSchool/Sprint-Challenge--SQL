@@ -88,3 +88,9 @@ WHERE message.user_id = user.id GROUP BY user.name ORDER BY user.name DESC;
 -- messages and setting up the foreign keys, write ON DELETE CASCADE
 -- this will cause all of the messages to delete when a user is
 -- deleted.
+
+-- Stretch
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(message.content) AS "Message Count"
+FROM message, channel, user 
+WHERE user.channel_id = channel.id AND message.user_id = user.id
+GROUP BY user.id ORDER BY channel.name;
