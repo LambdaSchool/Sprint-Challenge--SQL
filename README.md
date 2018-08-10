@@ -157,6 +157,13 @@ various tables, not just the columns listed here.
       Alice       3
       ```
 
+
+      SELECT user.name, COUNT(messages.content) FROM user, messages 
+      WHERE user.id = messages.user 
+      GROUP BY user.name 
+      ORDER BY user.name DESC;
+
+
    10. [Stretch!] List the count of messages per user per channel.
 
        Example:
