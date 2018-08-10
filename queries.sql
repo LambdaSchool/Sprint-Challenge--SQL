@@ -17,7 +17,7 @@ CREATE TABLE user (
 CREATE TABLE message (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  content TEXT,
+  content VARCHAR(255) NOT NULL,
   user_id INTEGER REFERENCES user(id),
   channel_id INTEGER REFERENCES channel(id),
 );
@@ -65,3 +65,18 @@ SELECT name FROM organization;
 -- ii
 SELECT name FROM channel;
 -- iii
+SELECT name AS LambdaSchool_Channels FROM channel WHERE organization_id IS (SELECT id FROM organization WHERE name IS 'Lambda School');
+-- iv
+SELECT * FROM message WHERE channel_id IS (SELECT id FROM channel WHERE name IS '#general') ORDER BY post_time DESC;
+-- v
+-- SELECT * from channel join join_channel_user on join_channel_user.channel_id = channel.id join user on user.id = join_channel_user.user_id where user.user_name = "Alice";
+-- vi
+-- placeholder
+-- vii
+-- placeholder
+-- viii
+SELECT message.content FROM message, user, channel WHERE user.id = message.user_id AND channel.name='#random' AND user.name='Bob';
+-- ix
+SELECT user.name as "User", channel.name AS "Channel", COUNT(*) AS "Message Count" FROM user, message, channel WHERE user_id = user.id AND channel_id = channel.id GROUP BY channel.name, user.name;
+
+-- Question
