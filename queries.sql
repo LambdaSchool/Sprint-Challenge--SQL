@@ -34,4 +34,6 @@ CREATE TABLE message (
   channel INTEGER REFRENCES channel(id)
 );
 
+-- Insert Organization
+insert into organization (name) values ('Lambda School');
 
