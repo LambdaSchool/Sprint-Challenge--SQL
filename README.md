@@ -121,6 +121,10 @@ various tables, not just the columns listed here.
 
    5. List all channels to which user `Alice` belongs.
 
+      SELECT channel.name FROM channel, user 
+      WHERE user.name = "Alice" 
+      AND channel.user = user.name;
+
    6. List all users that belong to channel `#general`.
 
    7. List all messages in all channels by user `Alice`.
