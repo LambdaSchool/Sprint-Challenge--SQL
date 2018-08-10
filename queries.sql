@@ -118,8 +118,19 @@ SELECT user.name AS "User Name", COUNT() AS "Message Count"
   FROM user, message, channel
     WHERE user.id IS message.posted_by
     AND channel.id IS message.channel_id
-    GROUP BY user.name
-    ORDER BY user.name ASC;
+      GROUP BY user.name
+      ORDER BY user.name ASC;
+
+-- [Stretch!] List the count of messages per user per channel.
+SELECT user.name AS "User", channel.name AS "Channel", Count(*) AS "Message Count"
+  FROM user, channel, message
+    WHERE message.posted_by IS user.id
+    AND message.channel_id IS channel.id
+      GROUP BY user.name, channel.name
+      ORDER BY channel.name ASC;
+
+
+--
 
 
 -- What SQL keywords or concept would you use if you wanted to automatically delete all messages 
