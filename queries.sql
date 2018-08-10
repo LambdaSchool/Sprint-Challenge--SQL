@@ -4,7 +4,7 @@ CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL,
     channel_id INTEGER, --foreign key
-    FOREIGN KEY(channel_id) REFRENCES channel(id)
+    FOREIGN KEY(channel_id) REFERENCES channel(id)
 );
 
 CREATE TABLE user (
@@ -12,16 +12,16 @@ CREATE TABLE user (
     name VARCHAR(128) NOT NULL,
     message_id INTEGER, --foreign key
     channel_id INTEGER, --foreign key
-    FOREIGN KEY(user_id) REFRENCES channel(id),
-    FOREIGN KEY(message_id) REFRENCES messages(id)
+    FOREIGN KEY(channel_id) REFERENCES channel(id),
+    FOREIGN KEY(message_id) REFERENCES messages(id)
 );
 
 CREATE TABLE messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL,
     post_time TEXT TIMESTAMP,
-    content VARCHAR(MAX) NOT NULL
-)
+    content VARCHAR(2000) NOT NULL
+);
 
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -55,33 +55,33 @@ INSERT INTO channel (name, user_id) VALUES ('#random',3);
 
 
 
-INSERT INTO user (message_id, name) VALUES ('hello bob', 2);
-INSERT INTO user (message_id, name) VALUES ('what a nice day', 1);
-INSERT INTO user (message_id, name) VALUES ('tommy is coming', 3);
-INSERT INTO channel (message_id, channel_id) VALUES ('once i knew the information', 3);
-INSERT INTO channel (message_id, channel_id) VALUES ('this is somewhat difficult', 4);
+-- INSERT INTO user (message_id, name) VALUES ('hello bob', 'bob');
+-- INSERT INTO user (message_id, name) VALUES ('what a nice day', 'Alice');
+-- INSERT INTO user (message_id, name) VALUES ('tommy is coming', 'Chris');
+-- INSERT INTO channel (message_id, channel_id) VALUES ('once i knew the information', 3);
+-- INSERT INTO channel (message_id, channel_id) VALUES ('this is somewhat difficult', 4);
 
-INSERT INTO user (message_id, name) VALUES ('hello alice', 2);
-INSERT INTO user (message_id, name) VALUES ('what a nice day bob', 1);
-INSERT INTO user (message_id, name) VALUES ('tommy is coming home', 3);
-INSERT INTO channel (message_id, channel_id) VALUES ('once i knew the information i am king', 3);
-INSERT INTO channel (message_id, channel_id) VALUES ('this is somewhat difficult or so i assume', 4);
-
-
-
-SELECT * FROM organization;
+-- INSERT INTO user (message_id, name) VALUES ('hello alice', 2);
+-- INSERT INTO user (message_id, name) VALUES ('what a nice day bob', 1);
+-- INSERT INTO user (message_id, name) VALUES ('tommy is coming home', 3);
+-- INSERT INTO channel (message_id, channel_id) VALUES ('once i knew the information i am king', 3);
+-- INSERT INTO channel (message_id, channel_id) VALUES ('this is somewhat difficult or so i assume', 4);
 
 
-SELECT * FROM channel;
 
-SELECT * FROM channel.name where organization.name = 'Lambda School';
+-- SELECT * FROM organization;
 
 
-SELECT * FROM channel, user where channel.user_id = user.id AND user.name = 'Alice';
+-- SELECT * FROM channel;
 
-SELECT * FROM user.name, channel where user.channel_id = channel.id AND channel.name = '#general';
+-- SELECT * FROM channel.name where organization.name = 'Lambda School';
 
-SELECT * from messages, user where user.name = 'Alice';
 
-SELECT * from messages, channel, user where channel.name = '#random' AND channel.user_id = user.id AND user.name = 'bob';
+-- SELECT * FROM channel, user where channel.user_id = user.id AND user.name = 'Alice';
+
+-- SELECT * FROM user.name, channel where user.channel_id = channel.id AND channel.name = '#general';
+
+-- SELECT * from messages, user where user.name = 'Alice';
+
+-- SELECT * from messages, channel, user where channel.name = '#random' AND channel.user_id = user.id AND user.name = 'bob';
 
