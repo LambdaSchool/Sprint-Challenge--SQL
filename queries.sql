@@ -1,16 +1,23 @@
 CREATE TABLE organization (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128)
 )
 
 CREATE TABLE channel (
-    name VARCHAR(128)
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(128),
+    org_id INTEGER FOREIGN KEY REFERENCES organization(id)
 )
 
 CREATE TABLE user (
-    name VARCHAR(128)
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(128),
+    channel_id INTEGER FOREIGN KEY REFERENCES channel(id)
 )
 
 CREATE TABLE message (
     post_time DATETIME,
     content VARCHAR(128)
+    user_id INTEGER FOREIGN KEY REFERENCES user(id)
 )
+
