@@ -72,3 +72,6 @@ AND user_id IS (SELECT id FROM user WHERE name IS 'Bob');
 SELECT COUNT(u.id) AS 'Message Count', u.name AS 'User Name' FROM messages AS m 
 INNER JOIN user AS u on m.user_id IS u.id 
 INNER JOIN channel as c WHERE m.channel_id IS c.id GROUP BY u.id;
+
+
+--in 'messages' table schema, add 'ON DELETE CASCADE' to the foreign key constraint to remove the user's messages if the user is deleted.--
