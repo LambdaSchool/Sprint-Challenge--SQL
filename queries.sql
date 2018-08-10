@@ -32,3 +32,9 @@ create table message (
   channel_kf Integer REFERENCES channel(id)
 
 );
+
+-- user_channel table
+create table user_channel (
+  user_fk Integer REFERENCES user(id),
+  channel_kf Integer REFERENCES channel(id)
+);
