@@ -53,3 +53,12 @@ insert into user(name) values ('Chris');
 insert into channel (name, organization_fk) values ('#general', 1);
 insert into channel (name, organization_fk) values ('#random', 2);
 
+-- Alice both channels
+insert into user_channel(channel_kf, user_fk) values (1,1);
+insert into user_channel(channel_kf, user_fk) values (2,1);
+
+-- Bob in general channel
+insert into user_channel(channel_kf, user_fk) values(1,2);
+
+-- Chris in random
+insert into user_channel(channel_kf, user_fk) values (2,3);
