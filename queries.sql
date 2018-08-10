@@ -20,3 +20,15 @@ create table channel (
   name varchar(255) not null UNIQUE,
   organization_fk Integer REFERENCES organization(id)
 );
+
+
+-- message table
+create table message (
+
+  id Integer PRIMARY KEY  AUTOINCREMENT,
+  post_time TimeStamp DEFAULT CURRENT_TIMESTAMP,
+  content LongText,
+  user_fk Integer REFERENCES user(id),
+  channel_kf Integer REFERENCES channel(id)
+
+);
