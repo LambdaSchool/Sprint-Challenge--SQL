@@ -28,11 +28,13 @@ CREATE TABLE message (
 
 -- Join Table For Channel and Users
 SELECT channel.name AS "Channel", user.name AS "User"
-FROM channel, user WHERE user.channel_id = channel.id;
+FROM channel, user WHERE user.channel_id = channel.id
+ORDER BY channel.name;
 
 -- Join Table For Users and Post
-SELECT user.name AS "User", message.content AS "Messages"
-FROM user, message WHERE message.user_id = user.id;
+SELECT user.name AS "User", message.content AS "Messages", channel.name AS "Channel"
+FROM user, message, channel WHERE message.user_id = user.id AND user.channel_id = channel.id
+ORDER BY user.name;
 
 -- Insert
 
