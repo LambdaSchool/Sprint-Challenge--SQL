@@ -127,7 +127,11 @@ various tables, not just the columns listed here.
 
    6. List all users that belong to channel `#general`.
 
+      SELECT user FROM channel WHERE channel.name = "#general";
+
    7. List all messages in all channels by user `Alice`.
+
+      SELECT content, name FROM messages, user WHERE user.name = "Alice" AND user.id = messages.user;
 
    8. List all messages in `#random` by user `Bob`.
 
