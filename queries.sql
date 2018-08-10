@@ -7,6 +7,7 @@
     DROP TABLE organization;
 
 -- Formatting
+
 .mode column
 .header on
 
