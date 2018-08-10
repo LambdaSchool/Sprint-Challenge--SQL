@@ -74,25 +74,25 @@ various tables, not just the columns listed here.
    For these `INSERT`s, it is **NOT** OK to refer to users, channels, and
    organization by their `id`s. You must join in those cases.
 
-   1. List all organization `name`s.
+  * 1. List all organization `name`s.
    
 ```sql
 SELECT name FROM organization;
 ```
 
-   2. List all channel `name`s.
+  * 2. List all channel `name`s.
 
 ```sql
 SELECT name FROM channel;
 ```
 
-   3. List all channels in a specific organization by organization `name`.
+  * 3. List all channels in a specific organization by organization `name`.
 
 ```sql
 SELECT channel.name, organization.name FROM channel, organization, organization_channel WHERE organization_channel.organizationID = organization.id AND organization_channel.channelID = channel.id AND organization.name = 'Lambda School';
 ```
 
-   4. List all messages in a specific channel by channel `name` `#general` in
+  * 4. List all messages in a specific channel by channel `name` `#general` in
       order of `post_time`, descending. (Hint: `ORDER BY`. Because your
       `INSERT`s might have all taken place at the exact same time, this might
       not return meaningful results. But humor us with the `ORDER BY` anyway.)
@@ -101,15 +101,31 @@ SELECT channel.name, organization.name FROM channel, organization, organization_
 SELECT message.content FROM message, user, channel, channel_user WHERE channel_user.channelID = channel.id AND channel_user.userID = user.id AND message.userID = user.id AND channel.name = '#general' AND message.channelID = channel.id ORDER BY message.post_time DESC;
 ```
 
-   5. List all channels to which user `Alice` belongs.
+  * 5. List all channels to which user `Alice` belongs.
 
-   6. List all users that belong to channel `#general`.
+```sql
+SELECT channel.name FROM channel, user, channel_user WHERE channel.id = channel_user.channelID AND user.id = channel_user.userID AND user.name = 'Alice';
+```
 
-   7. List all messages in all channels by user `Alice`.
+  * 6. List all users that belong to channel `#general`.
 
-   8. List all messages in `#random` by user `Bob`.
+```sql
+SELECT user.name FROM channel, user, channel_user WHERE channel.id = channel_user.channelID AND user.id = channel_user.userID AND channel.name = '#general';
+```
 
-   9. List the count of messages across all channels per user. (Hint:
+  * 7. List all messages in all channels by user `Alice`.
+
+```sql
+SELECT message.content FROM message, user, channel, channel_user WHERE channel_user.channelID = channel.id AND channel_user.userID = user.id AND message.userID = user.id AND user.name = 'Alice' AND message.channelID = channel.id;
+```
+
+  * 8. List all messages in `#random` by user `Bob`.
+
+```sql
+SELECT message.content FROM message, user, channel, channel_user WHERE channel_user.channelID = channel.id AND channel_user.userID = user.id AND message.userID = user.id AND channel.name = '#random' AND message.channelID = channel.id AND user.name = 'Bob';
+```
+
+  * 9. List the count of messages across all channels per user. (Hint:
       `COUNT`, `GROUP BY`.)
       
       The title of the user's name column should be `User Name` and the title of
@@ -127,8 +143,11 @@ SELECT message.content FROM message, user, channel, channel_user WHERE channel_u
       Bob         3
       Alice       3
       ```
+```sql
+SELECT user.name AS 'User Name', COUNT(message.content) AS 'Message Count' from message, user, channel, channel_user WHERE channel_user.channelID = channel.id AND channel_user.userID = user.id AND message.channelID = channel.id AND message.userID = user.id GROUP BY user.name;
+```
 
-   10. [Stretch!] List the count of messages per user per channel.
+  * 10. [Stretch!] List the count of messages per user per channel.
 
        Example:
 
@@ -143,6 +162,12 @@ SELECT message.content FROM message, user, channel, channel_user WHERE channel_u
        Chris       #random     2
        ```
 
+```sql
+SELECT user.name AS 'User Name', channel.name as 'Channel', COUNT(message.content) AS 'Message Count' from message, user, channel, channel_user WHERE channel_user.channelID = channel.id AND channel_user.userID = user.id AND message.channelID = channel.id AND message.userID = user.id GROUP BY channel.name, user.name;
+```
+
 6. What SQL keywords or concept would you use if you wanted to automatically
    delete all messages by a user if that user were deleted from the `user`
    table?
+
+  * in the table for messages where the `FOREIGN KEY` for usesID exists, i would add on `ON DELETE CASCADE`
