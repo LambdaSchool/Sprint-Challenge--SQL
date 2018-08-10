@@ -100,3 +100,12 @@ where message.user_id = user.id
 and channel_id = channel.id
 group by channel.name, user.name;
 
+
+-- Question:
+
+-- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
+
+-- Answer:
+
+-- I would use "ON DELETE CASCADE". As per wikipedia - A foreign key with cascade delete means that if a record in the parent table is deleted, 
+-- then the corresponding records in the child table will automatically be deleted. This is called a cascade delete in SQL Server.
