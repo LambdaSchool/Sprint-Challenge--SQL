@@ -25,4 +25,13 @@ CREATE TABLE user (
   messages INTEGER REFRENCES message(id)
 );
 
+-- Message Table
+CREATE TABLE message (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  post_time TimeStamp DEFAULT CURRENT_TIMESTAMP,
+  content LongText,
+  user INTEGER REFRENCES user(id),
+  channel INTEGER REFRENCES channel(id)
+);
+
 
