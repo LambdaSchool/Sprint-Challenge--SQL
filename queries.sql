@@ -2,28 +2,29 @@ Drop table if exists organization;--
 Drop table if exists channel;--
 Drop table if exists user;--
 Drop table if exists message;--
+Drop table if exists user_channels;
 
 
 create table organization (
   id integer primary key autoincrement,
-  name varchar(120) not null
+  name varchar(200) not null
 );
 
 create table channel(
   id integer primary key autoincrement,
-  name varchar(120) not null,
+  name varchar(200) not null,
   organization_id integer,
   foreign key (organization_id) references organization(id)
 );
 
 create table user (
   id integer primary key autoincrement,
-  name varchar(120) not null
+  name varchar(200) not null
 );
 
 create table message (
   id integer primary key autoincrement,
-  content varchar(120) not null,
+  content varchar(200) not null,
   user_id integer,
   channel_id integer,
   post_time datetime default current_timestamp,
@@ -67,4 +68,15 @@ insert into user_channels (user_id, channel_id) values (3, 2);
 select (name) from organization;
 select (name) from channel;
 select channel.name as "Channel", organization.name as "Organization" from channel join organization;
-select * from message where message.channel_id = 2  order by post_time desc;
+select * from message where message.channel_id = 1  order by post_time desc;
+-- Weird behavior, repeats records beyond this point
+select channel.name from channel, user, user_channels where user_channels.channel_id = channel.id and user.name = "Alice";
+select message.content  from message, channel where channel.id = 1 and channel.name = "#general";
+-- Seems to be due to the where and from parameters, have to attempt different queries
+select message.content from message, user where user.id = message.user_id and message.user_id = 1;
+select message.content, message.user_id from message, user, channel where message.user_id = user.id and user.id = 2 and channel.id = message.channel_id and channel.name = "#random";
+-- Above will return empty as ReadMe specified bob should only be in general
+select count(message.content) as "Count", user.name, channel.name as "Channel" from message, user, channel
+where message.user_id = user.id
+and message.channel_id = channel.id
+group by channel.name, user.name;
