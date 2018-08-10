@@ -40,6 +40,11 @@ create table user_channel (
 );
 
 
--- insert
+-- insert organization
 insert  into organization (name) values ('Lambda School');
 
+
+-- insert into user
+insert into user(name) values ('Alice');
+insert into user(name) values ('Bob');
+insert into user(name) values ('Chris');
