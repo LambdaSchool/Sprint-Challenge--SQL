@@ -81,7 +81,7 @@ SELECT user.name FROM user, addid, channel
 SELECT * FROM message WHERE u_id IS(SELECT id from user WHERE name IS "Alice");
 
 SELECT * FROM message WHERE ch_id IS(SELECT id FROM channel WHERE name IS "#random") 
-    AND u_id IS(SELECT id FROM user WHERE name IS "#random");
+    AND u_id IS(SELECT id FROM user WHERE name IS "Bob");
 
 SELECT name AS "User Name", COUNT(content) as "Message Count" FROM user, message
     WHERE message.u_id = user.id
