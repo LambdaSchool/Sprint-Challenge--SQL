@@ -147,12 +147,13 @@ SELECT message.content
   AND channel.name = '#random'
   AND user.name = 'Bob';
 
------ Count messages per user -----
+----- Count messages per user descending order -----
 SELECT user.name AS 'User', COUNT(message.id) AS 'Message Count'
   FROM message, channel, user
   WHERE message.channel_id = channel.id
   AND message.user_id = user.id
-  GROUP BY user.name;
+  GROUP BY user.name
+  ORDER BY user.name DESC;
 
 ----- Count messages per user and per channel -----
 SELECT user.name AS 'User', channel.name AS 'Channel', COUNT(message.id) AS 'Message Count'
@@ -160,6 +161,7 @@ SELECT user.name AS 'User', channel.name AS 'Channel', COUNT(message.id) AS 'Mes
   WHERE message.channel_id = channel.id
   AND message.user_id = user.id
   GROUP BY user.name, channel.name;
+ 
 
 
 -- What SQL keywords or concept would you use if you wanted to automatically delete all 
