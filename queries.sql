@@ -28,6 +28,21 @@ insert into message(content,userId,channelId,post_time) values('agreed',3,2,date
 insert into message(content,userId,channelId,post_time) values('happy emoticon',1,2,datetime('now'));
 insert into message(content,userId,channelId,post_time) values('smiling emoticon',3,2,datetime('now'));
 
+insert into user_channel(userId,channelId) values(1,1);
+insert into user_channel(userId,channelId) values(1,2);
+insert into user_channel(userId,channelId) values(2,1);
+insert into user_channel(userId,channelId) values(3,2);
+
+select * from organization;
+select name from channel;
+select channel.name,organization.name from channel, organization;
+select message.content, channel.name from message,channel where channel.name is '#general';
+select channel.name from channel,user_channel,user where user_channel.userId = user.id and user.name = 'Alice
+
+
+
+
+
 
 
 
