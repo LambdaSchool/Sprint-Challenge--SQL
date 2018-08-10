@@ -75,23 +75,68 @@ various tables, not just the columns listed here.
    organization by their `id`s. You must join in those cases.
 
    1. List all organization `name`s.
+   
+      SELECT name FROM organization;
+
+      name         
+      -------------
+      Lambda School
 
    2. List all channel `name`s.
 
+      SELECT name FROM channel;
+
+      name      
+      ----------
+      #general  
+      #random 
+
    3. List all channels in a specific organization by organization `name`.
+
+      SELECT channel.name, organization.name FROM channel, organization 
+      WHERE channel.organization = organization.id;
+
+      name        name         
+      ----------  -------------
+      #general    Lambda School
+      #random     Lambda School
 
    4. List all messages in a specific channel by channel `name` `#general` in
       order of `post_time`, descending. (Hint: `ORDER BY`. Because your
       `INSERT`s might have all taken place at the exact same time, this might
       not return meaningful results. But humor us with the `ORDER BY` anyway.)
 
+      SELECT post_time, content FROM messages, channel 
+      WHERE channel.name = "#general" 
+      AND channel.name = messages.channel 
+      ORDER BY post_time DESC;
+
+      post_time            content    
+      -------------------  -----------
+      2018-08-10 16:33:57  i like dogs
+      2018-08-10 16:33:48  i like the 
+      2018-08-10 16:33:40  hi my name 
+      2018-08-10 16:33:02  i like the 
+      2018-08-10 16:32:34  hi my name 
+
    5. List all channels to which user `Alice` belongs.
+
+      SELECT channel.name FROM channel, user 
+      WHERE user.name = "Alice" 
+      AND channel.user = user.name;
 
    6. List all users that belong to channel `#general`.
 
+      SELECT user FROM channel WHERE channel.name = "#general";
+
    7. List all messages in all channels by user `Alice`.
 
+      SELECT content, name FROM messages, user WHERE user.name = "Alice" AND user.id = messages.user;
+
    8. List all messages in `#random` by user `Bob`.
+
+
+      SELECT messages.content, user.name FROM messages, user, channel WHERE channel.name = "#random" AND user.name = "Bob" AND user.id = messages.user;
 
    9. List the count of messages across all channels per user. (Hint:
       `COUNT`, `GROUP BY`.)
@@ -111,6 +156,13 @@ various tables, not just the columns listed here.
       Bob         3
       Alice       3
       ```
+
+
+      SELECT user.name, COUNT(messages.content) FROM user, messages 
+      WHERE user.id = messages.user 
+      GROUP BY user.name 
+      ORDER BY user.name DESC;
+
 
    10. [Stretch!] List the count of messages per user per channel.
 
