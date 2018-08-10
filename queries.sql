@@ -1,3 +1,7 @@
+-- FORMATTING
+.mode column
+.header on
+
 -- CREATE TABLES
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -67,13 +71,16 @@ SELECT name FROM organization;
 
 SELECT name FROM channel;
 
-SELECT channel.name FROM channel, organization WHERE organization_id = organization.id AND organization.name = 'Lambda School';
+SELECT channel.name FROM channel, organization WHERE organization_id = organization.id AND organization.name = "Lambda School";
 
-SELECT message.content FROM message, channel WHERE channel_id = channel.id AND channel.name = '#general' ORDER BY post_time;
+SELECT message.content FROM message, channel WHERE channel_id = channel.id AND channel.name = "#general" ORDER BY post_time;
 
-SELECT channel.name FROM channel, user, channel_user WHERE user.name IS "Alice" AND user_id IS user.id AND channel_id is channel.id;
+SELECT channel.name FROM channel, user, channel_user WHERE user.name IS "Alice" AND user_id IS user.id AND channel_id IS channel.id;
 
+SELECT user.name FROM channel, user, channel_user WHERE channel.name IS "#general" AND user_id is user.id AND channel_id IS channel.id;
 
+SELECT message.content FROM message, user, channel WHERE user.name IS "Alice" AND user_id IS user.id AND channel_id IS channel.id;
 
+SELECT message.content FROM message, user, channel WHERE user.name IS "Bob" AND message.user_id IS user.id AND message.channel_id IS channel.id AND channel.name IS "#random";
 
-
+SELECT name as "User Name", COUNT() as "Message Count" FROM message, user WHERE user_id IS user.id GROUP BY user.name ORDER BY user.name DESC;
