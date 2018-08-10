@@ -12,3 +12,11 @@ create table organization (
   name varchar(255) not null UNIQUE
 
 );
+
+-- channel table
+-- name must be unique
+create table channel (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name varchar(255) not null UNIQUE,
+  organization_fk Integer REFERENCES organization(id)
+);
