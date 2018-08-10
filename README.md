@@ -106,6 +106,19 @@ various tables, not just the columns listed here.
       `INSERT`s might have all taken place at the exact same time, this might
       not return meaningful results. But humor us with the `ORDER BY` anyway.)
 
+      SELECT post_time, content FROM messages, channel 
+      WHERE channel.name = "#general" 
+      AND channel.name = messages.channel 
+      ORDER BY post_time DESC;
+
+      post_time            content    
+      -------------------  -----------
+      2018-08-10 16:33:57  i like dogs
+      2018-08-10 16:33:48  i like the 
+      2018-08-10 16:33:40  hi my name 
+      2018-08-10 16:33:02  i like the 
+      2018-08-10 16:32:34  hi my name 
+
    5. List all channels to which user `Alice` belongs.
 
    6. List all users that belong to channel `#general`.
