@@ -75,6 +75,12 @@ various tables, not just the columns listed here.
    organization by their `id`s. You must join in those cases.
 
    1. List all organization `name`s.
+   
+      SELECT name FROM organization;
+
+      name         
+      -------------
+      Lambda School
 
    2. List all channel `name`s.
 
