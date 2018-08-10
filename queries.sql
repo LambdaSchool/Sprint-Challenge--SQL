@@ -37,8 +37,12 @@ CREATE TABLE message (
 -- Insert Organization
 insert into organization (name) values ('Lambda School');
 
--- Insert 3 Users 
+-- Insert Users 
 insert into user(name) values ('Alice');
 insert into user(name) values ('Bob');
 insert into user(name) values ('Chris');
+
+-- Insert Channels
+insert into channel (name, organization) values ('#general', 1);
+insert into channel (name, organization) values ('#random', 2);
 
