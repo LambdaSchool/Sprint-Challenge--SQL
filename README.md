@@ -75,15 +75,31 @@ various tables, not just the columns listed here.
    organization by their `id`s. You must join in those cases.
 
    1. List all organization `name`s.
+   
+```sql
+SELECT name FROM organization;
+```
 
    2. List all channel `name`s.
 
+```sql
+SELECT name FROM channel;
+```
+
    3. List all channels in a specific organization by organization `name`.
+
+```sql
+SELECT channel.name, organization.name FROM channel, organization, organization_channel WHERE organization_channel.organizationID = organization.id AND organization_channel.channelID = channel.id AND organization.name = 'Lambda School';
+```
 
    4. List all messages in a specific channel by channel `name` `#general` in
       order of `post_time`, descending. (Hint: `ORDER BY`. Because your
       `INSERT`s might have all taken place at the exact same time, this might
       not return meaningful results. But humor us with the `ORDER BY` anyway.)
+
+```sql
+SELECT message.content FROM message, user, channel, channel_user WHERE channel_user.channelID = channel.id AND channel_user.userID = user.id AND message.userID = user.id AND channel.name = '#general' AND message.channelID = channel.id ORDER BY message.post_time DESC;
+```
 
    5. List all channels to which user `Alice` belongs.
 
