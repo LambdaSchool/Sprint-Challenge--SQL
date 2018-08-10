@@ -1,7 +1,7 @@
 -- CREATE TABLES
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL UNIQUE,
+    name VARCHAR(128) NOT NULL UNIQUE
 );
 
 CREATE TABLE channel (
@@ -13,7 +13,7 @@ CREATE TABLE channel (
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL UNIQUE,
+    name VARCHAR(128) NOT NULL UNIQUE
 );
 
 CREATE TABLE message (
@@ -23,15 +23,16 @@ CREATE TABLE message (
     content TEXT,
     post_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES user(id),
-    FOREIGN KEY(channel_id) REFERENCES channel(id),
+    FOREIGN KEY(channel_id) REFERENCES channel(id)
 );
 
 -- JOIN TABLE
-CREATE TABLE channel_user
+CREATE TABLE channel_user (
     channel_id INTEGER,
     user_id INTEGER,
     FOREIGN KEY(channel_id) REFERENCES channel(id)
     FOREIGN KEY(user_id) REFERENCES user(id)
+);
 
 -- INSERT QUERIES
 INSERT INTO organization(name) VALUES ("Lambda School");
@@ -66,9 +67,11 @@ SELECT name FROM organization;
 
 SELECT name FROM channel;
 
-SELECT channel.name FROM channel WHERE organization_id = organization.id;
+SELECT channel.name FROM channel, organization WHERE organization_id = organization.id AND organization.name = 'Lambda School';
 
-SELECT message.content FROM message WHERE channel_id = channel.id AND channel.name = '#general' ORDER BY post_time
+SELECT message.content FROM message, channel WHERE channel_id = channel.id AND channel.name = '#general' ORDER BY post_time;
+
+SELECT channel.name FROM channel, user, channel_user WHERE user.name IS "Alice" AND user_id IS user.id AND channel_id is channel.id;
 
 
 
