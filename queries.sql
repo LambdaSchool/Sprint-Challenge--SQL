@@ -31,6 +31,13 @@ create table message (
   foreign key (user_id) references user(id)
 );
 
+create table user_channels (
+    user_id integer,
+    channel_id integer,
+    foreign key (user_id) references user(id),
+    foreign key (channel_id) references channel(id)
+);
+
 insert into organization (name) values ("Lambda School");
 
 insert into user (name) values ("Alice");
@@ -50,3 +57,14 @@ insert into message (content, user_id, channel_id) values ("Cool, see you then "
 insert into message (content, user_id, channel_id) values ("Having inernet issues", 2, 1);
 insert into message (content, user_id, channel_id) values ("I like dogs", 3, 2);
 insert into message (content, user_id, channel_id) values ("Cats are better", 1, 2);
+
+insert into user_channels (user_id, channel_id) values (1, 1);
+insert into user_channels (user_id, channel_id) values (1, 2);
+insert into user_channels (user_id, channel_id) values (2, 1);
+insert into user_channels (user_id, channel_id) values (3, 2);
+
+
+select (name) from organization;
+select (name) from channel;
+select channel.name as "Channel", organization.name as "Organization" from channel join organization;
+select * from message where message.channel_id = 2  order by post_time desc;
