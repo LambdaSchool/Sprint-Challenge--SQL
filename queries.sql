@@ -75,6 +75,7 @@
     INSERT INTO message (content, chanID, userID) VALUES ('Tell him Chris sent you', 2, 3);
     INSERT INTO message (content, chanID, userID) VALUES ('Im back, Chris sent me, where are the cats?', 1, 1);
     INSERT INTO message (content, chanID, userID) VALUES ('Press Alt + F4', 1, 2);
+    INSERT INTO message (content, chanID, userID) VALUES ('I hate you all, Im leaving forever! Peace!', 2, 2);
 
 -- Insert Alice in #general and #random, Bob in #general and Chris in #random
 
@@ -139,3 +140,12 @@
     ORDER BY user.name DESC;
 
 -- List the count of messages per user per channel.
+
+    SELECT user.name AS 'User Name', channel.name AS 'Channel' , COUNT (message.content) AS 'Message Count'FROM user, message, channel
+    WHERE message.userID = user.ID
+    AND message.chanID = channel.ID
+    GROUP BY channel.name, user.name;
+
+-- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
+
+    -- 'ON DELETE CASCADE', this allows all the children to be automatically deleted when their parent is deleted (so gloomy).
