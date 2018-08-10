@@ -24,3 +24,9 @@ CREATE TABLE message (
     FOREIGN KEY(user_id) REFERENCES user(id),
     FOREIGN KEY(channel_id) REFERENCES channel(id),
 )
+
+CREATE TABLE channel_user
+    channel_id INTEGER,
+    user_id INTEGER,
+    FOREIGN KEY(channel_id) REFERENCES channel(id)
+    FOREIGN KEY(user_id) REFERENCES user(id)
