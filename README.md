@@ -93,6 +93,14 @@ various tables, not just the columns listed here.
 
    3. List all channels in a specific organization by organization `name`.
 
+      SELECT channel.name, organization.name FROM channel, organization 
+      WHERE channel.organization = organization.id;
+
+      name        name         
+      ----------  -------------
+      #general    Lambda School
+      #random     Lambda School
+
    4. List all messages in a specific channel by channel `name` `#general` in
       order of `post_time`, descending. (Hint: `ORDER BY`. Because your
       `INSERT`s might have all taken place at the exact same time, this might
