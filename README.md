@@ -71,7 +71,7 @@ various tables, not just the columns listed here.
 
 5. Write `SELECT` queries to:
 
-   For these `INSERT`s, it is **NOT** OK to refer to users, channels, and
+   For these `SELECT`s, it is **NOT** OK to refer to users, channels, and
    organization by their `id`s. You must join in those cases.
 
    1. List all organization `name`s.
