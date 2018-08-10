@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL,
@@ -17,7 +19,7 @@ CREATE TABLE user (
 CREATE TABLE messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL,
-    post_time TEXT,
+    post_time TEXT TIMESTAMP,
     content VARCHAR(MAX) NOT NULL
 )
 
@@ -64,3 +66,22 @@ INSERT INTO user (message_id, name) VALUES ('what a nice day bob', 1);
 INSERT INTO user (message_id, name) VALUES ('tommy is coming home', 3);
 INSERT INTO channel (message_id, channel_id) VALUES ('once i knew the information i am king', 3);
 INSERT INTO channel (message_id, channel_id) VALUES ('this is somewhat difficult or so i assume', 4);
+
+
+
+SELECT * FROM organization;
+
+
+SELECT * FROM channel;
+
+SELECT * FROM channel.name where organization.name = 'Lambda School';
+
+
+SELECT * FROM channel, user where channel.user_id = user.id AND user.name = 'Alice';
+
+SELECT * FROM user.name, channel where user.channel_id = channel.id AND channel.name = '#general';
+
+SELECT * from messages, user where user.name = 'Alice';
+
+SELECT * from messages, channel, user where channel.name = '#random' AND channel.user_id = user.id AND user.name = 'bob';
+
