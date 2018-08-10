@@ -130,3 +130,5 @@ various tables, not just the columns listed here.
 6. What SQL keywords or concept would you use if you wanted to automatically
    delete all messages by a user if that user were deleted from the `user`
    table?
+
+6. Answer: I would use `ON DELETE CASCADE` and specify it in the Foreign Key Constraint on the Schema for the messages.
