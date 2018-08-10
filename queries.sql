@@ -75,4 +75,7 @@ SELECT * FROM message where user_id = (select id from user where user_name = "Al
 SELECT * from message join user on message.user_id = user.id where user.user_name = "Alice";
 SELECT * from message join user on message.user_id = user.id join channel on channel.id = message.channel_id where channel.channel_name = "#random" AND user.user_name = "Bob";
 SELECT count(message.id) as "Message Count", user.user_name as "User Name" from message join user on message.user_id = user.id join channel on channel.id = message.channel_id where channel.channel_name = "#random" AND user.user_name = "Bob";
+SELECT user.user_name as "User Name", count(*) as "Message Count" FROM user, message, channel where user_id = user.id and channel_id = channel.id GROUP BY channel.channel_name, user.user_name;
+SELECT user.user_name as "User", channel.channel_name as "Channel", count(*) as "Message Count" FROM user, message, channel where user_id = user.id and channel_id = channel.id GROUP BY channel.channel_name, user.user_name;
+
 
