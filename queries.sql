@@ -100,6 +100,10 @@ INSERT INTO message (content, user_id, channel_id)VALUES(
     'This is a message from Alice in #general: BOB if you do not stop i will kick you from general..',
     1,1
 );
+INSERT INTO message (content, user_id, channel_id)VALUES(
+    'This is a message from Alice in #general: BOB if you do not stop i will kick you from general..',
+    1,1
+);
 
 -- #### QUERY LAND ######## --
 -- 1. List all organization `name`s.
@@ -116,20 +120,31 @@ SELECT name AS LambdaSchool_Channels FROM channel WHERE organization_id IS (SELE
 SELECT * FROM message WHERE channel_id IS (SELECT id FROM channel WHERE name IS '#general') ORDER BY post_time DESC;
 
 -- 5. List all channels to which user `Alice` belongs.
+SELECT c.name AS Alice_Channels, c.id AS Channel_ID  FROM channel AS c INNER JOIN channel_subs AS cs ON c.id IS cs.channel_id INNER JOIN user AS u ON u.id IS cs.user_id WHERE u.name IS 'Alice';
 
 -- 6. List all users that belong to channel `#general`.
+SELECT u.name AS Users_In_General FROM user AS u INNER JOIN channel_subs AS cs ON u.id IS cs.user_id INNER JOIN channel AS c ON cs.channel_id IS c.id WHERE c.name IS "#general";
 
 -- 7. List all messages in all channels by user `Alice`.
+SELECT post_time AS POSTED_AT, content AS MESSGE_BODY, u.name AS USERNAME FROM message AS m INNER JOIN user AS u ON user_id IS u.id WHERE u.name IS 'Alice';
 
 -- 8. List all messages in `#random` by user `Bob`.
+-- NO messages will come up because nothing was added for bob in that channel, bob only speaks in General.
+SELECT * FROM message WHERE channel_id IS (SELECT id FROM channel WHERE name IS '#random') 
+AND user_id IS (SELECT id FROM user WHERE name IS 'Bob');
 
 -- 9. List the count of messages across all channels per user. (Hint:
 -- `COUNT`, `GROUP BY`.)
-
 -- The title of the user's name column should be `User Name` and the title of
 -- the count column should be `Message Count`. (The SQLite commands
 -- `.mode column` and `.header on` might be useful here.)
+SELECT COUNT(u.id) AS 'Message Count', u.name AS 'User Name' FROM message AS m 
+INNER JOIN user AS u on m.user_id IS u.id 
+INNER JOIN channel as c WHERE m.channel_id IS c.id GROUP BY u.id;
 
+
+-- ### CLEARING OUT ALL TABLES ### 
+-- # REMOVE THIS AFTER DEBUGGING #
 DROP TABLE IF EXISTS organization;
 DROP TABLE IF EXISTS channel;
 DROP TABLE IF EXISTS user;
