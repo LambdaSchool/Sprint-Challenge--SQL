@@ -46,3 +46,12 @@ insert into user(name) values ('Chris');
 insert into channel (name, organization) values ('#general', 1);
 insert into channel (name, organization) values ('#random', 2);
 
+-- Alice 
+insert into user_channel (channel, user) values (1,1);
+insert into user_channel (channel, user) values (2,1);
+
+-- Bob 
+insert into user_channel (channel, user) values (1,2);
+
+-- Chris
+insert into user_channel (channel, user) values (2,3);
