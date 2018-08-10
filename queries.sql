@@ -33,5 +33,9 @@ INSERT INTO user (name) VALUES ("Alice");
 INSERT INTO user (name) VALUES ("Bob");
 INSERT INTO user (name) VALUES ("Chris");
 
+-- channel stuff
+INSERT INTO channel (name, organizations) VALUES ('#general', 1);
+INSERT INTO channel (name, organizations) VALUES ('#random', 2);
+
 
 
