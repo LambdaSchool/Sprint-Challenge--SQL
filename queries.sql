@@ -48,7 +48,7 @@ INSERT INTO channel (name, organization_id) VALUES ('#random', 1);
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 1', 1, 1);
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 2', 3, 2);
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 3', 2, 3);
-INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 4', 4, 1);
+INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 4', 3, 1);
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 5', 1, 1);
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 6', 1, 1);
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 7', 1, 1);
