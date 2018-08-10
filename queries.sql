@@ -17,6 +17,20 @@ insert into user(name) values('Chris');
 insert into channel(name,organizationId) values('#general',1);
 insert into channel(name,organizationId) values('#random',1);
 
+insert into message(content,userId,channelId,post_time) values('hi',1,1,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('hello',2,1,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('tiem 2 lern',1,1,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('yah',2,1,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('hi',1,2,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('heya',3,2,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('random random',1,2,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('agreed',3,2,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('happy emoticon',1,2,datetime('now'));
+insert into message(content,userId,channelId,post_time) values('smiling emoticon',3,2,datetime('now'));
+
+
+
+
 
 
 
