@@ -8,3 +8,17 @@ CREATE TABLE user_channel(id integer primary key autoincrement, userId integer, 
 
 CREATE TABLE message(id integer primary key autoincrement, content text, userId integer, post_time text, foreign key(userId) references user(id));
 
+insert into organization(name) values("Lambda School");
+
+insert into user(name) values('Alice');
+insert into user(name) values('Bob');
+insert into user(name) values('Chris');
+
+insert into channel(name,organizationId) values('#general',1);
+insert into channel(name,organizationId) values('#random',1);
+
+
+
+
+
+
