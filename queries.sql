@@ -37,3 +37,8 @@ CREATE TABLE message (
 -- Insert Organization
 insert into organization (name) values ('Lambda School');
 
+-- Insert 3 Users 
+insert into user(name) values ('Alice');
+insert into user(name) values ('Bob');
+insert into user(name) values ('Chris');
+
