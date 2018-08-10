@@ -48,3 +48,8 @@ insert  into organization (name) values ('Lambda School');
 insert into user(name) values ('Alice');
 insert into user(name) values ('Bob');
 insert into user(name) values ('Chris');
+
+-- insert into channels
+insert into channel (name, organization_fk) values ('#general', 1);
+insert into channel (name, organization_fk) values ('#random', 2);
+
