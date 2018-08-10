@@ -1,11 +1,11 @@
 # Sprint Challenge: SQL
 
-Design a database for an online chat system.
+Design a database for an online chat system. - DONE
 
 ## Deliverables
 
 Add a file called `queries.sql` that runs all of the `CREATE TABLE`,
-`INSERT`, and `SELECT` queries, below.
+`INSERT`, and `SELECT` queries, below. - DONE
 
 The last question is a fill-in-the-blank. You can add that as a SQL
 comment to the end of `queries.sql`.
@@ -31,30 +31,30 @@ longer subscribe to now.)
 In the following, there will be more columns that you have to add in
 various tables, not just the columns listed here.
 
-1. Write `CREATE TABLE` statements for tables `organization`, `channel`, `user`,
+1. Write `CREATE TABLE` statements for tables `organization`, `channel`, `user`, - DONE
    and `message`.
 
-   1. `organization`. This table should at least have column(s):
+   1. `organization`. This table should at least have column(s): - DONE
       * `name`
 
-   2. `channel`. This table should at least have column(s):
+   2. `channel`. This table should at least have column(s): - DONE
       * `name`
 
-   3. `user`. This table should at least have column(s):
+   3. `user`. This table should at least have column(s): - DONE
       * `name`
 
-   4. `message`. This table should have at least columns(s):
+   4. `message`. This table should have at least columns(s): - DONE
 
-      * `post_time`--the timestamp of when the message was posted
+      * `post_time`--the timestamp of when the message was posted - DONE
         * See [Date types in
           SQLite](https://www.sqlite.org/datatype3.html#date_and_time_datatype).
           Also see the SQLite function `datetime()`.
 
-      * `content`--the message content itself
+      * `content`--the message content itself - DONE
 
-2. Add additional foreign keys needed to the above tables, if any.
+2. Add additional foreign keys needed to the above tables, if any. - DONE
 
-3. Add additional join tables needed, if any.
+3. Add additional join tables needed, if any. - DONE
 
 4. Write `INSERT` queries to add information to the database.
 
