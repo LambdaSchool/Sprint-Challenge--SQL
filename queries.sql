@@ -73,7 +73,7 @@ SELECT user.name as User_Name, count(message.content) as Messagee_Count from use
 -- Stretch
 SELECT user.name as User_Name, channel.name as Channel, count(message.content) as Messagee_Count 
 from channel, user, message 
-where message.user_id = user.id, message.channel_id = channel.id
+where message.user_id = user.id and message.channel_id = channel.id
 group by user.name, channel.name 
 order by user.name DESC;
 
