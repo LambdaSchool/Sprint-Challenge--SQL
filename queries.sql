@@ -1,7 +1,32 @@
+-- Table Setup
+CREATE TABLE organization (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(128) NOT NULL UNIQUE,
+  channel_id INTEGER,
+  FOREIGN KEY(channel_id) REFERENCES organization(id)
+);
 
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(128) NOT NULL,
+  message_id INTEGER,
+  channel_id INTEGER,
+  FOREIGN KEY(channel_id) REFERENCES channel(id),
+  FOREIGN KEY(messages_id) REFERENCES messages(id),
+);
 
--- Answer to last README.md Question
--- What SQL keywords or concept would you use if you wanted to automatically
--- delete all messages by a user if that user were deleted from the `user`
--- table? 
+CREATE TABLE messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(128) NOT NULL,
+  post_time TEXT TIMESTAMP,
+  content VARCHAR(4000) NOT NULL,
+);
 
+CREATE TABLE channel (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(128) NOT NULL,
+  organization_id INTEGER,
+  user_id INTEGER,
+  FOREIGN KEY(organization_id) REFERENCES organization(id),
+  FOREIGN KEY(user_id) REFERENCES user(id),
+);
