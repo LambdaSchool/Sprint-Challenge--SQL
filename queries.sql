@@ -93,4 +93,10 @@ and channel.name = "#random";
 select count (message.content) as "Message Count", user.name as "User Name" from message, user
 where message.user_id = user.id
 group by user.id
-order by user.name desc
+order by user.name desc;
+
+select count (message.content) as "Message Count", user.name as "User", channel.name as "Channel" from message, user, channel
+where message.user_id = user.id
+and channel_id = channel.id
+group by channel.name, user.name;
+
