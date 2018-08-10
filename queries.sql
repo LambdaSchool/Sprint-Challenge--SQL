@@ -23,12 +23,30 @@ create table user (
 
 create table message (
   id integer primary key autoincrement,
-  name varchar(120) not null,
   content varchar(120) not null,
-  post_time datetime not null,
   user_id integer,
   channel_id integer,
+  post_time datetime default current_timestamp,
   foreign key (channel_id) references channel(id),
-  foreign key (user_id) references user(id) 
+  foreign key (user_id) references user(id)
 );
 
+insert into organization (name) values ("Lambda School");
+
+insert into user (name) values ("Alice");
+insert into user (name) values ("Bob");
+insert into user (name) values ("Chris");
+
+insert into channel (name) values ("#general");
+insert into channel (name) values ("#random");
+
+insert into message (content, user_id, channel_id) values ("Hey Alice!", 2, 1);
+insert into message (content, user_id, channel_id) values ("Hey Bob...", 1, 1);
+insert into message (content, user_id, channel_id) values ("I love go", 3, 2);
+insert into message (content, user_id, channel_id) values ("Go go go go go", 3, 2);
+insert into message (content, user_id, channel_id) values ("How are the reports coming Alice?", 2, 1);
+insert into message (content, user_id, channel_id) values ("On track to finish by 2pm!", 1, 1);
+insert into message (content, user_id, channel_id) values ("Cool, see you then ", 2, 1);
+insert into message (content, user_id, channel_id) values ("Having inernet issues", 2, 1);
+insert into message (content, user_id, channel_id) values ("I like dogs", 3, 2);
+insert into message (content, user_id, channel_id) values ("Cats are better", 1, 2);
