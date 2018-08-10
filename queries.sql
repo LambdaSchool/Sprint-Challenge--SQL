@@ -1,0 +1,17 @@
+CREATE TABLE organization (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(128)
+)
+
+CREATE TABLE channel (
+  name VARCHAR(128)
+)
+
+CREATE TABLE user (
+  name VARCHAR(128)
+)
+
+CREATE TABLE message (
+  post_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  content VARCHAR(128)
+)
