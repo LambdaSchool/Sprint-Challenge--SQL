@@ -79,3 +79,13 @@ ORDER  BY  post_time;
 
 SELECT user.name AS "User Name", COUNT (message.content) AS "Message Count" FROM message, 
 user WHERE message.user = user.id GROUP BY user.id ORDER BY user.name DESC;
+
+-- Question --
+
+--  What SQL keywords or concept would you use if you wanted to automatically
+--  delete all messages by a user if that user were deleted from the `user`
+--  table?
+
+-- Answer --
+
+-- ON DELETE CASCADE
