@@ -32,7 +32,7 @@ insert into message(user_id,content,post_time) values ( 2,'they lost yesterday',
 insert into message(user_id,content,post_time ) values ( 9,'they call me bob','02-06-2013');
 insert into message(user_id,content,post_time) values (3 ,'are u working?', '01-11-2014');
 insert into message(user_id,content,post_time) values ( 3,'they lost yesterday', '01-20-2016');
-
+insert into message(user_id,content,post_time) values ( 8,'they lost yesterday', '01-10-2011');
 
 insert into user_channel(channel_id, user_id) values(1,2);
 insert into user_channel(channel_id, user_id) values(1,7);
@@ -46,6 +46,10 @@ insert into user_channel(channel_id, user_id) values(2,4);
 insert into user_channel(channel_id, user_id) values(1,3);
 insert into user_channel(channel_id, user_id) values(1,1);
 insert into user_channel(channel_id, user_id) values(2,1);
+insert into user_channel(channel_id, user_id) values(2,3);
+insert into user_channel(channel_id, user_id) values(2,7);
+insert into user_channel(channel_id, user_id) values(1,9);
+
 
 
 INSERT INTO channel_message (channel_id, message_id) VALUES (1, 1);

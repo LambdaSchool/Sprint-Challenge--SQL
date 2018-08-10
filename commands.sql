@@ -67,18 +67,12 @@ message.user_id as 'id',
 user.name as "User Name",
 channel.name  as "Channel", 
 count(message.user_id) as "Message count",
---channel.name  as "Channel", 
 message.content
---message.user_id as 'owner of message',
---count(message.user_id) as "Message count"
-
-
-
  from user , message, channel, user_channel 
     where message.user_id = user.id 
     and  user_channel.user_id = user.id
     and  user_channel.channel_id = channel.id
-    group by user.name, channel.name;
+ group by user.name, channel.name;
 
 
 
@@ -86,22 +80,10 @@ message.content
     
     
 
-
-
-
--- select user.name as "User Name", count(message.id) as "Message Count" 
--- --channel.name as "channel"
--- from 
--- message, user, channel --, user_channel
--- --where   user_channel.user_id = user.id
---    --and  user_channel.channel_id = channel.id
---    where  message.user_id = user.id
---   group by user.name;
  
-
--- select user.name as "User Name", channel.name as "Channel", count(message.id) as "Message Count" from message, user, channel , channel_message
--- where  user.channel_id = channel.id 
---   and channel_message.channel_id = channel.id
---   and channel_message.message_id = message.id 
---   group by channel.name; 
- 
+-- drop table message;
+--  drop table channel_message;
+--  drop table channel;
+--  drop table organization;
+--  drop table user_channel;
+--  drop table user ;
