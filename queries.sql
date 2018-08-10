@@ -55,4 +55,16 @@ insert into user_channel (channel, user) values (2,1);
 insert into user_channel (channel, user) values (1,2);
 
 -- insert Chris
-insert into user_channel (channel, user) values (2,2);
+insert into user_channel (channel, user) values (2,3);
+
+-- insert 10 messages 
+insert into message (content, user, channel) values ('Random Message 1', 1, 2);
+insert into message (content, user, channel) values ('Random Message 2', 2, 2);
+insert into message (content, user, channel) values ('Random Message 3', 1, 1);
+insert into message (content, user, channel) values ('Random Message 4', 3, 2);
+insert into message (content, user, channel) values ('Random Message 5', 3, 1);
+insert into message (content, user, channel) values ('Random Message 6', 1, 1);
+insert into message (content, user, channel) values ('Random Message 7', 2, 1);
+insert into message (content, user, channel) values ('Random Message 8', 1, 2);
+insert into message (content, user, channel) values ('Random Message 9', 2, 2);
+insert into message (content, user, channel) values ('Random Message 10', 3, 2);
