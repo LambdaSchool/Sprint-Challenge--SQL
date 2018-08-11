@@ -1,4 +1,7 @@
+.mode COLUMN
+.header ON
 PRAGMA foreign_keys = ON;
+
 -- TABLES --
 
 CREATE TABLE organization (
@@ -40,10 +43,13 @@ CREATE TABLE channel_joins (
 INSERT INTO organization (name) VALUES ('Lambda School');
 
 INSERT INTO user (name) VALUES ('Alice');
+
 INSERT INTO user (name) VALUES ('Bob');
+
 INSERT INTO user (name) VALUES ('Chris');
 
 INSERT INTO channel (name, organization) VALUES ('#general', 1);
+
 INSERT INTO channel (name, organization) VALUES ('#random', 1);
 
 INSERT INTO message (content, user, channel) VALUES('these are all the same...kinda 1', 1, 1);
@@ -59,15 +65,12 @@ INSERT INTO message (content, user, channel) VALUES('these are all the same...ki
 
 INSERT INTO channel_joins (channel_id, user_id) VALUES (1, 1);
 INSERT INTO channel_joins (channel_id, user_id) VALUES (1, 2);
-
 INSERT INTO channel_joins (channel_id, user_id) VALUES (2, 1);
-
 INSERT INTO channel_joins (channel_id, user_id) VALUES (2, 3);
 
 -- SELECT--
 
 SELECT name FROM organization;
-
 SELECT name FROM channel;
 
 SELECT organization.name AS "organization", 
@@ -78,17 +81,16 @@ SELECT content FROM message, channel
 WHERE message.channel IS channel.id AND channel.name IS "#general" 
 ORDER BY post_time;
 
-SELECT channel.name AS "channels with alice" FROM user, channel, user_channel
+SELECT channel.name AS "channels with alice" FROM user, channel, channel_joins
 WHERE user.id = user_id AND channel.id = channel_id AND user.name = "Alice";
 
-SELECT name AS "#general" FROM user, channel, user_channel
+SELECT user.name AS "#general" FROM user, channel, channel_joins
 WHERE user.id = user_id AND channel.id = channel_id AND channel.name = "#general";
 
-
 SELECT content AS "alice again" FROM message, user
-WHERE user_id = user.id AND user.name = "Alice";
+WHERE user = user.id AND user.name = "Alice";
 
-SELECT content AS "bob gets random" FROM message, channel, user
+SELECT content AS "bob gets random" FROM message, channel, user, channel_joins
 WHERE user_id = user.id AND channel_id = channel.id AND channel.name = "#random"
 AND user.name = "Bob";
 
