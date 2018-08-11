@@ -74,12 +74,26 @@ SELECT organization.name AS "organization",
 channel.name AS "channel" FROM channel 
 join organization;
 
-SELECT message.content FROM message, 
-channel WHERE message.channel IS channel.id AND channel.name IS "#general" 
+SELECT content FROM message, channel 
+WHERE message.channel IS channel.id AND channel.name IS "#general" 
 ORDER BY post_time;
 
-SELECT user.name AS "User Name", COUNT (message.content) AS "Message Count" FROM message, 
-user WHERE message.user = user.id GROUP BY user.id ORDER BY user.name DESC;
+SELECT channel.name AS "channels with alice" FROM user, channel, user_channel
+WHERE user.id = user_id AND channel.id = channel_id AND user.name = "Alice";
+
+SELECT name AS "#general" FROM user, channel, user_channel
+WHERE user.id = user_id AND channel.id = channel_id AND channel.name = "#general";
+
+
+SELECT content AS "alice again" FROM message, user
+WHERE user_id = user.id AND user.name = "Alice";
+
+SELECT content AS "bob gets random" FROM message, channel, user
+WHERE user_id = user.id AND channel_id = channel.id AND channel.name = "#random"
+AND user.name = "Bob";
+
+SELECT user.name AS "User Name", COUNT (message.content) AS "Message Count" FROM message, user 
+WHERE message.user = user.id GROUP BY user.id ORDER BY user.name DESC;
 
 -- Question --
 
