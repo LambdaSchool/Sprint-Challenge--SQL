@@ -2,36 +2,38 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL,
-    channel_id INTEGER, --foreign key
-    FOREIGN KEY(channel_id) REFERENCES channel(id)
+    name VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL,
-    message_id INTEGER, --foreign key
-    channel_id INTEGER, --foreign key
-    FOREIGN KEY(channel_id) REFERENCES channel(id),
-    FOREIGN KEY(message_id) REFERENCES messages(id)
+    date TIMESTAMP
+    DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128) NOT NULL,
-    post_time TEXT TIMESTAMP,
-    content VARCHAR(2000) NOT NULL
+    post_time TEXT TIMESTAMP
+    DEFAULT CURRENT_TIMESTAMP,
+    content VARCHAR(2000) NOT NULL,
+    channel_id INTEGER,
+    FOREIGN KEY(channel_id) REFERENCES channel(id), 
+    user_id INTEGER,
+    FOREIGN KEY(user_id) REFERENCES user(id), 
 );
 
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL,
     organization_id INTEGER, --foreign key
-    user_id INTEGER, -- foreign key
     FOREIGN KEY(organization_id) REFERENCES organization(id),
-    FOREIGN KEY(user_id) REFERENCES user(id)
 
 );
+
+
+INSERT INTO channel.user_id (message_id, name) VALUES ('hello bob', 'bob');
+
 
 
 
@@ -55,7 +57,7 @@ INSERT INTO channel (name, user_id) VALUES ('#random',3);
 
 
 
--- INSERT INTO user (message_id, name) VALUES ('hello bob', 'bob');
+INSERT INTO user (message_id, name) VALUES ('hello bob', 'bob');
 -- INSERT INTO user (message_id, name) VALUES ('what a nice day', 'Alice');
 -- INSERT INTO user (message_id, name) VALUES ('tommy is coming', 'Chris');
 -- INSERT INTO channel (message_id, channel_id) VALUES ('once i knew the information', 3);
