@@ -32,6 +32,19 @@ CREATE TABLE channel (
 );
 
 
+-------------------------------------------------------------------------
+
+-- join tables --
+
+CREATE TABLE channel_subs (
+    channel_id INTEGER,
+    FOREIGN KEY(channel_id) REFERENCES channel(id),
+    user_id INTEGER,
+    FOREIGN KEY(user_id) REFERENCES user(id)
+);
+)
+
+
 INSERT INTO channel.user_id (message_id, name) VALUES ('hello bob', 'bob');
 
 
