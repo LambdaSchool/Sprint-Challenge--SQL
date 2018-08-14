@@ -74,7 +74,7 @@ CREATE TABLE channel_subs (
  INSERT INTO channel_subs (channel_id, users_id) VALUES (2,2);
 
 
-
+-- insert 10 comments --
 INSERT INTO messages (content, channel_id, user_id) VALUES ('hello bob this is a message', 1, 1);
 INSERT INTO messages (content, channel_id, user_id) VALUES ('hello alice this is a message', 1, 2);
 INSERT INTO messages (content, channel_id, user_id) VALUES ('hello jim this is a message', 1, 3);
@@ -115,5 +115,8 @@ SELECT * FROM messages, user, channel where channel.name = '#random' AND message
 
 -- List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.) --
 -- The title of the user's name column should be User Name and the title of the count column should be Message Count. --
-SELECT user.name, count(*) FROM user, messages where messages.user_id = user.id GROUP BY messages.user_id;
+SELECT user.name AS "User Name", count(*) AS "Message Count" FROM user, messages where messages.user_id = user.id GROUP BY messages.user_id ORDER BY user.name DESC;
 
+
+-- What SQL keywords or concept would you use if you wanted to automatically delete all messages --
+-- by a user if that user were deleted from the user table --
