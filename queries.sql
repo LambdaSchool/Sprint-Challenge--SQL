@@ -93,7 +93,7 @@ SELECT * FROM organization;
 SELECT * FROM channel;
 
 -- List all channels in a specific organization by organization name. --
-SELECT * FROM channel.name where organization.name = 'Lambda School';
+SELECT * FROM channel, organization where organization.name = 'Lambda School';
 
 
 -- List all messages in a specific channel by channel name #general in order of post_time, descending. (Hint: ORDER BY. --
@@ -102,19 +102,18 @@ SELECT * FROM channel.name where organization.name = 'Lambda School';
 SELECT * FROM messages where channel_id = 1 ORDER BY post_time desc;
 
 -- List all channels to which user Alice belongs. --
-SELECT * FROM channel, channel_subs, user where channel_subs.users_id = user.id AND user.name = 'Alice';
+SELECT * FROM channel, channel_subs, user where channel_subs.users_id = user.id AND channel_subs.channel_id = channel.id AND user.name = 'Alice';
 
 -- List all users that belong to channel #general. --
-SELECT * FROM user, channel_subs, channel where channel_subs.channel_id = channel.id AND channel.name = '#general';
+SELECT * FROM user, channel_subs, channel where channel_subs.channel_id = channel.id AND channel.name = '#general' AND channel_subs.users_id = user.id;
 
 -- List all messages in all channels by user Alice --
-SELECT * FROM messages, channel_subs, user where channel_subs.users_id = user.id AND user.name = 'Alice';
+SELECT * FROM messages, user where messages.user_id = user.id AND user.name = 'Alice';
 
 -- List all messages in #random by user Bob. --
-SELECT * FROM messages, user, channel_subs, channel where channel_subs.channel_id = channel.id AND channel.name = '#random' AND user.name = 'Bob';
+SELECT * FROM messages, user, channel where channel.name = '#random' AND messages.user_id = user.id AND user.name = 'Bob';
 
 -- List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.) --
 -- The title of the user's name column should be User Name and the title of the count column should be Message Count. --
-SELECT user.name, count(*) FROM user, messages GROUP BY messages.user_id;
--- SELECT * from messages, channel, user where channel.name = '#random' AND channel.user_id = user.id AND user.name = 'bob';
+SELECT user.name, count(*) FROM user, messages where messages.user_id = user.id GROUP BY messages.user_id;
 
