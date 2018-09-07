@@ -1,3 +1,4 @@
+-- CREATE TABLES
 CREATE TABLE organization {
   id int NOT NULL,
   organization_name varchar(255) NOT NULL,
@@ -35,4 +36,35 @@ CREATE TABLE subscriptions {
   PRIMARY KEY (id),
   FOREIGN KEY (channel_id) REFERENCES channel(id)
   FOREIGN KEY (user_id) REFERENCES user(id)
-}
+};
+
+-- INSERT DATA
+INSERT INTO organization
+VALUES (1, 'Lambda School');
+
+INSERT INTO user
+VALUES (1, 'Alice');
+
+INSERT INTO user
+VALUES (2, 'Bob');
+
+INSERT INTO user
+VALUES (3, 'Chris');
+
+INSERT INTO channel
+VALUES (1, '#general', 1);
+
+INSERT INTO channel
+VALUES (2, '#random', 1);
+
+INSERT INTO subscriptions
+VALUES (1, 1, 1);
+
+INSERT INTO subscriptions
+VALUES (2, 2, 1);
+
+INSERT INTO subscriptions
+VALUES (3, 1, 2);
+
+INSERT INTO subscriptions
+VALUES (4, 2, 3);
