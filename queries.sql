@@ -160,13 +160,19 @@ SELECT user.name
   AND channel.name = "#CHIMtips";
 
 SELECT content
-FROM message, user
-WHERE user_id = user.id
+  FROM message, user
+  WHERE user_id = user.id
   AND user.name = "Vehk";
 
 SELECT content
-FROM message, channel, user
-WHERE user_id = user.id
+  FROM message, channel, user
+  WHERE user_id = user.id
   AND channel_id = channel.id
   AND channel.name = "#divinediscussion"
   AND user.name = "Ayem";
+
+SELECT user.name AS "User Name", COUNT(*) AS "Message Count"
+  FROM user, message
+  WHERE user_id = user.id
+  GROUP BY user.id
+  ORDER BY user.name DESC;
