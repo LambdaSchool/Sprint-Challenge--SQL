@@ -21,8 +21,9 @@ CREATE TABLE user {
 
 CREATE TABLE message {
   id int AUTOINCREMENT,
-  message_content varchar(255) NOT NULL,
+  content varchar(255) NOT NULL,
   channel_id int NOT NULL,
+  post_time default current_timestamp
   user_id int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (channel_id) REFERENCES channel(id)
@@ -68,3 +69,54 @@ VALUES (1, 2);
 
 INSERT INTO subscriptions
 VALUES (2, 3);
+
+-- SELECT QUERIES
+
+-- 1
+SELECT organization_name FROM organization;
+
+-- 2
+SELECT channel_name FROM channel;
+
+-- 3
+SELECT channel_name FROM channel, organization 
+WHERE organization_id = organization.id
+AND organization_name = 'Lambda School';
+
+-- 4
+SELECT content FROM channel, message
+WHERE channel_id = message.channel_id
+AND channel_name = '#general'
+ORDER BY post_time;
+
+-- 5
+SELECT channel_name FROM user, channel, subscriptions
+WHERE subscriptions.user_id = user.id
+AND subscriptions.channel_id = channel.id
+AND person_name = 'Alice';
+
+-- 6
+SELECT person_name from user, channel, subscriptions
+WHERE subscriptions.user_id = user.id
+AND subscriptions.channel_id = channel.id
+AND channel_name = '#general';
+
+-- 7
+SELECT content FROM message, user
+WHERE message.user_id = user.id
+AND user.person_name = 'Alice';
+
+-- 8
+SELECT content FROM message, user, channel
+WHERE channel_id = message.channel_id
+AND message.user_id = user.id
+AND channel_name = '#random'
+AND person_name = 'Bob';
+
+-- 9
+.mode column
+.headers on
+SELECT user.person_name AS 'User Name', COUNT(message.id) as 'Message Count'
+FROM message, user
+WHERE message.user_id = user.id
+GROUP BY user.person_name;
