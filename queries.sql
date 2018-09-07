@@ -45,4 +45,6 @@ INSERT INTO user_channel (user_id, channel_id) VALUES(9, 2);
 INSERT INTO user_channel (user_id, channel_id) VALUES(11, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES(12, 2);
 
-
+--What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
+--I would use "ON DELETE CASCADE" and specify it under foreign keys in the schema.
+--https://en.wikipedia.org/wiki/Foreign_key
