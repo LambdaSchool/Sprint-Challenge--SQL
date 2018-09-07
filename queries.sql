@@ -171,3 +171,10 @@ SELECT message.content AS message, message.post_time
   AND message.channel_id = channel.id
   AND channel.name = '#random'
   AND user.name = 'Bob';
+
+-- List the count of messages across all channels per user
+SELECT user.name AS 'User Name', COUNT(message.user_id) AS 'Message Count'
+  FROM user, message
+  WHERE user.id = message.user_id
+  GROUP BY user.name
+  ORDER BY user.name DESC;
