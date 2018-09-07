@@ -41,7 +41,7 @@ CREATE TABLE user_channel (
 
 INSERT INTO user
   (name, username)
-  VALUES("Vekh", "vivec2002");
+  VALUES("Vehk", "vivec2002");
 
 INSERT INTO user
   (name, username)
@@ -146,3 +146,9 @@ SELECT message.content
   WHERE channel_id = channel.id
   AND channel.name = "#guarpics"
   ORDER BY message.created DESC;
+
+SELECT channel.name
+  FROM user, channel, user_channel
+  WHERE user.id = user_id
+  AND channel.id = channel_id
+  AND user.name  = "Vehk";
