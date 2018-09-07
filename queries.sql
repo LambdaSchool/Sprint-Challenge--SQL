@@ -52,3 +52,19 @@ INSERT INTO user (name, username) VALUES("Chris", "coolguy");
 INSERT INTO channel (name, organization_id) VALUES("#general", 1);
 
 INSERT INTO channel (name, organization_id) values("#random", 1);
+
+--Insert 10 messages 
+INSERT INTO message (content, user_id, channel_id) VALUES("Is this the lambda general channel?", 1, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES("Yes you are in the lambda general channel, the coolest channel", 3, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES("Welcome to the lambda general channel littlegirl, I'm Bob theboss", 2, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES("Thank You guys, I'm new here there is another channel were i can post any subject", 1, 1);
+
+INSERT INTO message (content, user_id, channel_id) VALUES("Breakout written in, uh, PDF.", 2, 2);
+
+INSERT INTO message (content, user_id, channel_id) VALUES("Try the #random channel", 2, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES("I'm getting ready to jump into lambda labs next week", 3, 1);
+
+INSERT INTO message (content, user_id, channel_id) VALUES("No way, Beej maybe did it, madman lol", 3, 2);
+
+INSERT INTO message (content, user_id, channel_id) VALUES("What is lamdba labs?", 1, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES("Where the cool guys code real life apps", 3, 1);
