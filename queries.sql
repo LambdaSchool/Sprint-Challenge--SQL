@@ -43,3 +43,16 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (1, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
 INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
+
+INSERT INTO message (content, user_id) VALUES ("first from  alice", 1);
+INSERT INTO message (content, user_id) VALUES ("second from alice", 1);
+INSERT INTO message (content, user_id) VALUES ("third from alice", 1);
+
+INSERT INTO message (content, user_id) VALUES ("first from bob", 2);
+INSERT INTO message (content, user_id) VALUES ("second from bob", 2);
+INSERT INTO message (content, user_id) VALUES ("third from bob", 2);
+
+INSERT INTO message (content, user_id) VALUES ("first from chris", 3);
+INSERT INTO message (content, user_id) VALUES ("second from chris", 3);
+INSERT INTO message (content, user_id) VALUES ("third from chris", 3);
+INSERT INTO message (content, user_id) VALUES ("forth from chris", 3);

@@ -131,4 +131,6 @@ various tables, not just the columns listed here.
    delete all messages by a user if that user were deleted from the `user`
    table?
 
+   I think it is CASCADE...
+
 * Initial commit
