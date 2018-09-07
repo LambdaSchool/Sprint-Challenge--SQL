@@ -112,3 +112,40 @@ VALUES("Don’t forget to put your name on your pull request.", 3, 1);
 INSERT INTO message
   (content, user_id, channel_id)
 VALUES("Please take a moment to reflect upon your day and fill out your Daily Standup report: https:\/\/airtable.com\/shr8ZYuNjevMLRsxI", 1, 1);
+
+-- SELECT QUERIES -- 
+SELECT name
+    from organization;
+
+SELECT name
+    from channel;
+
+SELECT channel.name
+    FROM channel, organization
+    WHERE organization_id = organization.id
+    AND organization.name = "Lambda School";
+
+SELECT content
+    FROM message AS
+    "GENERAL MESSAGES" WHERE channel_id IS
+    (SELECT id FROM channel
+    WHERE name IS '#general')
+    ORDER BY created DESC;
+
+SELECT content FROM message INNER JOIN user ON message.user_id IS user.id WHERE user.name IS "Alice";
+
+SELECT content
+FROM message, channel, user
+WHERE user_id = user.id
+  AND channel_id = channel.id
+  AND channel.name = "#random"
+  AND user.name = "Bob"
+
+SELECT COUNT(user.id) AS "MESSAGE COUNT", user.name AS "Name"
+FROM message
+INNER JOIN user
+  ON message.user_id
+IS user.id 
+INNER JOIN channel 
+WHERE message.channel_id IS channel.id 
+GROUP BY user.id;
