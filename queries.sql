@@ -163,3 +163,10 @@ SELECT content
 FROM message, user
 WHERE user_id = user.id
   AND user.name = "Vehk";
+
+SELECT content
+FROM message, channel, user
+WHERE user_id = user.id
+  AND channel_id = channel.id
+  AND channel.name = "#divinediscussion"
+  AND user.name = "Ayem";
