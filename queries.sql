@@ -66,3 +66,7 @@ INSERT INTO message (content, user_id, channel_id) VALUES ("Hi, I'm Alice! I for
 INSERT INTO message (content, user_id, channel_id) VALUES ("Hi, I'm Bob! Gee, SQL is fun, isn't it?", 2, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ("Hi, I'm Chris! Hey, my name really is Chris!", 3, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES ("Hi, I'm Alice! This is message #10!", 1, 2);
+SELECT name from organization;
+SELECT name from channel;
+SELECT organization.name AS "Organization", channel.name AS "Channel" FROM channel JOIN organization;
+SELECT message.content AS text, post_time AS time FROM message, channel WHERE message.channel_id = channel.id AND channel.name = "#general" ORDER BY message.post_time ASC;
