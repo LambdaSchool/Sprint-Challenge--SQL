@@ -131,3 +131,5 @@ various tables, not just the columns listed here.
 6. What SQL keywords or concept would you use if you wanted to automatically
    delete all messages by a user if that user were deleted from the `user`
    table?
+
+## ON DELETE CASCADE are the main keywords I would use to delete all messages associated with a given user that was also slated for deletion.
