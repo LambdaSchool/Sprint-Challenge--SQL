@@ -126,3 +126,12 @@ INSERT INTO user_channel
 INSERT INTO user_channel
   (user_id, channel_id)
   VALUES(5, 3);
+
+
+-- QUERY STUFF --
+
+SELECT name
+from organization
+
+SELECT name
+from channel
