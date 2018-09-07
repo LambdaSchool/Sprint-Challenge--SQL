@@ -110,3 +110,19 @@ INSERT INTO message
 INSERT INTO message
   (content, user_id, channel_id)
   VALUES("Guys, I got locked out of the ALMSIVI channels, you need to reinvite me.  Guys?  Are you seeing this?", 4, 3);
+
+INSERT INTO user_channel
+  (user_id, channel_id)
+  VALUES(1, 1);
+
+INSERT INTO user_channel
+  (user_id, channel_id)
+  VALUES(3, 2);
+
+INSERT INTO user_channel
+  (user_id, channel_id)
+  VALUES(6, 4);
+
+INSERT INTO user_channel
+  (user_id, channel_id)
+  VALUES(5, 3);
