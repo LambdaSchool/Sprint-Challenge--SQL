@@ -34,10 +34,15 @@ CREATE TABLE message (
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE user_channel (
+    user_id INTEGER REFERENCES user(id),
+    channel_id INTEGER REFERENCES channel(id)
+);
+
 -- Writing INSERT queries to populate the tables/databases.
 
 -- One organization, Lambda School
-INSERT INTO organization (name, username) VALUES ("Lambda School");
+INSERT INTO organization (name) VALUES ("Lambda School");
 
 -- Three users, Alice, Bob, and Chris
 INSERT INTO user (name, username) VALUES ("Alice", "aliceinchains");
@@ -75,7 +80,7 @@ SELECT channel.name
     AND organization.name = "Lambda School";
 
 -- List all messages in a specific channel by channel name #general in order of post_time, descending.
-SELECT contact
+SELECT content
     FROM message, channel
     WHERE channel_id = channel.id
     AND channel.name = "#general"
@@ -115,3 +120,11 @@ SELECT user.name AS "User Name", COUNT(*) AS "Message Count"
     WHERE user_id = user.id
     GROUP BY user.id
     ORDER BY user.name DESC;
+
+-- Write SELECT queries to list the count of messages per user per channel.
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(*)
+    AS "Message Count"
+    FROM user, message, channel
+    WHERE user_id = user.id
+    AND channel_id = channel.id
+    GROUP BY channel.name, user.name;
