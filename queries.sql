@@ -35,3 +35,15 @@ CREATE TABLE message (
     channel_id INT REFERENCES channel(id),
     user_id INT REFERENCES user(id)
 );
+
+-- JOIN TABLES
+
+CREATE TABLE organization_user (
+    organization_id INT REFERENCES organization(id),
+    user_id INT REFERENCES user(id)
+);
+
+CREATE TABLE channel_user (
+    user_id INT REFERENCES user(id),
+    channel_id INT REFERENCES channel(id)
+);
