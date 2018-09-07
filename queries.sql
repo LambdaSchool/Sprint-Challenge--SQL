@@ -124,4 +124,7 @@ INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'faucibus orci 
 */
 
 -- List all organization names
-SELECT name FROM organization;
+SELECT name AS organization_names FROM organization;
+
+-- List all channel names
+SELECT name AS channel_names FROM channel;
