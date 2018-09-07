@@ -116,22 +116,54 @@ SELECT content FROM message WHERE channel_id IS (SELECT id FROM channel WHERE na
 
 
 -- List all channels to which user Alice belongs.
-SELECT
+SELECT channel.name, channel.id FROM channel INNER JOIN channel_user ON channel.id IS channel_user.channel_id INNER JOIN user ON user.id IS channel_user.user_id WHERE user.name IS "Alice";
+
+-- OUTPUT
+-- name        id
+-- ----------  ----------
+-- #general    1
+-- #random     2
 
 
 -- List all users that belong to channel #general.
-SELECT
+SELECT user.name from user INNER JOIN channel_user ON user.id IS channel_user.user_id INNER JOIN channel ON channel_user.channel_id IS channel.id WHERE channel.name IS "#general";
+
+-- OUTPUT
+-- name
+-- ----------
+-- Alice
+-- Bob
 
 
 -- List all messages in all channels by user Alice.
-SELECT
+SELECT content from message INNER JOIN user ON message.user_id IS user.id WHERE user.name IS "Alice";
+
+-- OUTPUT 
+-- content
+-- ------------------
+-- Chris is so random
+-- Bob is so basic
+-- What's your favori
+-- ...Can't you take
 
 
 -- List all messages in #random by user Bob.
-SELECT
+SELECT content FROM message WHERE channel_id IS (SELECT id FROM channel WHERE name is "#general") AND user_id IS (SELECT id FROM user WHERE name is "Bob");
+
+-- OUTPUT
+-- content
+-- ----------
+-- Ha, yeah
+-- I like bre
 
 
 -- List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.)
-SELECT
+SELECT user.name, COUNT(user.id) FROM message INNER JOIN user ON message.user_id IS user.id INNER JOIN channel WHERE message.channel_id IS channel.id GROUP BY user.id ORDER BY user_id DESC;
 
+-- OUTPUT
+-- name        COUNT(user.id)
+-- ----------  --------------
+-- Chris       4
+-- Bob         2
+-- Alice       4
 
