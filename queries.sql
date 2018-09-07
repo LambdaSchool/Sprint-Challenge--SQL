@@ -79,4 +79,59 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
 INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
 
+/**/
+SELECT organization.name FROM organization;
 
+/**/
+SELECT channel.name FROM channel;
+
+/**/
+SELECT channel.name as "Channel Name" FROM channel, organization WHERE organization_id = organization.id AND 
+    organization.name = "Lambda School";
+
+/**/
+SELECT message.user_id, message.content 
+FROM channel, message 
+WHERE message.channel_id = channel.id AND channel.name = "#general" 
+ORDER BY post_time DESC;
+
+/**/
+SELECT channel.name AS "Alice's Channels" 
+FROM channel, user, user_channel 
+WHERE user.name = "Alice" 
+AND user.id = user_channel.user_id
+AND channel.id = user_channel.channel_id;
+
+SELECT channel.name as "Alice's Channels" 
+FROM channel 
+INNER JOIN user_channel ON channel.id IS user_channel.channel_id 
+INNER JOIN user ON user.id IS user_channel.user_id
+AND user.name = "Alice";
+
+/**/
+SELECT user.name AS "#general users" 
+FROM user, channel, user_channel
+WHERE channel.name = "#general" 
+AND user.id = user_channel.user_id
+AND channel.id = user_channel.channel_id;
+
+/**/
+SELECT message.id AS Message ID, message.content AS "Alice's Messages"
+FROM user, message
+WHERE user.name = "Alice"
+AND user.id = message.user_id;
+
+/**/
+SELECT message.id AS "Message ID", message.content AS "#random content by Bob"
+FROM user, channel, message, user_channel
+WHERE user.name = "Bob"
+AND channel.name = "#random"
+AND user.id = message.user_id
+AND user_channel.user_id = user.id;
+
+/**/
+SELECT user.name AS "User Name", COUNT(message.user_id) AS "Message Count"
+FROM user, message 
+WHERE user.id = message.user_id
+GROUP BY user.id
+ORDER BY user.name DESC;
