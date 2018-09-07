@@ -65,7 +65,7 @@ various tables, not just the columns listed here.
 
 3. Add additional join tables needed, if any.
 
-   1. user_channels
+   1. subscriptions
       * `user_id`
       * `channel_id`
 
