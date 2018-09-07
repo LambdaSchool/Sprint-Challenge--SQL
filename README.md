@@ -130,3 +130,4 @@ various tables, not just the columns listed here.
 6. What SQL keywords or concept would you use if you wanted to automatically
    delete all messages by a user if that user were deleted from the `user`
    table?
+   For mysql, onDelete=CASCADE is not available, but it's available on other sql version. If you delete a user , to delete the messages, user onDelete=CASCADE.
