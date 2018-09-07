@@ -8,7 +8,7 @@ CREATE TABLE organization (
 CREATE TABLE channel (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128),
-    organization_id INTEGER REFERENCES organization(id) --might need ON DELETE CASCADE
+    organization_id INTEGER REFERENCES organization(id)
 );
 
 CREATE TABLE user (
@@ -18,14 +18,14 @@ CREATE TABLE user (
 
 CREATE TABLE channel_user (
     id INTEGER PRIMARY KEY AUTOINCREMENT, --included so messages can only be posted to the correct channel/user combo
-    channel_id INTEGER REFERENCES channel(id), --might need ON DELETE CASCADE
+    channel_id INTEGER REFERENCES channel(id),
     user_id INTEGER REFERENCES user(id) --might need ON DELETE CASCADE
 );
 
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     content TEXT,
-    post_time TIMESTAMP default CURRENT_TIMESTAMP, --might need some tweeking
+    post_time TIMESTAMP default CURRENT_TIMESTAMP,
     channel_user_id INTEGER REFERENCES channel_user(id) --might need ON DELETE CASCADE
 );
 
@@ -124,3 +124,9 @@ WHERE message.channel_user_id = channel_user.id
 AND channel_user.channel_id = channel.id 
 AND channel_user.user_id = user.id 
 GROUP BY channel_user.id ;
+
+
+-- Question: What SQL keywords or concept would you use if you wanted to automatically delete all 
+-- messages by a user if that user were deleted from the user table?
+
+-- Answer: Add `ON DELETE CASCADE` to the end of the `message.channel_user` and `channel_user.user_id` line
