@@ -113,3 +113,15 @@ INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'risus semper p
 INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'quisque arcu libero rutrum ac lobortis vel dapibus');
 INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'tincidunt nulla mollis molestie lorem quisque ut erat curabitur');
 INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit');
+
+/***************************************************************************************/
+/***************************************************************************************/
+/***************************************************************************************/
+
+/*
+  SELECT queries.
+  For these SELECTs, it is NOT OK to refer to users, channels, and organization by their ids.
+*/
+
+-- List all organization names
+SELECT name FROM organization;
