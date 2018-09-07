@@ -32,3 +32,22 @@ CREATE TABLE message (
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- user_channel --
+CREATE TABLE user_channel (
+  user_id INTEGER REFERENCES user(id),
+  channel_id INTEGER REFERENCES channel(id)
+);
+
+-- inserting data into database
+INSERT INTO user
+(name, username)
+VALUES("Alice", "A_wonderLand");
+
+INSERT INTO user
+(name, username)
+VALUES("Bob", "Pyscho_B_N_Springfield");
+
+INSERT INTO user
+(name, username)
+VALUES("Chris Hensworth", "Thor");
