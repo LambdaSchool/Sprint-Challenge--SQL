@@ -30,6 +30,7 @@ SELECT name FROM channel;
 SELECT channel.name from channel, organization WHERE organization_id = organization.id AND organization.name = "Lambda School"
 SELECT content FROM message, channel WHERE channel_id = channel.id AND channel.name = "#general" ORDER BY post_time DESC;
 SELECT channel.name FROM channel, user_channel, user WHERE channel_id = channel.id AND user_id = user.id AND user.name = "Alice";
+SELECT user.name, message.content FROM user, message WHERE message.user_id = user.id AND user.name = "Alice";
 SELECT user.name FROM user, user_channel, channel WHERE user_id = user.id AND channel_id = channel.id AND channel.name = "#general";
 SELECT content FROM message, channel, user WHERE user_id = user.id AND channel_id = channel.id AND channel.name = "#random" AND user.name = "Bob";
 SELECT user.name as "User Name", COUNT(*) AS "Message Count" FROM user, message WHERE user_id = user.id GROUP BY user.id ORDER BY user.name DESC;
