@@ -44,4 +44,8 @@ CREATE TABLE organization_users (
 );
 
 INSERT INTO organization (name) VALUES ("Lambda School");
-
+INSERT INTO user (name) VALUES ("Alice");
+INSERT INTO user (name) VALUES ("Bob");
+INSERT INTO user (name) VALUES ("Chris");
+INSERT INTO channel (name, organization_id) VALUES ("#general", 1);
+INSERT INTO channel (name, organization_id) VALUES ("#random", 1);
