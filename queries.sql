@@ -134,3 +134,11 @@ SELECT channel.id AS channel_id, channel.name AS channel_name
   FROM channel, organization
   WHERE channel.organization_id = organization.id
   AND organization.name = 'Lambda School';
+
+-- List all messages in a specific channel by channel name #general in order of post_time, descending
+SELECT user.name AS user, message.content AS content, message.post_time
+  FROM message, channel, user
+  WHERE message.channel_id = channel.id
+  AND message.user_id = user.id
+  AND channel.name = '#general'
+  ORDER BY message.post_time DESC;
