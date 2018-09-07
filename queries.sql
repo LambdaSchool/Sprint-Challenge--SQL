@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS channel
 DROP TABLE IF EXISTS user
 DROP TABLE IF EXISTS message
 
-/*CREATE TABLE*/
+/*CREATE TABLES*/
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL UNIQUE,
@@ -47,7 +47,7 @@ CREATE TABLE user_channel (
     channel_id INTEGER REFERENCES channel(id)
 );
 
-/**/
+/*Make Data*/
 INSERT INTO organization (name) VALUES("Lambda School");
 
 /**/
@@ -79,20 +79,25 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
 INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
 
-/**/
+
+
+/*Queries*/
 SELECT organization.name FROM organization;
 
 /**/
 SELECT channel.name FROM channel;
 
 /**/
-SELECT channel.name as "Channel Name" FROM channel, organization WHERE organization_id = organization.id AND 
-    organization.name = "Lambda School";
+SELECT channel.name as "Channel Name" 
+FROM channel, organization 
+WHERE organization_id = organization.id 
+AND organization.name = "Lambda School";
 
 /**/
 SELECT message.user_id, message.content 
 FROM channel, message 
-WHERE message.channel_id = channel.id AND channel.name = "#general" 
+WHERE message.channel_id = channel.id 
+AND channel.name = "#general" 
 ORDER BY post_time DESC;
 
 /**/
@@ -136,7 +141,7 @@ WHERE user.id = message.user_id
 GROUP BY user.id
 ORDER BY user.name DESC;
 
-/**/
+/*  -- First Try on Stretch --
 SELECT user.name AS "User", channel.name AS "Channel", COUNT(message.id) AS "Message Count"
 FROM user, channel, user_channel, message
 WHERE user_channel.user_id = user.id
@@ -151,6 +156,7 @@ AND channel.id = message.channel_id
 AND user_channel.user_id = user.id
 AND user_channel.channel_id = channel.id
 GROUP BY channel.id, user.id;
+*/
 
 SELECT user.name AS "User", channel.name AS "Channel", COUNT(*) AS "Message Count"
 FROM user, channel, message
@@ -160,7 +166,7 @@ GROUP BY channel.id, user.id;
 
 /*
 To have messages by a user be automatically deleted when a user is deleted,
-you can apply ON DELETE CASCADE constraint to the foreign key on the child table when creating the table:
+you can apply ON DELETE CASCADE constraint to the foreign key on the *child* table when creating the table:
 
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
