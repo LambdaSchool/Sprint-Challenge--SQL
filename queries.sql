@@ -1,0 +1,6 @@
+-- Organization Table --
+CREATE TABLE organization (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(64) NOT NULL UNIQUE,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
