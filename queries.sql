@@ -25,13 +25,13 @@ CREATE TABLE channel (
     FOREIGN KEY(organization_id) REFERENCES organization(id)
 );
 
-CREATE TABLE channel_messages (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    channel_id INTEGER NOT NULL,
-    messages_id INTEGER NOT NULL,
-    FOREIGN KEY(channel_id) REFERENCES channel(id),
-    FOREIGN KEY(messages_id) REFERENCES messages(id)
-);
+-- CREATE TABLE channel_messages (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     channel_id INTEGER NOT NULL,
+--     messages_id INTEGER NOT NULL,
+--     FOREIGN KEY(channel_id) REFERENCES channel(id),
+--     FOREIGN KEY(messages_id) REFERENCES messages(id)
+-- );
 
 CREATE TABLE channel_user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -104,7 +104,10 @@ SELECT channel.name FROM organization, channel WHERE channel.organization_id IS 
 -- 4.
 SELECT messages.content, messages.id, messages.post_time FROM channel, messages WHERE messages.channel_id IS channel.id AND channel.id IS '1' ORDER BY post_time DESC;
 -- 5. 
-
-
-
-
+SELECT channel.name FROM channel_user, user, channel WHERE channel_user.user_id IS user.id AND user.id IS '1' GROUP BY channel.name;
+-- 6.
+SELECT user.name FROM user, channel, channel_user WHERE channel_user.user_id IS user.id AND channel_user.channel_id IS '1' GROUP BY user.name;
+-- 7.
+SELECT messages.id, messages.content, messages.user_id FROM channel_user, messages, user WHERE channel_user.user_id IS user.id AND messages.user_id IS '1' GROUP BY messages.id;
+-- 8.
+SELECT * FROM messages WHERE messages.user_id IS '2' AND messages.channel_id IS '2';
