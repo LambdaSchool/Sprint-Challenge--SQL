@@ -68,3 +68,10 @@ INSERT INTO message (content, user_id, channel_id) VALUES("No way, Beej maybe di
 
 INSERT INTO message (content, user_id, channel_id) VALUES("What is lamdba labs?", 1, 1);
 INSERT INTO message (content, user_id, channel_id) VALUES("Where the cool guys code real life apps", 3, 1);
+
+INSERT INTO user_channel (user_id, channel_id) VALUES(1,1);
+INSERT INTO user_channel (user_id, channel_id) VALUES(1,2);
+
+INSERT INTO user_channel (user_id, channel_id) VALUES(2,1);
+
+INSERT INTO user_channel (user_id, channel_id) VALUES(3,2);
