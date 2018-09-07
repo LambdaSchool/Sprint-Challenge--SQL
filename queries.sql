@@ -120,7 +120,8 @@ INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'faucibus orci 
 
 /*
   SELECT queries.
-  For these SELECTs, it is NOT OK to refer to users, channels, and organization by their ids.
+  For these SELECTs, it is NOT OK to refer to users, channels, and organization by their
+  ids.
 */
 
 -- List all organization names
@@ -135,7 +136,8 @@ SELECT channel.id AS channel_id, channel.name AS channel_name
   WHERE channel.organization_id = organization.id
   AND organization.name = 'Lambda School';
 
--- List all messages in a specific channel by channel name #general in order of post_time, descending
+-- List all messages in a specific channel by channel name #general in order of post_time,
+-- descending
 SELECT user.name AS user, message.content AS content, message.post_time
   FROM message, channel, user
   WHERE message.channel_id = channel.id
@@ -178,3 +180,17 @@ SELECT user.name AS 'User Name', COUNT(message.user_id) AS 'Message Count'
   WHERE user.id = message.user_id
   GROUP BY user.name
   ORDER BY user.name DESC;
+
+/***************************************************************************************/
+/***************************************************************************************/
+/***************************************************************************************/
+
+/*
+  Short Answer: What SQL keywords or concept would you use if you wanted to automatically
+  delete all messages by a user if that user were deleted from the user table?
+
+  To automatically delete all message by a user should that user be deleted from the user
+  table, the user_id foreign key in the message table needs the foreign key constraint
+  action:ON DELETE CASCADE. ON DELETE CASCADE means if the parent key that this foregin
+  key refers to is deleted, delete this record as well.
+*/
