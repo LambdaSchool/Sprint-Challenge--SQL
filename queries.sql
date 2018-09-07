@@ -136,3 +136,8 @@ INSERT INTO messages(content, user_id, channel_id)VALUES(
     FROM messages, user
     WHERE messages.user_id = user.id
     GROUP BY user.name;
+
+    -- 6. What SQL keywords or concept would you use if you wanted to automatically
+--    delete all messages by a user if that user were deleted from the `user`
+--    table?
+--cascade on delete
