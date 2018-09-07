@@ -14,7 +14,7 @@ CREATE TABLE channel(
 
 CREATE TABLE user(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name VARCHAR(128) NOT NULL UNIQUE,
+  name VARCHAR(128) NOT NULL UNIQUE
 );
 
 CREATE TABLE user_channel(
@@ -26,6 +26,7 @@ CREATE TABLE message(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   content TEXT,
   user_id INTEGER REFERENCES user(id),
+  channel_id INTEGER REFERENCES channel(id),
   post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   update_post TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -44,15 +45,15 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
 INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
 
-INSERT INTO message (content, user_id) VALUES ("first from  alice", 1);
-INSERT INTO message (content, user_id) VALUES ("second from alice", 1);
-INSERT INTO message (content, user_id) VALUES ("third from alice", 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ("first from  alice", 1, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ("second from alice", 1, 2);
+INSERT INTO message (content, user_id, channel_id) VALUES ("third from alice", 1, 2);
 
-INSERT INTO message (content, user_id) VALUES ("first from bob", 2);
-INSERT INTO message (content, user_id) VALUES ("second from bob", 2);
-INSERT INTO message (content, user_id) VALUES ("third from bob", 2);
+INSERT INTO message (content, user_id, channel_id) VALUES ("first from bob", 2, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ("second from bob", 2, 2);
+INSERT INTO message (content, user_id, channel_id) VALUES ("third from bob", 2, 2);
 
-INSERT INTO message (content, user_id) VALUES ("first from chris", 3);
-INSERT INTO message (content, user_id) VALUES ("second from chris", 3);
-INSERT INTO message (content, user_id) VALUES ("third from chris", 3);
-INSERT INTO message (content, user_id) VALUES ("forth from chris", 3);
+INSERT INTO message (content, user_id, channel_id) VALUES ("first from chris", 3, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ("second from chris", 3, 1);
+INSERT INTO message (content, user_id, channel_id) VALUES ("third from chris", 3, 2);
+INSERT INTO message (content, user_id, channel_id) VALUES ("forth from chris", 3, 2);

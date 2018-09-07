@@ -1,0 +1,5 @@
+User Name   Message Count
+----------  -------------
+Chris       4            
+Bob         3            
+Alice       3            
