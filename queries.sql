@@ -181,6 +181,14 @@ SELECT user.name AS 'User Name', COUNT(message.user_id) AS 'Message Count'
   GROUP BY user.name
   ORDER BY user.name DESC;
 
+-- List the count of messages per user per channel
+SELECT user.name AS 'User', channel.name AS 'Channel', COUNT(message.user_id) AS 'Message Count'
+  FROM user, channel, message
+  WHERE message.user_id = user.id
+  AND message.channel_id = channel.id
+  GROUP BY message.user_id, message.channel_id
+  ORDER BY channel.name ASC;
+
 /***************************************************************************************/
 /***************************************************************************************/
 /***************************************************************************************/
