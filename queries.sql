@@ -214,6 +214,29 @@ SELECT users.name AS "User Name", COUNT(messages.content) AS "Message Count"
 
 
 
+-- [Stretch!] List the count of messages per user per channel.
+SELECT users.name AS User,
+  channels.name AS Channel,
+  COUNT(messages.content) AS "Message Count"
+  FROM users, channels, messages
+  WHERE users.id=messages.user_id
+  AND channels.id=messages.channel_id
+  GROUP BY User, Channel
+  ORDER BY User;
+  -- sqlite> SELECT users.name AS User,
+  --    ...>   channels.name AS Channel,
+  --    ...>   COUNT(messages.content) AS "Message Count"
+  --    ...>   FROM users, channels, messages
+  --    ...>   WHERE users.id=messages.user_id
+  --    ...>   AND channels.id=messages.channel_id
+  --    ...>   GROUP BY User, Channel
+  --    ...>   ORDER BY User;
+  -- User        Channel     Message Count
+  -- ----------  ----------  -------------
+  -- Alice       #general    4
+  -- Alice       #random     3
+  -- Bob         #general    2
+  -- Chris       #random     2
 
 
 -- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
