@@ -1,4 +1,6 @@
-PRAGMA foreign_keys = ON;
+.mode column
+.header on
+
 
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,17 +19,14 @@ CREATE TABLE user (
     name VARCHAR(128) NOT NULL UNIQUE
 );
 
-
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     content TEXT,
     user_id INTEGER REFERENCES user(id),
-    channel_id INTEGER REFERENCES channel(id)
+    channel_id INTEGER REFERENCES channel(id),
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
---- Join table for users + channels --- 
 
 CREATE TABLE user_channel (
     user_id INTEGER REFERENCES user(id),
@@ -81,3 +80,7 @@ SELECT COUNT(user.id) AS "Message Count", user.name AS "User Name"
 FROM message INNER JOIN user ON message.user_id IS user.id
 INNER JOIN channel WHERE message.channel_id IS channel_id
 GROUP BY user.id;
+
+--- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the `user` table? --- 
+
+--- Answer: ON DELETE CASCADE --- 
