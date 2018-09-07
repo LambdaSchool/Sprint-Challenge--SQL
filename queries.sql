@@ -67,3 +67,48 @@ VALUES("#general", 1);
 INSERT INTO channel
 (name, organization_id)
 VALUES("#random", 2);
+
+-- messages --
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("I'M THE KING OF THE WORLD", 3, 2);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("OH, you did an actual query.  That’s awesome lol", 2, 1);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("So many repos.", 1, 1);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Don't worry guys.", 1, 2);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Why do I type so slow?", 3, 2);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Two hours of sleep is rough.", 3, 2);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("What's the repo for today?", 2, 1);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Can you make a PR request please", 1, 1);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Are we doing #after-hours?", 2, 2);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Don’t forget to put your name on your pull request.", 3, 1);
+
+INSERT INTO message
+  (content, user_id, channel_id)
+VALUES("Please take a moment to reflect upon your day and fill out your Daily Standup report: https:\/\/airtable.com\/shr8ZYuNjevMLRsxI", 1, 1);
