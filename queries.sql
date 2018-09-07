@@ -128,3 +128,9 @@ SELECT name AS organization_names FROM organization;
 
 -- List all channel names
 SELECT name AS channel_names FROM channel;
+
+-- List all channels in a specific organization by organization name
+SELECT channel.id AS channel_id, channel.name AS channel_name
+  FROM channel, organization
+  WHERE channel.organization_id = organization.id
+  AND organization.name = 'Lambda School';
