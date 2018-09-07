@@ -149,18 +149,21 @@ WHERE U.firstname= 'Alice';
 -- 3           #general #ra  1
 
 -- 8. List all messages in `#random` by user `Bob`.
-select * from channel C join message M on M.channel_id = C.channel_id JOIN user U on U.u_id = M.u_id where U.firstname= 'Bob' and C.channel_name ='#random';
+SELECT * FROM channel C JOIN message M 
+ON M.channel_id = C.channel_id JOIN user U 
+ON U.u_id = M.u_id 
+WHERE U.firstname= 'Bob' AND C.channel_name ='#random';
 -- channel_id  channel_name  organization_id  message_id  message_content                                   u_id        channel_id  post_time            u_id        username    firstname   lastname
 -- ----------  ------------  ---------------  ----------  ------------------------------------------------  ----------  ----------  -------------------  ----------  ----------  ----------  ----------
 -- 2           #random       1                5           Content of messege5 with uid 2 and channel id 2   2           2           2018-09-07 12:11:53  2           bobM        Bob         Marley
 
 
 -- 9. List the count of messages across all channels per user. (Hint:`COUNT`, `GROUP BY`.)
-select  U.firstname as 'User Name', COUNT(*) as 'Message Count'  
-from channel C join message M 
-on M.channel_id = C.channel_id JOIN user U 
-on U.u_id = M.u_id 
-group by(U.u_id);
+SELECT  U.firstname AS 'User Name', COUNT(*) AS 'Message Count'  
+FROM channel C JOIN message M 
+ON M.channel_id = C.channel_id JOIN user U 
+ON U.u_id = M.u_id 
+GROUP BY(U.u_id);
 -- User Name   Message Count
 -- ----------  -------------
 -- Alice       3
@@ -168,11 +171,11 @@ group by(U.u_id);
 -- Chris       2
 
 -- 10. [Stretch!] List the count of messages per user per channel.
-SELECT  U.firstname as 'User Name', channel_name as 'Channel', COUNT(*) as 'Message Count'  
-from channel C join message M 
-on M.channel_id = C.channel_id JOIN user U 
-on U.u_id = M.u_id 
-group by( C.channel_id);
+SELECT  U.firstname AS 'User Name', channel_name AS 'Channel', COUNT(*) AS 'Message Count'  
+FROM channel C JOIN message M 
+ON M.channel_id = C.channel_id JOIN user U 
+ON U.u_id = M.u_id 
+GROUP BY( C.channel_id);
 -- User Name   Channel     Message Count
 -- ----------  ----------  -------------
 -- Chris       #general    3
@@ -180,5 +183,5 @@ group by( C.channel_id);
 -- Bob         #general #  3
 
 -- 6. What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the `user`table?
--- the term is cascade, one the cascade on delete is set on the table, when you delete  message all related user info will be deleted with it, keeping the integrity and
+-- the term is cascade, once the cascade on delete is set on the table, when all messages are deleted all related user info will be deleted with it, keeping the integrity and
 -- consistancy of the database.
