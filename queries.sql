@@ -158,3 +158,8 @@ SELECT user.name
   WHERE user.id = user_id
   AND channel.id = channel_id
   AND channel.name = "#CHIMtips";
+
+SELECT content
+FROM message, user
+WHERE user_id = user.id
+  AND user.name = "Vehk";
