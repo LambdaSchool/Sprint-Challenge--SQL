@@ -97,7 +97,7 @@ INSERT INTO message
 
 INSERT INTO message
   (content, user_id, channel_id)
-  VALUES("What do you guys do when your followers pray to you too much?", 3, 2);
+  VALUES("What do you guys do when your followers pray too much?", 3, 2);
 
 INSERT INTO message
   (content, user_id, channel_id)
@@ -131,7 +131,18 @@ INSERT INTO user_channel
 -- QUERY STUFF --
 
 SELECT name
-from organization
+from organization;
 
 SELECT name
-from channel
+from channel;
+
+SELECT channel.name
+  FROM channel, organization
+  WHERE organization_id = organization.id
+  AND organization.name = "ALMSIVI";
+
+SELECT message.content
+  FROM message, channel
+  WHERE channel_id = channel.id
+  AND channel.name = "#guarpics"
+  ORDER BY message.created DESC;
