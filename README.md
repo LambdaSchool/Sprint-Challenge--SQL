@@ -36,25 +36,39 @@ various tables, not just the columns listed here.
 
    1. `organization`. This table should at least have column(s):
       * `name`
+      * `id`
 
    2. `channel`. This table should at least have column(s):
       * `name`
+      * `id`
 
    3. `user`. This table should at least have column(s):
       * `name`
+      * `id`
 
    4. `message`. This table should have at least columns(s):
-
       * `post_time`--the timestamp of when the message was posted
         * See [Date types in
           SQLite](https://www.sqlite.org/datatype3.html#date_and_time_datatype).
           Also see the SQLite function `datetime()`.
-
       * `content`--the message content itself
+      * `id`
 
 2. Add additional foreign keys needed to the above tables, if any.
 
+   1. `channel`. This table should also have column(s):
+      * `organization_id`
+
+   2. `message`. This table should have also columns(s):
+      * `user_id`
+      * `channel_id`
+
 3. Add additional join tables needed, if any.
+
+   1. user_channels
+      * `user_id`
+      * `channel_id`
+
 
 4. Write `INSERT` queries to add information to the database.
 
