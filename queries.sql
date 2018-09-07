@@ -171,4 +171,5 @@ SELECT user.name AS "User Name", COUNT(user.id) as "Message Count" FROM message 
 -- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
 
 PRAGMA foreign_keys = OFF
-SELECT user.name 
+DELETE FROM message WHERE message.user_id IS user.id
+
