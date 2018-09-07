@@ -113,3 +113,118 @@ id          content                   user_id     channel_id  post_time
 10          I'm Chris. Yoroshiku one  3           2           2018-09-07 16:28:03
 */
 
+
+/********* Select queries *********/
+SELECT name AS organization_name FROM organization;
+/*
+organization_name
+-----------------
+Lambda School 
+*/
+
+SELECT name AS channel_name FROM channel;
+/*
+channel_name
+------------
+#general    
+#random
+*/
+
+SELECT channel.name
+    FROM channel, organization
+    WHERE organization_id = organization.id
+    AND organization.name = "Lambda School";
+/*
+name      
+----------
+#general  
+#random 
+*/
+
+
+SELECT message.content, channel.name, message.post_time
+    FROM message, channel
+    WHERE channel_id = channel.id
+    AND channel.name = "#general"
+    ORDER BY post_time DESC;
+/*
+content                      name        post_time          
+---------------------------  ----------  -------------------
+Hello everyone. This is Bob  #general    2018-09-07 16:23:05
+Hey, Alice. Nice to see you  #general    2018-09-07 16:22:10
+Nice to see you Bob from Al  #general    2018-09-07 16:20:32
+Bob in General channel       #general    2018-09-07 16:18:37
+Alice in General channel     #general    2018-09-07 16:17:29
+*/
+
+
+SELECT channel.name 
+    FROM channel, user, user_channel
+    WHERE user.name = "Alice"
+    AND user_id = user.id
+    AND channel_id = channel.id;
+/*
+name      
+----------
+#general  
+#random
+*/
+
+
+SELECT user.name
+    FROM channel, user, user_channel
+    WHERE channel.name = "#general"
+    AND user_id = user.id
+    AND channel_id = channel.id;
+/*
+name      
+----------
+Alice     
+Bob
+*/
+
+
+SELECT user.name AS "User Name", Count(*) AS "Message Count"
+    FROM user, message
+    WHERE user_id = user.id
+    GROUP BY user.id
+    ORDER BY user.name DESC;
+/*
+User Name   Message Count
+----------  -------------
+Chris       3            
+Bob         3            
+Alice       4 
+*/
+
+
+SELECT user.name 
+    AS "User",
+    channel.name
+    AS "Channel",
+    COUNT (*)
+    AS "Message Count"
+    FROM user, message, channel
+    WHERE user_id = user.id
+    AND channel_id = channel.id
+    ROUP BY channel.name, user.name;
+/*
+User        Channel     Message Count
+----------  ----------  -------------
+Alice       #general    2            
+Bob         #general    3            
+Alice       #random     2            
+Chris       #random     3
+*/
+
+
+/*
+What SQL keywords or concept would you use 
+if you wanted to automatically delete all messages 
+by a user if that user were deleted from the user table?
+
+ANSWER:  
+    Add `ON DELETE CASCADE` clause to the foreign key, 
+    for example, 
+    `FOREIGN KEY(author_id) REFERENCES author(id) ON DELETE CASCADE`.
+*/
