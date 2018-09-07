@@ -44,7 +44,7 @@ CREATE TABLE user_channel (
 );
 
 -- INSERT Queries --
-INSERT INTO organization (name) VALUES ("Lambda Sschool");
+INSERT INTO organization (name) VALUES ("Lambda School");
 
 INSERT INTO user (name, username) VALUES ("Alice", "alice");
 INSERT INTO user (name, username) VALUES ("Bob", "bob");
@@ -68,3 +68,69 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (1, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
 INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
 INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
+
+-- SELECT queries --
+-- List all organization names --
+SELECT name AS "ORGANIATION NAME(S)" from organization;
+
+-- List all channel names --
+SELECT name AS "CHANNEL NAME(S)" from channel;
+
+-- List all channels in a specific organization by organization name --
+SELECT channel.name AS "LAMBDA SCHOOL CHANNELS"
+FROM channel, organization
+WHERE channel.organization_id = organization.id 
+AND organization.name = "Lambda School";
+
+-- List all messages in a specific channel by channel name #general in order of post_time, descending --
+SELECT content AS "General Messages", post_time FROM message
+WHERE channel_id IS (
+SELECT id FROM channel WHERE name  IS "#general"
+)
+ORDER BY post_time DESC;
+
+-- List all channels to which user Alice belongs -- 
+SELECT channel.name AS "Alice's Channels" 
+FROM channel INNER JOIN user_channel 
+ON channel.id IS user_channel.channel_id INNER JOIN user ON user.id IS user_channel.user_id
+AND user.name IS "Alice";
+
+-- List all users that belong to channel #general --
+SELECT user.name AS "USERS in #general"
+FROM user INNER JOIN user_channel
+ON user.id IS user_channel.user_id INNER JOIN channel ON channel.id IS user_channel.channel_id
+AND channel.name IS "#general";
+
+-- List all messages in all channels by user Alice --
+SELECT message.content AS "Alice's Messages"
+FROM message INNER JOIN user
+ON message.user_id IS user.id
+WHERE user.name IS "Alice";
+
+-- List all messages in #random by user Bob --
+SELECT content AS "Bob's Messages in #random" FROM message
+WHERE channel_id IS (
+    SELECT id FROM channel 
+    WHERE name IS "#random"
+)
+AND user_id IS (
+    SELECT id FROM user 
+    WHERE name IS "Bob"
+);
+
+-- List the count of messages across all channels per user --
+SELECT user.name AS "User Name", COUNT(user.id) AS "Message Count"
+FROM message
+INNER JOIN user 
+ON message.user_id IS user.id
+INNER JOIN channel 
+WHERE message.channel_id IS channel.id
+GROUP BY user.id
+ORDER BY user.name DESC;
+
+/*
+What SQL keywords or concept would you use if you wanted to automatically 
+delete all messages by a user if that user were deleted from the user table?
+
+ON DELETE CASCADE
+*/
