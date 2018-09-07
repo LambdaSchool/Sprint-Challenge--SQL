@@ -161,6 +161,6 @@ GROUP BY user.name, channel.name
 -- from the user table?
 -- 
 -- Answer: in you table you would need to have something like ON DELETE CASCADE. 
--- the idea is that when the parent is deleted, all the children that ref that child
+-- the idea is that when the parent is deleted, all the children that ref that parent
 -- are also deleted.
 
