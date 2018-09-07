@@ -156,3 +156,10 @@ SELECT user.name AS user
   WHERE user.id = user_channel.user_id
   AND user_channel.channel_id = channel.id
   AND channel.name = '#general';
+
+-- List all messages in all channels by user Alice
+SELECT channel.name AS channel_name, message.content AS message, message.post_time
+  FROM message, user, channel
+  WHERE message.user_id = user.id
+  AND message.channel_id = channel.id
+  AND user.name = 'Alice';
