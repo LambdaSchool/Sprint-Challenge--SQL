@@ -2,6 +2,7 @@
 
 Design a database for an online chat system.
 
+
 ## Deliverables
 
 Add a file called `queries.sql` that runs all of the `CREATE TABLE`,
