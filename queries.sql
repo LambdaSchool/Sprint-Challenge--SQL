@@ -51,3 +51,19 @@ VALUES("Bob", "Pyscho_B_N_Springfield");
 INSERT INTO user
 (name, username)
 VALUES("Chris Hensworth", "Thor");
+
+
+-- organizations --
+INSERT INTO organization
+(name)
+VALUES("Lambda School");
+
+
+-- channels --
+INSERT INTO channel
+(name, organization_id)
+VALUES("#general", 1);
+
+INSERT INTO channel
+(name, organization_id)
+VALUES("#random", 2);
