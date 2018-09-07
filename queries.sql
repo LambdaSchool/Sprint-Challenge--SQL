@@ -192,6 +192,21 @@ Bob
 */
 
 
+-- List all messages in all channels by user Alice.
+SELECT user.name, message.content
+    FROM message, user
+    WHERE user_id = user.id
+    AND user.name = "Alice";
+/*
+name        content                 
+----------  ------------------------
+Alice       Alice in General channel
+Alice       Alice in Random channel 
+Alice       Nice to see you Bob from
+Alice       Hello Chris. This is Ali
+*/
+
+
 -- List all messages in #random by user Bob.
 SELECT message.content
 FROM message, channel, user
@@ -227,7 +242,7 @@ SELECT user.name
     FROM user, message, channel
     WHERE user_id = user.id
     AND channel_id = channel.id
-    ROUP BY channel.name, user.name;
+    GROUP BY channel.name, user.name;
 /*
 User        Channel     Message Count
 ----------  ----------  -------------
