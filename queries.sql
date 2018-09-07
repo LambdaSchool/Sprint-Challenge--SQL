@@ -142,3 +142,10 @@ SELECT user.name AS user, message.content AS content, message.post_time
   AND message.user_id = user.id
   AND channel.name = '#general'
   ORDER BY message.post_time DESC;
+
+-- List all channels to which user Alice belongs
+SELECT channel.name AS channel_name
+  FROM channel, user, user_channel
+  WHERE channel.id = user_channel.channel_id
+  AND user_channel.user_id = user.id
+  AND user.name = 'Alice';
