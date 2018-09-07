@@ -169,3 +169,25 @@ SELECT name AS 'User Name', COUNT(messages.id) AS 'Message Count'
 FROM users, messages
 WHERE users.id IS messages.user_id
 GROUP BY users.name;
+
+
+/**
+ * What SQL keywords or concept would you use if you wanted to automatically
+ * delete all messages by a user if that user were deleted from the user table?
+ *
+ * In SQLite3 we would use the `PRAGMA foreign_keys = ON;` to let SQLite3 know
+ * that we want to honor foreign keys. With this setting turned on we can no
+ * longer delete a table with one-to-many relationships with another table
+ * before deleting all of the many-to-one relationships with that table.
+ * For example, we have an organization table that has a one-to-many
+ * relationship with the channels table. In order to delete the
+ * organization table our query would look something like
+ *
+ * BEGIN;
+ * DELETE FROM messages;
+ * DELETE FROM users_channels;
+ * DELETE FROM users;
+ * DELETE FROM channels;
+ * DELETE FROM organizations;
+ * COMMIT;
+ */
