@@ -75,3 +75,41 @@ CREATE TABLE message (
   FOREIGN KEY (user_id, channel_id) REFERENCES user_channel (user_id, channel_id)
     ON DELETE SET NULL
 );
+
+/***************************************************************************************/
+/***************************************************************************************/
+/***************************************************************************************/
+
+/*
+  Populate chat database.
+  For these INSERTs, it is OK to refer to users, channels, and organization by their ids.
+*/
+-- INSERT INTO organzation
+INSERT INTO organization (name) VALUES ('Lambda School');
+
+-- INSERT INTO channel
+INSERT INTO channel (name, organization_id) VALUES ('#general', 1);
+INSERT INTO channel (name, organization_id) VALUES ('#random', 1);
+
+-- INSERT INTO user
+INSERT INTO user (name) VALUES ('Alice');
+INSERT INTO user (name) VALUES ('Bob');
+INSERT INTO user (name) VALUES ('Chris');
+
+-- INSERT INTO user_channel
+INSERT INTO user_channel (user_id, channel_id) VALUES (1, 1);
+INSERT INTO user_channel (user_id, channel_id) VALUES (1, 2);
+INSERT INTO user_channel (user_id, channel_id) VALUES (2, 1);
+INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
+
+-- INSERT INTO message
+INSERT INTO message (user_id, channel_id, content) VALUES (1, 1, 'scelerisque mauris sit amet eros suspendisse');
+INSERT INTO message (user_id, channel_id, content) VALUES (1, 1, 'in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
+INSERT INTO message (user_id, channel_id, content) VALUES (1, 1, 'leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras');
+INSERT INTO message (user_id, channel_id, content) VALUES (1, 2, 'proin risus praesent lectus vestibulum quam sapien varius ut blandit non interdum in ante');
+INSERT INTO message (user_id, channel_id, content) VALUES (1, 2, 'ligula nec sem duis aliquam');
+INSERT INTO message (user_id, channel_id, content) VALUES (2, 1, 'tincidunt eget tempus vel pede');
+INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'risus semper porta volutpat quam pede lobortis ligula sit amet');
+INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'quisque arcu libero rutrum ac lobortis vel dapibus');
+INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'tincidunt nulla mollis molestie lorem quisque ut erat curabitur');
+INSERT INTO message (user_id, channel_id, content) VALUES (3, 2, 'faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit');
