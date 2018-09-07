@@ -1,0 +1,26 @@
+--org table
+
+CREATE TABLE organization (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR (128) NOT NULL UNIQUE,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--channel table
+CREATE TABLE channel (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR (128) NOT NULL UNIQUE,
+    organization_id INTEGER REFERENCES organization(id),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--user table
+CREATE TABLE message (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content text,
+    user_id INTEGER REFERENCES user(id),
+    channel_id INTEGER REFERENCES channel(id)
+    crated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
