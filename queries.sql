@@ -149,3 +149,5 @@ IS user.id
 INNER JOIN channel 
 WHERE message.channel_id IS channel.id 
 GROUP BY user.id;
+
+-- DROP USER [ IF EXISTS ] user_name --
