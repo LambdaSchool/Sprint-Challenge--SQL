@@ -12,7 +12,6 @@ PRAGMA foreign_keys = ON
 CREATE TABLE organization (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(128) NOT NULL
-
 );
 
 CREATE TABLE channel (
@@ -73,4 +72,66 @@ INSERT INTO channel_user (user_id, channel_id) VALUES (1, 1);
 INSERT INTO channel_user (user_id, channel_id) VALUES (1, 2);
 INSERT INTO channel_user (user_id, channel_id) VALUES (2, 1);
 INSERT INTO channel_user (user_id, channel_id) VALUES (3, 2);
+
+-- SELECT
+
+-- List all organization names.
+SELECT organization.name from organization;
+
+-- OUTPUT
+-- name
+-- -------------
+-- Lambda School
+
+
+-- List all channel names.
+SELECT channel.name from channel;
+
+-- OUTPUT
+-- name
+-- ----------
+-- #general
+-- #random
+
+
+-- List all channels in a specific organization by organization name.
+SELECT channel.name from channel, organization WHERE organization_id = organization.id AND organization.name = "Lambda School";
+
+-- OUTPUT
+-- name
+-- ----------
+-- #general
+-- #random
+
+
+-- List all messages in a specific channel by channel name #general in order of post_time, descending. (Hint: ORDER BY. Because your INSERTs might have all taken place at the exact same time, this might not return meaningful results. But humor us with the ORDER BY anyway.)
+SELECT content FROM message WHERE channel_id IS (SELECT id FROM channel WHERE name IS '#general') ORDER BY post_time DESC;
+
+-- OUTPUT
+-- content
+-- ------------------
+-- Chris is so random
+-- Ha, yeah
+-- I like bread
+
+
+-- List all channels to which user Alice belongs.
+SELECT
+
+
+-- List all users that belong to channel #general.
+SELECT
+
+
+-- List all messages in all channels by user Alice.
+SELECT
+
+
+-- List all messages in #random by user Bob.
+SELECT
+
+
+-- List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.)
+SELECT
+
 
