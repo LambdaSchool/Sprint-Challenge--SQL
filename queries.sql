@@ -38,3 +38,27 @@ CREATE TABLE user_channel (
 
 
 -- INSERT STUFF --
+
+INSERT INTO user
+  (name, username)
+  VALUES("Vekh", "vivec2002");
+
+INSERT INTO user
+  (name, username)
+  VALUES("Seht", "s-sil");
+
+INSERT INTO user
+  (name, username)
+  VALUES("Ayem", "lexie");
+
+INSERT INTO user
+  (name, username)
+  VALUES("Nerevar", "hortator1");
+
+INSERT INTO user
+  (name, username)
+  VALUES("Kagrenac", "1337toolz");
+
+INSERT INTO user
+  (name, username)
+  VALUES("Dagoth Ur", "ursharmat");
