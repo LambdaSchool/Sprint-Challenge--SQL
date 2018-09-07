@@ -149,3 +149,10 @@ SELECT channel.name AS channel_name
   WHERE channel.id = user_channel.channel_id
   AND user_channel.user_id = user.id
   AND user.name = 'Alice';
+
+-- List all users that belong to channel #general
+SELECT user.name AS user
+  FROM user, channel, user_channel
+  WHERE user.id = user_channel.user_id
+  AND user_channel.channel_id = channel.id
+  AND channel.name = '#general';
