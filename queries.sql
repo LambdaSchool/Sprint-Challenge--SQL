@@ -1,11 +1,15 @@
-PRAGMA foreign_keys = ON
+PRAGMA foreign_keys = OFF;
 .mode column
 .header ON
 
-DROP TABLE IF EXISTS organization
-DROP TABLE IF EXISTS channel
-DROP TABLE IF EXISTS user
-DROP TABLE IF EXISTS message
+
+DROP TABLE IF EXISTS user_channel;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS channel;
+DROP TABLE IF EXISTS organization;
+DROP TABLE IF EXISTS user;
+
+PRAGMA foreign_keys = ON;
 
 /*CREATE TABLES*/
 CREATE TABLE organization (
@@ -82,52 +86,52 @@ INSERT INTO user_channel (user_id, channel_id) VALUES (3, 2);
 
 
 /*Queries*/
-SELECT organization.name FROM organization;
+SELECT organization.name AS "1. Organization Names" FROM organization;
 
 /**/
-SELECT channel.name FROM channel;
+SELECT channel.name AS "2. Channel Names" FROM channel;
 
 /**/
-SELECT channel.name as "Channel Name" 
+SELECT channel.name AS "3. Channel Name" 
 FROM channel, organization 
 WHERE organization_id = organization.id 
 AND organization.name = "Lambda School";
 
 /**/
-SELECT message.user_id, message.content 
+SELECT message.user_id AS "4. User ID", message.content 
 FROM channel, message 
 WHERE message.channel_id = channel.id 
 AND channel.name = "#general" 
 ORDER BY post_time DESC;
 
 /**/
-SELECT channel.name AS "Alice's Channels" 
+SELECT channel.name AS "5. Alice's Channels" 
 FROM channel, user, user_channel 
 WHERE user.name = "Alice" 
 AND user.id = user_channel.user_id
 AND channel.id = user_channel.channel_id;
 
-SELECT channel.name as "Alice's Channels" 
+SELECT channel.name as "6. Alice's Channels" 
 FROM channel 
 INNER JOIN user_channel ON channel.id IS user_channel.channel_id 
 INNER JOIN user ON user.id IS user_channel.user_id
 AND user.name = "Alice";
 
 /**/
-SELECT user.name AS "#general users" 
+SELECT user.name AS "7. #general users" 
 FROM user, channel, user_channel
 WHERE channel.name = "#general" 
 AND user.id = user_channel.user_id
 AND channel.id = user_channel.channel_id;
 
 /**/
-SELECT message.id AS Message ID, message.content AS "Alice's Messages"
+SELECT message.id AS "8. Message ID", message.content AS "Alice's Messages"
 FROM user, message
 WHERE user.name = "Alice"
 AND user.id = message.user_id;
 
 /**/
-SELECT message.id AS "Message ID", message.content AS "#random content by Bob"
+SELECT message.id AS "9. Message ID", message.content AS "#random content by Bob"
 FROM user, channel, message, user_channel
 WHERE user.name = "Bob"
 AND channel.name = "#random"
@@ -135,7 +139,7 @@ AND user.id = message.user_id
 AND user_channel.user_id = user.id;
 
 /**/
-SELECT user.name AS "User Name", COUNT(message.user_id) AS "Message Count"
+SELECT user.name AS "10. User Name", COUNT(message.user_id) AS "Message Count"
 FROM user, message 
 WHERE user.id = message.user_id
 GROUP BY user.id
@@ -158,7 +162,7 @@ AND user_channel.channel_id = channel.id
 GROUP BY channel.id, user.id;
 */
 
-SELECT user.name AS "User", channel.name AS "Channel", COUNT(*) AS "Message Count"
+SELECT user.name AS "11. User", channel.name AS "Channel", COUNT(*) AS "Message Count"
 FROM user, channel, message
 WHERE user.id = message.user_id
 AND channel.id = message.channel_id
