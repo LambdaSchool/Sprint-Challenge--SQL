@@ -54,3 +54,73 @@ INSERT INTO message (content, channel_user_id) VALUES ("This is Alice posting in
 INSERT INTO message (content, channel_user_id) VALUES ("Once again, Alice posting in #random", 3);
 INSERT INTO message (content, channel_user_id) VALUES ("This is Chris posting in #random", 4);
 INSERT INTO message (content, channel_user_id) VALUES ("Once again, Chris posting in #random", 4);
+
+
+-- List all organization names
+SELECT * FROM organization;
+
+-- List all channel names
+SELECT * FROM channel;
+
+-- List all channels in a specific organization by name
+SELECT channel.name, organization.name 
+FROM organization, channel 
+WHERE channel.organization_id = organization.id 
+AND organization.name = "Lambda School";
+
+-- List all messages in a specific channel by channel name #general in order of post_time, descending
+SELECT message.content, message.post_time, channel.name 
+FROM message, channel, user, channel_user 
+WHERE message.channel_user_id = channel_user.id 
+AND channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+AND channel.name = "#general" 
+ORDER BY post_time DESC;
+
+-- List all channels to which user Alice belongs
+SELECT channel.* 
+FROM channel, user, channel_user 
+WHERE channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+AND user.name = "Alice";
+
+-- List all users that belong to channel #general
+SELECT user.* 
+FROM channel, user, channel_user 
+WHERE channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+AND channel.name = "#general";
+
+-- List all messages in all channels by user Alice
+SELECT message.*, channel.name 
+FROM message, channel, user, channel_user 
+WHERE message.channel_user_id = channel_user.id 
+AND channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+AND user.name = "Alice";
+
+-- List all messages in #random by user Bob
+SELECT message.*, channel.name 
+FROM message, channel, user, channel_user 
+WHERE message.channel_user_id = channel_user.id 
+AND channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+AND user.name = "Bob" 
+AND channel.name= "#random";
+
+-- List the count of messages across all channels per user
+SELECT user.name AS "User Name", COUNT(*) AS "Message Count" 
+FROM message, channel, user, channel_user 
+WHERE message.channel_user_id = channel_user.id 
+AND channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+GROUP BY user_id 
+ORDER BY user.name DESC;
+
+-- [STRETCH!] List the count of messages per user per channel
+SELECT user.name AS "User Name", channel.name AS "Channel", COUNT(*) AS "Message Count" 
+FROM message, channel, user, channel_user 
+WHERE message.channel_user_id = channel_user.id 
+AND channel_user.channel_id = channel.id 
+AND channel_user.user_id = user.id 
+GROUP BY channel_user.id ;
