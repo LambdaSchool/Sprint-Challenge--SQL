@@ -44,3 +44,10 @@ BEGIN
     UPDATE message SET TIMESTAMP = STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW') WHERE id = NEW.id;
 END;
 
+-- 2. Add additional foreign keys needed to the above tables, if any.
+-- 3. Add additional join tables needed, if any.
+
+CREATE TABLE users_channel (users_id INTEGER REFERENCES user(id) ON DELETE CASCADE, channel_id INTEGER REFERENCES channel(id) ON DELETE CASCADE) 
+
+
+
