@@ -163,3 +163,11 @@ SELECT channel.name AS channel_name, message.content AS message, message.post_ti
   WHERE message.user_id = user.id
   AND message.channel_id = channel.id
   AND user.name = 'Alice';
+
+-- List all messages in #random by user Bob
+SELECT message.content AS message, message.post_time
+  FROM message, channel, user
+  WHERE message.user_id = user.id
+  AND message.channel_id = channel.id
+  AND channel.name = '#random'
+  AND user.name = 'Bob';
