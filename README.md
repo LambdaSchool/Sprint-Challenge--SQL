@@ -1,5 +1,8 @@
 # Sprint Challenge: SQL
 
+first commit comment
+
+
 Design a database for an online chat system.
 
 ## Deliverables
