@@ -75,3 +75,26 @@ INSERT INTO user_channel (user_id, channel_id) VALUES(1,2);
 INSERT INTO user_channel (user_id, channel_id) VALUES(2,1);
 
 INSERT INTO user_channel (user_id, channel_id) VALUES(3,2);
+
+--select data
+
+
+SELECT name FROM organization;
+
+SELECT name FROM channel;
+
+SELECT channel.name FROM channel, organization WHERE organization_id = organization.id AND organization.name= "Lambda School";
+
+SELECT content FROM message, channel WHERE channel_id = channel.id AND channel.name = "#general" ORDER BY message.created DESC;
+
+SELECT channel.name FROM user, channel, user_channel WHERE user.id = user_id AND channel.id = channel_id AND user.name  = "Alice";
+
+SELECT user.name FROM user, channel, user_channel WHERE user.id = user_id AND channel.id = channel_id AND channel.name  = "#general";
+
+SELECT content FROM message, user WHERE user_id = user.id AND user.name = "Alice";
+
+SELECT message.content AS "Message" FROM user, channel, message WHERE user.id=message.user_id AND channel.id=message.channel_id AND channel.name="#random" AND user.name="Bob";
+
+.mode column
+.header on
+SELECT user.name AS "User Name", COUNT(message.content) AS "Message Count" FROM user, message WHERE user.id=message.user_id GROUP BY "User Name";
