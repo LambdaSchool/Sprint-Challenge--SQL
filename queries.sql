@@ -154,3 +154,13 @@ WHERE messages.id_user = user.id
 AND messages.id_channel = channel.id
 GROUP BY user.name, channel.name
 ;
+
+
+-- Question: What SQL keywords or concept would you use if you wanted to 
+-- automatically delete all messages by a user if that user were deleted 
+-- from the user table?
+-- 
+-- Answer: in you table you would need to have something like ON DELETE CASCADE. 
+-- the idea is that when the parent is deleted, all the children that ref that child
+-- are also deleted.
+
