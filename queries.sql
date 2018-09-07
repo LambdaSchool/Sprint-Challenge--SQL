@@ -1,4 +1,4 @@
-PRAGMA foreign_keys = ON;
+PRAGMA foreign_keys = TRUE;
 
 CREATE TABLE organization(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -69,9 +69,15 @@ INSERT INTO message (content, user_id, channel_id) VALUES ("Hi, I'm Alice! This 
 SELECT name from organization;
 SELECT name from channel;
 SELECT organization.name AS "Organization", channel.name AS "Channel" FROM channel JOIN organization;
-SELECT message.content AS text, post_time AS time FROM message, channel WHERE message.channel_id = channel.id AND channel.name = "#general" ORDER BY message.post_time ASC;
+SELECT message.content AS text, post_time AS time FROM message, channel WHERE message.channel_id = channel.id AND channel.name = "#general" ORDER BY message.post_time DESC;
 SELECT channel.name AS "Channel Name", user.name AS user FROM channel JOIN user WHERE user.name = "Alice";
 SELECT user.name AS "Username", channel.name AS general FROM channel JOIN user WHERE channel.name = "#general";
 SELECT message.content AS text, user.name AS "User", channel.name AS "Channel" FROM message, user, channel WHERE message.user_id = user.id AND user.name = "Alice";
 SELECT message.content AS text, user.name AS "User", channel.name AS "Channel" FROM message, user, channel WHERE message.user_id = user.id AND user.name = "Bob" AND channel.name = "#random";
 SELECT user.name as "Username", COUNT(messgae.id) AS "Number of messages" FROM message, user WHERE message.user_id = user.id GROUP BY user.name;
+
+-- 6. What SQL keywords or concept would you use if you wanted to automatically
+--    delete all messages by a user if that user were deleted from the `user`
+--    table?
+
+-- ## ON DELETE CASCADE are the main keywords I would use to delete all messages associated with a given user that was also slated for deletion.
