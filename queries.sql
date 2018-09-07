@@ -34,7 +34,7 @@ CREATE TABLE message (
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Writing the INSERT queries to populate the tables/databases.
+-- Writing INSERT queries to populate the tables/databases.
 
 -- One organization, Lambda School
 INSERT INTO organization (name, username) VALUES ("Lambda School");
@@ -60,3 +60,58 @@ INSERT INTO message (content, user_id, channel_id) VALUES ("But you can call me 
 INSERT INTO message (content, user_id, channel_id) VALUES ("Family name's also Chris. So call me Chris Chris.", 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ("Bye!", 1, 1);
 
+-- Writing SELECT queries.
+
+-- List all organization names.
+SELECT name from organization;
+
+-- List all channel names.
+SELECT name from channel;
+
+-- List all channels in a specific organization by organization name.
+SELECT channel.name
+    FROM channel, organization
+    WHERE organization_id = organization.id
+    AND organization.name = "Lambda School";
+
+-- List all messages in a specific channel by channel name #general in order of post_time, descending.
+SELECT contact
+    FROM message, channel
+    WHERE channel_id = channel.id
+    AND channel.name = "#general"
+    ORDER BY created DESC;
+
+-- List all channels to which user Alice belongs.
+SELECT channel.name
+    FROM user, channel, user_channel
+    WHERE user.id = user_id
+    AND channel.id = channel_id
+    AND user.name = "Alice";
+
+-- List all users that belong to channel #general.
+SELECT user.name
+    FROM user, channel, user_channel
+    WHERE user.id = user_id
+    AND channel.id = channel_id
+    AND channel.name = "#general";
+
+-- List all messages in all channels by user Alice.
+SELECT content
+    FROM message, user
+    WHERE user_id = user.id
+    AND user.name = "Alice";
+
+-- List all messages in #random by user Bob.
+SELECT content 
+    FROM message, channel, user
+    WHERE user_id = user.id
+    AND channel_id = channel.id
+    AND channel.name = "#random"
+    AND user.name = "Bob";
+
+-- List the count of messages across all channels per user.
+SELECT user.name AS "User Name", COUNT(*) AS "Message Count"
+    FROM user, message
+    WHERE user_id = user.id
+    GROUP BY user.id
+    ORDER BY user.name DESC;

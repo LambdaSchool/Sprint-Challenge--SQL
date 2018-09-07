@@ -1,6 +1,5 @@
 # Sprint Challenge: SQL
 
-
 Design a database for an online chat system.
 
 ## Deliverables
