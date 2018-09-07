@@ -158,12 +158,17 @@ SELECT content FROM message WHERE channel_id IS (SELECT id FROM channel WHERE na
 
 
 -- List the count of messages across all channels per user. (Hint: COUNT, GROUP BY.)
-SELECT user.name, COUNT(user.id) FROM message INNER JOIN user ON message.user_id IS user.id INNER JOIN channel WHERE message.channel_id IS channel.id GROUP BY user.id ORDER BY user_id DESC;
+SELECT user.name AS "User Name", COUNT(user.id) as "Message Count" FROM message INNER JOIN user ON message.user_id IS user.id INNER JOIN channel WHERE message.channel_id IS channel.id GROUP BY user.id ORDER BY user_id DESC;
 
 -- OUTPUT
--- name        COUNT(user.id)
--- ----------  --------------
+-- User Name   Message Count
+-- ----------  -------------
 -- Chris       4
 -- Bob         2
 -- Alice       4
 
+
+-- What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
+
+PRAGMA foreign_keys = OFF
+SELECT user.name 
