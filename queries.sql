@@ -62,3 +62,27 @@ INSERT INTO user
 INSERT INTO user
   (name, username)
   VALUES("Dagoth Ur", "ursharmat");
+
+INSERT INTO organization
+  (name)
+  VALUES("ALMSIVI");
+
+INSERT INTO organization
+  (name)
+  VALUES("Morrowind");
+
+INSERT INTO channel
+  (name, organization_id)
+  VALUES("#CHIMtips", 1);
+
+INSERT INTO channel
+  (name, organization_id)
+  VALUES("#divinediscussion", 1);
+
+INSERT INTO channel
+  (name, organization_id)
+  VALUES("#guarpics", 2);
+
+INSERT INTO channel
+  (name, organization_id)
+  VALUES("#livingwithcorprus", 2);
