@@ -21,9 +21,10 @@ CREATE TABLE user (
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     content TEXT,
-    post_time DATETIME default current_time,
     user_id INTEGER REFERENCES user(id),
     channel_id INTEGER REFERENCES channel(id)
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --- Join table for users + channels --- 
@@ -59,3 +60,24 @@ INSERT INTO message (content, user_id, channel_id) VALUES (':coffeeparrot:', 3, 
 INSERT INTO message (content, user_id, channel_id) VALUES ('What is the weekly retro topic?', 3, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES (':lambdareps:', 1, 2);
 INSERT INTO message (content, user_id, channel_id) VALUES ('Almost done!', 2, 1);
+
+
+SELECT name FROM organization;
+SELECT name FROM channel;
+
+SELECT channel.name FROM channel, organization
+WHERE channel.organization_id = organization.id AND organization.name = "Lambda School";
+
+SELECT content FROM message, channel WHERE channel_id = channel.id AND channel.name = '#general'
+ORDER BY created DESC;
+
+SELECT content FROM message INNER JOIN user
+ON message.user_id IS user.id WHERE user.name IS 'Alice';
+
+SELECT content FROM message, user, channel
+WHERE user_id = user.id AND channel_id = channel.id AND channel.name = '#random' AND user.name = 'Bob';
+
+SELECT COUNT(user.id) AS "Message Count", user.name AS "User Name"
+FROM message INNER JOIN user ON message.user_id IS user.id
+INNER JOIN channel WHERE message.channel_id IS channel_id
+GROUP BY user.id;
