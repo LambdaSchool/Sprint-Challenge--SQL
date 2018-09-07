@@ -1,5 +1,6 @@
 # Wladimir Fraga CS10
 
+-- Create tables
 CREATE TABLE organization (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VARCHAR (64) NOT NULL UNIQUE,
@@ -16,7 +17,7 @@ CREATE TABLE channel (
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name VARCHAR (64) NOT NULL UNIQUE,
+  name VARCHAR (64) NOT NULL,
   username VARCHAR (32) NOT NULL UNIQUE,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -29,4 +30,11 @@ CREATE TABLE message (
   channel_id INTEGER REFERENCES channel(id),
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Join tables
+CREATE TABLE user_channel
+(
+  user_id INTEGER REFERENCES user(id),
+  channel_id INTEGER REFERENCES channel(id)
 );
