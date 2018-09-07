@@ -152,3 +152,9 @@ SELECT channel.name
   WHERE user.id = user_id
   AND channel.id = channel_id
   AND user.name  = "Vehk";
+
+SELECT user.name
+  FROM user, channel, user_channel
+  WHERE user.id = user_id
+  AND channel.id = channel_id
+  AND channel.name = "#CHIMtips";
