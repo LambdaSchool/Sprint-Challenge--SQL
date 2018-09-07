@@ -1,24 +1,24 @@
 PRAGMA foreign_keys = ON;
 
-CREATE TABLE organization (
+CREATE TABLE organization(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128),
+    name VARCHAR(128) NOT NULL,
 );
 
-CREATE TABLE channel (
+CREATE TABLE channel(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(128),
+    name VARCHAR(128) NOT NULL,
     organization_id INTEGER REFERENCES organization(id),
 );
 
-CREATE TABLE user (
+CREATE TABLE user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(64),
+    name VARCHAR(64) NOT NULL,
 );
 
-CREATE TABLE message (
+CREATE TABLE message(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    content TEXT,
+    content TEXT NOT NULL,
     post_time TIMESTAMP default datetime('now'),
     user_id INTEGER REFERENCES user(id),
     channel_id INTEGER REFERENCES channel(id),
