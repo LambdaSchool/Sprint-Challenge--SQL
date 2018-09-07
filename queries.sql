@@ -115,6 +115,7 @@ id          content                   user_id     channel_id  post_time
 
 
 /********* Select queries *********/
+-- List all organization names.
 SELECT name AS organization_name FROM organization;
 /*
 organization_name
@@ -122,6 +123,8 @@ organization_name
 Lambda School 
 */
 
+
+-- List all channel names.
 SELECT name AS channel_name FROM channel;
 /*
 channel_name
@@ -130,6 +133,8 @@ channel_name
 #random
 */
 
+
+-- List all channels in a specific organization by organization name.
 SELECT channel.name
     FROM channel, organization
     WHERE organization_id = organization.id
@@ -142,6 +147,7 @@ name
 */
 
 
+-- List all messages in a specific channel by channel name #general in order of post_time, descending.
 SELECT message.content, channel.name, message.post_time
     FROM message, channel
     WHERE channel_id = channel.id
@@ -158,6 +164,7 @@ Alice in General channel     #general    2018-09-07 16:17:29
 */
 
 
+-- List all channels to which user Alice belongs.
 SELECT channel.name 
     FROM channel, user, user_channel
     WHERE user.name = "Alice"
@@ -171,6 +178,7 @@ name
 */
 
 
+-- List all users that belong to channel #general.
 SELECT user.name
     FROM channel, user, user_channel
     WHERE channel.name = "#general"
@@ -184,6 +192,17 @@ Bob
 */
 
 
+-- List all messages in #random by user Bob.
+SELECT message.content
+FROM message, channel, user
+WHERE user.name = "Bob"
+AND channel.name = "#random"
+AND user_id = user.id
+AND channel_id = channel.id;
+/* nothing return*/
+
+
+-- List the count of messages across all channels per user.
 SELECT user.name AS "User Name", Count(*) AS "Message Count"
     FROM user, message
     WHERE user_id = user.id
@@ -198,6 +217,7 @@ Alice       4
 */
 
 
+-- Stretch! List the count of messages per user per channel.
 SELECT user.name 
     AS "User",
     channel.name
