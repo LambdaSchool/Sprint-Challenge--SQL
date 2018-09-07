@@ -135,3 +135,54 @@ FROM user, message
 WHERE user.id = message.user_id
 GROUP BY user.id
 ORDER BY user.name DESC;
+
+/**/
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(message.id) AS "Message Count"
+FROM user, channel, user_channel, message
+WHERE user_channel.user_id = user.id
+AND user_channel.channel_id = channel.id
+AND user.id = message.user_id
+GROUP BY channel.id, user.id, message.user_id;
+
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(message.id) AS "Message Count"
+FROM user, channel, user_channel, message
+WHERE user.id = message.user_id
+AND channel.id = message.channel_id
+AND user_channel.user_id = user.id
+AND user_channel.channel_id = channel.id
+GROUP BY channel.id, user.id;
+
+SELECT user.name AS "User", channel.name AS "Channel", COUNT(*) AS "Message Count"
+FROM user, channel, message
+WHERE user.id = message.user_id
+AND channel.id = message.channel_id
+GROUP BY channel.id, user.id;
+
+/*
+To have messages by a user be automatically deleted when a user is deleted,
+you can apply ON DELETE CASCADE constraint to the foreign key on the child table when creating the table:
+
+CREATE TABLE message (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    content TEXT,
+    user_id INTEGER REFERENCES user(id) ON DELETE CASCADE,
+    channel_id INTEGER REFERENCES channel(id),
+    post_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+OR
+
+ALTER TABLE message
+ALTER COLUMN user_id INTEGER REFERENCES user(id) ON DELETE CASCADE;
+
+
+EXCEPT!!!! it doesn't work in sqlite as the ALTER TABLE command is very limited so you have to:
+1. Turn off PRAGMA foreign keys=OFF
+2. Make a new table
+3. copy data over 
+4. drop the old table
+5. rename new table
+6. turn pragma back on
+*/
+
