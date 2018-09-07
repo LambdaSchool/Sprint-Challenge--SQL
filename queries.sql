@@ -32,8 +32,8 @@ CREATE TABLE organization_users (
     user_id INT REFERENCES user(id)
 );
 CREATE TABLE channel_users (
-    channel_id INT REFERENCES user(id),
-    user_id INT REFERENCES channel(id)
+    channel_id INT REFERENCES channel(id),
+    user_id INT REFERENCES user(id)
 );
 
 INSERT INTO organization VALUES (1, 'Lambda School');
@@ -71,3 +71,50 @@ INSERT INTO user_messages VALUES (1,7);
 INSERT INTO user_messages VALUES (2,8);
 INSERT INTO user_messages VALUES (3,9);
 INSERT INTO user_messages VALUES (2,10);
+
+-- .mode column .width 20 20
+-- 1.
+SELECT * from organization;
+
+SELECT * from user;
+-- 2.
+SELECT * from channel;
+SELECT * from message;
+
+-- 3.
+SELECT channel.id, channel.name, organization.id, organization.name 
+FROM channel, organization WHERE
+organization.name = 'Lambda School';
+
+-- 4.
+SELECT channel.id, channel.name, message.post_time, message.content FROM channel, message WHERE message.channel_id = channel.id 
+ORDER BY message.post_time
+
+-- 5.
+SELECT user.id, user.name, channel.name FROM user, channel WHERE user.name = 'Alice';
+
+-- 6.
+SELECT channel.id, channel.name, user.id, user.name from channel, user
+WHERE channel.name = '#general'
+ORDER BY user.name;
+
+-- 7.
+
+SELECT user.id, user.name, message.channel_id, message.content FROM user, message
+WHERE message.user_id = user.id AND user.name = 'Alice';
+
+-- 8.
+SELECT content FROM message, channel, user WHERE user_id = user.id AND channel_id = channel.id AND channel.name = "#random" AND user.name = "Bob";
+
+-- 9.
+SELECT COUNT(message.content), user.name
+   FROM message, user
+   WHERE message.user_id = user.id
+   GROUP BY user.name;
+
+-- 9.
+SELECT user.name as "User Name", COUNT(*) AS "Message Count" FROM user, message WHERE user_id = user.id GROUP BY user.id ORDER BY user.name DESC;
+
+SELECT user.name AS "User", channel.name AS "Channel", Count(*) AS "Message Count" FROM user, message, channel WHERE user_id = user.id AND channel_id = channel.id GROUP BY channel.name, user.name;
+
+-- ON DELETE CASCADE
