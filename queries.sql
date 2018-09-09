@@ -131,3 +131,10 @@ SELECT user.first_name AS 'User Name', COUNT(message.id) AS 'Message Count' FROM
 SELECT user.first_name AS 'User', channel.name AS 'Channel', COUNT(*) AS 'Message Count' FROM user, channel, message WHERE user.id = message.user_id AND message.channel_id = channel.id GROUP BY channel.name, user.first_name; 
  
     
+-- 6. What SQL keywords or concept would you use if you wanted to automatically delete all messages by a user if that user were deleted from the user table?
+
+PRAGMA FOREIGN_KEYS = ON; 
+
+    -- Use must use "ON DELETE CASCADE" when referencing foreign keys in order to delete all messages by a user if that user were deleted from the user table. 
+
+DELETE FROM user WHERE username = 'alice20';
