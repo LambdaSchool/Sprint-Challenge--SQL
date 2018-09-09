@@ -124,6 +124,10 @@ SELECT message.content AS 'All messages in #random by user Bob' FROM user, messa
 
     -- List the count of messages across all channels per user.
 
-SELECT user.first_name AS 'User Name', COUNT(message.id) as 'Message Count' FROM user, message where user.id = message.user_id GROUP BY user.first_name; 
+SELECT user.first_name AS 'User Name', COUNT(message.id) AS 'Message Count' FROM user, message WHERE user.id = message.user_id GROUP BY user.first_name; 
 
+    -- [Stretch!] List the count of messages per user per channel.
+
+SELECT user.first_name AS 'User', channel.name AS 'Channel', COUNT(*) AS 'Message Count' FROM user, channel, message WHERE user.id = message.user_id AND message.channel_id = channel.id GROUP BY channel.name, user.first_name; 
+ 
     
