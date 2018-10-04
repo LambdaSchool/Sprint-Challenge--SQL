@@ -1,7 +1,6 @@
 -- DB Config Setup
 .header on
 .mode column
-.open lambdachat.db
 
 -- 1. DB Tables (2 & 3 Not Required Here)
 
